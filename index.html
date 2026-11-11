@@ -29,7 +29,7 @@ body{height:100%;font:14px/1.35 var(--f-body);-webkit-user-select:none;user-sele
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
 button:focus-visible,input:focus-visible{outline:2px solid var(--boost);outline-offset:2px}
 svg{display:block}
-#app{height:100%;display:grid;grid-template-areas:"top" "stage" "tools" "time";grid-template-rows:auto 1fr auto auto;grid-template-columns:minmax(0,1fr);
+#app{height:100%;display:grid;grid-template-areas:"top" "stage" "coach" "tools" "time";grid-template-rows:auto 1fr auto auto auto;grid-template-columns:minmax(0,1fr);
   padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
 #stage{grid-area:stage;position:relative;min-height:0;min-width:0;background:radial-gradient(ellipse at center,#141c30 0%,var(--bg) 75%)}
 #cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:block}
@@ -56,7 +56,7 @@ svg{display:block}
 #frames::-webkit-scrollbar{display:none}
 .fr{flex:none;height:34px;min-width:34px;padding:0 8px;border-radius:8px;background:var(--panel);border:1px solid var(--line);font:700 13px var(--f-display);color:var(--dim);font-variant-numeric:tabular-nums}
 .fr[aria-current="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
-.fr.add{color:var(--boost);border-style:dashed}
+.fr.add{color:var(--boost);border-style:dashed;min-width:40px;font-size:18px}
 #playBtn{background:var(--boost);color:#1a1405}
 #speedBtn{font:700 12px var(--f-display);width:44px}
 #loopBtn[aria-pressed="true"]{color:var(--boost)}
@@ -80,7 +80,7 @@ svg{display:block}
 
 /* Landscape: rails on both sides so the pitch gets full height */
 @media (orientation:landscape) and (max-height:620px), (orientation:landscape) and (min-width:900px){
-  #app{grid-template-areas:"tools stage top" "tools stage time";grid-template-columns:auto 1fr 196px;grid-template-rows:auto 1fr}
+  #app{grid-template-areas:"tools stage top" "tools stage coach" "tools stage time";grid-template-columns:auto 1fr 250px;grid-template-rows:auto 1fr auto}
   #tools{display:flex;flex-direction:column;justify-content:center;gap:4px;border-top:0;border-right:1px solid var(--line);overflow:visible;padding:6px}
   #tools .ib{width:60px;max-width:none;flex:none;height:min(50px,calc((100vh - 60px) / 8))}
   #tools{gap:2px}
@@ -91,6 +91,8 @@ svg{display:block}
   #mapBtn{order:-1;flex-basis:100%}
   #time{gap:4px;flex-wrap:wrap;align-content:flex-start;border-top:1px solid var(--line);border-left:1px solid var(--line)}
   #frames{flex-basis:100%;flex-wrap:wrap;overflow:visible;order:5}
+  #modeSeg{order:2}
+  #time{align-content:flex-end}
 }
 
 /* Overlays */
@@ -139,22 +141,113 @@ textarea{height:110px;font:12px ui-monospace,Menlo,monospace;resize:none}
 #toast.show{opacity:1}
 .shot{width:100%;border-radius:10px;border:1px solid var(--line);-webkit-touch-callout:default}
 .kbd{font:600 12px var(--f-display);color:var(--boost)}
+#learnBtn{background:var(--boost);color:#1a1405;position:relative}
+#learnBtn.new::after{content:"";position:absolute;top:3px;right:3px;width:10px;height:10px;border-radius:50%;background:var(--danger);border:2px solid var(--panel)}
+@media (max-width:420px){.seg button{min-width:30px;padding:0 4px}}
+#coach{grid-area:coach;display:flex;flex-direction:column;gap:6px;padding:8px 10px;background:var(--panel);border-top:1px solid var(--line);height:clamp(132px,24vh,190px);min-height:0;min-width:0}
+#coach[hidden]{display:none}
+#coach.min{height:auto}
+#coach.min .ch-say{display:none}
+.ch-h{display:flex;align-items:center;gap:6px;min-width:0}
+.ch-tag{flex:none;font:700 9px var(--f-display);letter-spacing:.12em;text-transform:uppercase;color:#1a1405;background:var(--boost);padding:3px 6px;border-radius:5px}
+.ch-title{flex:1;min-width:0;font:600 14px var(--f-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.ib.sm{width:32px;height:32px;border-radius:8px}
+.ib.sm svg{width:18px;height:18px}
+.ch-say{flex:1;min-height:0;overflow:auto;margin:0;font:500 15px/1.42 var(--f-body);color:var(--fg);-webkit-user-select:text;user-select:text}
+.ch-say .sn{font:700 11px var(--f-display);letter-spacing:.08em;color:var(--boost);margin-right:8px}
+.ch-say i{color:var(--dim)}
+.ch-nav{display:flex;align-items:center;gap:6px}
+.ch-nav .btn{height:38px;padding:0 12px}
+.ch-nav .grow{justify-content:center}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.wide{width:100%;justify-content:center;height:48px;font-size:16px;margin:4px 0 6px}
+.btn[disabled]{opacity:.35}
+.card.tall{max-height:94%}
+.progrow{display:flex;align-items:center;gap:10px;margin:10px 0}
+.progrow span{font:600 12px var(--f-display);color:var(--dim);white-space:nowrap}
+.prog{flex:1;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--boost),#3ddc84);border-radius:4px}
+.nextup{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:12px 14px;border-radius:14px;background:linear-gradient(120deg,rgba(255,201,60,.18),rgba(61,155,255,.12));border:1px solid rgba(255,201,60,.45);text-align:left;margin-bottom:10px}
+.nextup b{font:700 16px var(--f-display)}.nextup small{color:var(--dim)}.nextup .lbl{color:var(--boost)}
+.hero{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.hc{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:10px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);text-align:left;min-height:96px}
+.hc svg{width:24px;height:24px;color:var(--boost)}
+.hc b{font:700 13px/1.15 var(--f-display)}.hc small{color:var(--dim);font-size:11.5px;line-height:1.25}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;position:sticky;top:-16px;z-index:2;background:var(--panel);padding:12px 0 8px;margin-top:8px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;height:34px;padding:0 13px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);font:600 13px var(--f-display);color:var(--dim)}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.cnt{color:var(--boost);letter-spacing:.04em}
+.les{width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:6px;border-radius:12px;background:var(--panel2);text-align:left;border:1px solid transparent}
+.les:active{border-color:var(--line)}
+.les .lm{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.les .lm b{font:600 14.5px var(--f-display);line-height:1.2}
+.les .lm small{color:var(--dim);font-size:12.5px;line-height:1.3}
+.ck{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font:700 13px var(--f-display);color:#06240f}
+.les.done .ck{background:#3ddc84;border-color:#3ddc84}
+.lv{flex:none;font:700 9px var(--f-display);letter-spacing:.1em;text-transform:uppercase;padding:3px 6px;border-radius:6px}
+.lv1{background:rgba(61,220,132,.16);color:#6ff0a6}.lv2{background:rgba(61,155,255,.18);color:#8fc4ff}.lv3{background:rgba(199,125,255,.2);color:#dcb3ff}
+.lhead{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.donebadge{font:700 11px var(--f-display);color:#3ddc84}
+.tipl{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.tipl li{display:flex;gap:10px;padding:10px 12px;border-radius:12px;background:var(--panel2);color:var(--fg);line-height:1.4}
+.tipl li::before{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--f-display);margin-top:1px}
+.tipl.ok li::before{content:"\2713";background:rgba(61,220,132,.2);color:#6ff0a6}
+.tipl.no li::before{content:"\2717";background:rgba(255,77,94,.2);color:#ff8d98}
+.card .qq{color:var(--fg);font:600 15.5px/1.4 var(--f-body);margin:0 0 10px}
+.qopt{width:100%;display:flex;align-items:center;gap:10px;text-align:left;padding:11px 12px;margin-bottom:6px;border-radius:12px;background:var(--panel2);border:2px solid var(--line);font:500 15px/1.3 var(--f-body);color:var(--fg)}
+.qopt .qk{flex:none;width:24px;height:24px;border-radius:7px;background:var(--line);display:grid;place-items:center;font:700 12px var(--f-display)}
+.qopt.ok{border-color:#3ddc84;background:rgba(61,220,132,.13)}
+.qopt.no{border-color:var(--danger);background:rgba(255,77,94,.13)}
+.qopt[disabled]{cursor:default}
+.qopt[disabled]:not(.ok):not(.no){opacity:.55}
+.why{padding:11px 13px;border-radius:12px;background:rgba(255,77,94,.1);border:1px solid rgba(255,77,94,.4);color:var(--fg);line-height:1.45;margin-top:4px}
+.why.good{background:rgba(61,220,132,.1);border-color:rgba(61,220,132,.45)}
+.rules{margin:0;padding:0;list-style:none;counter-reset:r;display:flex;flex-direction:column;gap:6px}
+.rules li{counter-increment:r;display:grid;grid-template-columns:32px 1fr;column-gap:10px;padding:10px 12px;border-radius:12px;background:var(--panel2)}
+.rules li::before{content:counter(r);grid-row:span 2;width:30px;height:30px;border-radius:9px;background:var(--boost);color:#1a1405;display:grid;place-items:center;font:700 14px var(--f-display)}
+.rules b{font:600 15px var(--f-display)}.rules small{color:var(--dim);line-height:1.35}
+.kt{display:flex;gap:12px;align-items:flex-start;margin-top:10px}
+#ktPic{flex:none;border-radius:12px;overflow:hidden}
+.ktq{flex:1;min-width:0}
+.streak{font:600 12px var(--f-display);color:var(--dim)}.streak b{color:var(--boost)}
+.role{padding:7px 10px;border-radius:10px;background:var(--panel2);margin-top:6px;border-left:4px solid #fff}
+.role b{display:block;font:700 13px var(--f-display)}.role small{color:var(--dim);font-size:12.5px}
+.role.go{border-color:#ffc93c}.role.ch{border-color:#3d9bff}.role.bo{border-color:#3ddc84}
+.kowrap{display:flex;gap:12px;align-items:flex-start;margin:6px 0 10px}.kowrap>div{flex:1;min-width:0}
+.kitem svg{flex:none}
+textarea.note{height:120px;font:500 16px/1.4 var(--f-body)}
+@media (max-width:420px){.kt{flex-direction:column;align-items:center}.ktq{width:100%}}
+@media (orientation:landscape) and (max-height:620px), (orientation:landscape) and (min-width:900px){
+  #coach{height:auto;min-height:0;border-left:1px solid var(--line)}
+  .ch-say{flex:1 1 auto;min-height:2.8em;font-size:14px}
+  .ch-tag{display:none}
+  .ch-nav .btn{padding:0 10px;white-space:nowrap}
+  .ch-nav .t{display:none}
+}
 </style>
 
 <div id="app">
   <div id="top">
     <button class="ib" id="menuBtn" aria-label="Menu"></button>
+    <button class="ib" id="learnBtn" aria-label="Academy: lessons, kickoff trainer, quiz" title="Academy"></button>
     <button id="mapBtn" aria-label="Choose map"><span class="sw"></span><span class="nm"></span><span class="ar"></span></button>
     <div class="seg" id="modeSeg" role="group" aria-label="Game mode"></div>
     <button class="ib" id="saveBtn" aria-label="Save play"></button>
   </div>
   <div id="stage"><canvas id="cv" aria-label="Tactics board"></canvas><div id="hist"><button class="ib" id="undoBtn" aria-label="Undo"></button><button class="ib" id="redoBtn" aria-label="Redo"></button></div></div>
+  <div id="coach" hidden>
+    <div class="ch-h"><span class="ch-tag" id="chTag"></span><b class="ch-title" id="chTitle"></b><button class="ib sm" id="chMin" aria-label="Collapse notes"></button><button class="ib sm" id="chClose" aria-label="Hide notes"></button></div>
+    <p class="ch-say" id="chSay" aria-live="polite"></p>
+    <div class="ch-nav"><button class="btn" id="chPrev" aria-label="Previous step">&lsaquo;<span class="t">&nbsp;Back</span></button><button class="btn pri grow" id="chNext">Next step &rsaquo;</button><button class="btn" id="chInfo">Tips</button><button class="ib sm" id="chEdit" aria-label="Edit step note"></button></div>
+  </div>
   <div id="tools" role="toolbar" aria-label="Tools"></div>
   <div id="time">
     <button class="ib" id="playBtn" aria-label="Play animation"></button>
     <button class="ib" id="speedBtn" aria-label="Playback speed">1x</button>
     <button class="ib" id="loopBtn" aria-label="Loop" aria-pressed="false"></button>
     <div id="frames"></div>
+    <button class="ib" id="noteBtn" aria-label="Step note" title="Step note"></button>
     <button class="ib" id="delFrameBtn" aria-label="Delete step"></button>
   </div>
 </div>
@@ -185,7 +278,13 @@ const I={
  plus:'<path d="M12 5v14M5 12h14"/>',
  reset:'<path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v5h5"/>',
  kick:'<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.3" fill="currentColor"/><circle cx="15" cy="15" r="1.3" fill="currentColor"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/><circle cx="9" cy="15" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/>',
- color:'',
+ cap:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c3.5 2.7 8.5 2.7 12 0v-4.5"/><path d="M22 9v6"/>',
+ quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.6v.3"/><circle cx="12" cy="17" r=".6" fill="currentColor"/>',
+ star:'<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/>',
+ x:'<path d="M6 6l12 12M18 6L6 18"/>',
+ up:'<path d="M6 15l6-6 6 6"/>',
+ down:'<path d="M6 9l6 6 6-6"/>',
+ note:'<path d="M5 4h14v11l-5 5H5z"/><path d="M14 20v-5h5"/><path d="M8 9h8M8 12.5h5"/>',
 };
 const svg=(k)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${I[k]}</svg>`;
 const $=s=>document.querySelector(s);
@@ -255,7 +354,7 @@ function undo(){if(!undoStack.length)return;redoStack.push(JSON.stringify({S,cur
 function redo(){if(!redoStack.length)return;undoStack.push(JSON.stringify({S,cur}));const r=JSON.parse(redoStack.pop());S=r.S;cur=r.cur;afterLoad()}
 let saveT=0;
 function changed(){dirty=true;clearTimeout(saveT);saveT=setTimeout(()=>{LS.set('bb.current',S);LS.set('bb.cur',cur)},250)}
-function afterLoad(){cur=Math.max(0,Math.min(cur,S.frames.length-1));selected=null;stopPlay();buildTop();buildFrames();syncUndo();changed()}
+function afterLoad(){cur=Math.max(0,Math.min(cur,S.frames.length-1));selected=null;stopPlay();buildTop();buildFrames();syncUndo();changed();syncCoach()}
 const frame=()=>S.frames[cur];
 const mapObj=()=>MAPS.find(m=>m.id===S.map)||MAPS[0];
 const arena=()=>ARENAS[mapObj().arena];
@@ -500,15 +599,19 @@ function interp(t){
     return r;
   });
 }
-function play(){
-  if(S.frames.length<2){toast('Add a step first: tap + and move things');return}
-  selected=null;playing=true;if(playT>=S.frames.length-1-1e-6)playT=0;else playT=cur;holdT=0;lastTs=performance.now();syncPlay();loop();
+let playEnd=null;
+function play(step){
+  const n=S.frames.length;
+  if(n<2){toast('Add a step first: tap + and move things');return}
+  if(step){if(cur>=n-1)return;playT=cur;playEnd=cur+1}else{playEnd=null;playT=cur>=n-1?0:cur}
+  selected=null;playing=true;holdT=0;lastTs=performance.now();syncPlay();loop();
 }
-function stopPlay(){if(!playing)return;playing=false;syncPlay();dirty=true}
+function stopPlay(){if(!playing)return;playing=false;playEnd=null;syncPlay();dirty=true}
 function loop(){
   if(!playing)return;
   const now=performance.now(), dt=Math.min(.05,(now-lastTs)/1000);lastTs=now;
-  const end=S.frames.length-1;
+  const end=playEnd!=null?playEnd:S.frames.length-1;
+  if(playEnd!=null&&playT>=end){playing=false;playEnd=null;cur=end;syncPlay();buildFrames();dirty=true;return}
   if(playT>=end){holdT+=dt;if(holdT>.7){if(settings.loop){playT=0;holdT=0}else{playing=false;cur=end;syncPlay();buildFrames()}}}
   else{playT=Math.min(end,playT+dt/segDur())}
   const fi=Math.min(end,Math.floor(playT+1e-6));
@@ -557,7 +660,8 @@ function render(){
   // step badge
   ctx.font=`700 12px ${FONT}`;ctx.textAlign='left';ctx.textBaseline='top';
   const n=S.frames.length, shown=playing?Math.min(n,Math.floor(playT+1e-6)+1):cur+1;
-  const label=`STEP ${shown}/${n}${S.name?'  ·  '+S.name.toUpperCase():''}`;
+  let label=`STEP ${shown}/${n}${S.name?'  ·  '+S.name.toUpperCase():''}`;
+  const maxW=V.W-110;if(ctx.measureText(label).width+16>maxW){while(label.length>8&&ctx.measureText(label+'…').width+16>maxW)label=label.slice(0,-1);label+='…'}
   ctx.fillStyle='rgba(8,11,20,.7)';const tw=ctx.measureText(label).width+16;ctx.beginPath();rrS(8,8,tw,22,6);ctx.fill();
   ctx.fillStyle='#c9d2e6';ctx.fillText(label,16,13);
 }
@@ -678,7 +782,7 @@ document.addEventListener('keydown',e=>{
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='y'){e.preventDefault();redo();return}
   if(e.key===' '){e.preventDefault();playing?stopPlay():play();return}
   const map={a:'run',p:'pass',t:'text',e:'eraser'};
-  if(map[e.key])setTool(map[e.key]);if(e.key==='r')resetPositions();if(e.key==='k')randomKick();
+  if(map[e.key])setTool(map[e.key]);if(e.key==='r')resetPositions();if(e.key==='k')randomKick();if(e.key==='l')openLearn();
   if(e.key==='ArrowRight'&&cur<S.frames.length-1){cur++;afterFrame()}
   if(e.key==='ArrowLeft'&&cur>0){cur--;afterFrame()}
 });
@@ -704,6 +808,9 @@ function buildStatic(){
   $('#speedBtn').onclick=()=>{const s=[0.5,1,1.5,2];settings.speed=s[(s.indexOf(settings.speed)+1)%s.length];saveSettings();syncPlay()};
   $('#loopBtn').onclick=()=>{settings.loop=!settings.loop;saveSettings();syncPlay()};
   $('#delFrameBtn').onclick=delFrame;
+  const lb=$('#learnBtn');lb.innerHTML=svg('cap');if(!LS.get('bb.openedLearn',false))lb.classList.add('new');
+  lb.onclick=()=>{LS.set('bb.openedLearn',true);lb.classList.remove('new');openLearn()};
+  $('#noteBtn').innerHTML=svg('note');$('#noteBtn').onclick=()=>{coachHidden=false;openNote()};
 }
 function setTool(k){tool=k;document.querySelectorAll('.tool').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===k));dirty=true}
 function buildTop(){
@@ -715,18 +822,19 @@ function buildTop(){
 }
 function buildFrames(){
   const f=$('#frames');
-  f.innerHTML=S.frames.map((_,i)=>`<button class="fr" data-i="${i}" aria-current="${i===cur}" aria-label="Step ${i+1}">${i+1}</button>`).join('')+`<button class="fr add" id="addFr" aria-label="Add step">+ Step</button>`;
+  f.innerHTML=S.frames.map((_,i)=>`<button class="fr" data-i="${i}" aria-current="${i===cur}" aria-label="Step ${i+1}">${i+1}</button>`).join('')+`<button class="fr add" id="addFr" aria-label="Add step" title="Add step">+</button>`;
   f.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{stopPlay();cur=+b.dataset.i;afterFrame()});
   $('#addFr').onclick=addFrame;
   $('#delFrameBtn').disabled=S.frames.length<2;
   const a=f.querySelector('[aria-current="true"]');if(a&&a.scrollIntoView)a.scrollIntoView({block:'nearest',inline:'nearest'});
 }
-function highlightFrame(i){document.querySelectorAll('#frames [data-i]').forEach(b=>b.setAttribute('aria-current',+b.dataset.i===i))}
-function afterFrame(){selected=null;shownFrame=-1;buildFrames();changed()}
+function highlightFrame(i){document.querySelectorAll('#frames [data-i]').forEach(b=>b.setAttribute('aria-current',+b.dataset.i===i));if(playing)syncCoach(i)}
+function afterFrame(){selected=null;shownFrame=-1;buildFrames();changed();syncCoach()}
 function syncUndo(){$('#undoBtn').disabled=!undoStack.length;$('#redoBtn').disabled=!redoStack.length}
 function syncPlay(){$('#playBtn').innerHTML=svg(playing?'pause':'play');$('#playBtn').setAttribute('aria-label',playing?'Pause':'Play animation');
   $('#speedBtn').textContent=settings.speed+'x';$('#loopBtn').setAttribute('aria-pressed',settings.loop);
-  if(!playing){shownFrame=-1;highlightFrame(cur)}}
+  if(!playing){shownFrame=-1;highlightFrame(cur)}
+  syncCoach()}
 function addFrame(){stopPlay();pushHistory();const f={objs:clone(frame().objs),marks:[]};S.frames.splice(cur+1,0,f);cur++;afterFrame();toast(`Step ${cur+1} added. Move cars and ball, then press play`)}
 let delArmed=0;
 function delFrame(){if(S.frames.length<2)return;
@@ -762,18 +870,19 @@ function kickSvg(k){let c='';k.forEach(sp=>{const [x,y]=KO[sp];c+=`<circle cx="$
 function openKickoff(){
   const now=curKick().join();
   const {el,close}=modal(`<h2>Kickoff</h2><p>${S.mode}v${S.mode} has ${combos(S.mode).length} spawn setups. Pick one, or roll a random one like the game does.</p>
-   <div class="row"><button class="btn pri" id="kRand">${svg('kick').replace('<svg','<svg width="18" height="18"')}Random kickoff</button><button class="btn" id="kReset">${svg('reset').replace('<svg','<svg width="18" height="18"')}Reset positions</button><button class="btn bad" id="kAll">Reset whole board</button></div>
+   <div class="row"><button class="btn pri" id="kRand">${svg('kick').replace('<svg','<svg width="18" height="18"')}Random kickoff</button><button class="btn" id="kTeach">${svg('cap')}Explain this kickoff</button><button class="btn" id="kReset">${svg('reset').replace('<svg','<svg width="18" height="18"')}Reset positions</button><button class="btn bad" id="kAll">Reset whole board</button></div>
    <h3>All ${S.mode}v${S.mode} kickoffs</h3><div class="kgrid">${combos(S.mode).map((k,i)=>`<button class="kc" data-k="${i}" aria-pressed="${k.join()===now}">${kickSvg(k)}<span>${k.map(x=>`<b>${SPOT_NAME[x]}</b>`).join('')}</span></button>`).join('')}</div>`);
   const all=combos(S.mode);
   el.querySelector('#kRand').onclick=()=>{randomKick();close()};
   el.querySelector('#kReset').onclick=()=>{resetPositions();close()};
+  el.querySelector('#kTeach').onclick=()=>{close();watchLesson(koLesson(curKick()))};
   el.querySelector('#kAll').onclick=e=>{const b=e.currentTarget;if(!b.classList.contains('armed')){b.classList.add('armed');b.textContent='Tap again: clears all steps and drawings';setTimeout(()=>{b.classList.remove('armed');b.textContent='Reset whole board'},3000);return}resetBoard();close()};
   el.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{applyKick(all[+b.dataset.k]);close()});
 }
 
 // ---------- overlays ----------
-function modal(html,center){
-  const m=document.createElement('div');m.className='modal'+(center?' center':'');m.innerHTML=`<div class="card" role="dialog" aria-modal="true">${html}</div>`;
+function modal(html,center,cls){
+  const m=document.createElement('div');m.className='modal'+(center?' center':'');m.innerHTML=`<div class="card${cls?' '+cls:''}" role="dialog" aria-modal="true">${html}</div>`;
   document.body.appendChild(m);const close=()=>m.remove();
   m.addEventListener('pointerdown',e=>{if(e.target===m)close()});
   m.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
@@ -836,15 +945,16 @@ function openMenu(){
   const plays=getPlays();
   const tg=(k,t,d)=>`<div class="tog"><span>${t}<small>${d}</small></span><button class="sw2" data-set="${k}" aria-pressed="${!!settings[k]}" aria-label="${t}"></button></div>`;
   const {el,close}=modal(`<h2>Boost Board</h2><p>Tactics whiteboard for Rocket League. Everything saves on this device.</p>
-   <div class="row"><button class="btn pri" id="mNew">New board</button><button class="btn" id="mSave">Save play</button><button class="btn" id="mReset">Reset positions</button><button class="btn" id="mKick">Kickoff spawns</button></div>
+   <div class="row"><button class="btn pri" id="mLearn">${svg('cap')}Academy</button><button class="btn" id="mNew">New board</button><button class="btn" id="mSave">Save play</button><button class="btn" id="mReset">Reset positions</button><button class="btn" id="mKick">Kickoff spawns</button></div>
    <h3>My plays</h3><div class="list" id="mPlays">${plays.length?plays.map(p=>`<div class="item"><span class="tag">${p.mode}v${p.mode}</span><div class="meta"><b>${esc(p.name)}</b><small>${p.frames.length} step${p.frames.length>1?'s':''} · ${esc((MAPS.find(m=>m.id===p.map)||MAPS[0]).name)} · ${fmtDate(p.updated)}</small></div><button class="btn" data-load="${p.id}">Open</button><button class="btn bad" data-del="${p.id}" aria-label="Delete ${esc(p.name)}">${svg('trash').replace('<svg','<svg width="18" height="18"')}</button></div>`).join(''):'<div class="empty">No saved plays yet. Build one, then tap the save icon.</div>'}</div>
-   <h3>Starter plays</h3><div class="list">${PRESETS.map((p,i)=>`<div class="item"><span class="tag">${p.mode}v${p.mode}</span><div class="meta"><b>${esc(p.name)}</b><small>${esc(p.desc)}</small></div><button class="btn" data-pre="${i}">Open</button></div>`).join('')}</div>
+   <h3>Learn</h3><div class="row"><button class="btn" id="mL2">Lessons</button><button class="btn" id="mKT">Kickoff trainer</button><button class="btn" id="mQZ">Situation quiz</button><button class="btn" id="mGR">Golden rules</button></div>
    <h3>Display</h3>${tg('pads','Boost pads','6 big and 28 small pads on Soccar and Snow Day')}${tg('ghosts','Previous step ghosts','Faded cars show where everyone was one step ago')}${tg('labels','Player numbers and names','Long-press a car to name it')}${tg('face','Cars face where you drag','Turn off to keep the angle while moving')}
    <div class="tog"><span>Car and ball size<small>Bigger is easier to grab on a phone</small></span><div class="seg" id="mSize">${[[0.85,'S'],[1,'M'],[1.25,'L']].map(([v,l])=>`<button data-v="${v}" aria-pressed="${settings.size===v}">${l}</button>`).join('')}</div></div>
    <h3>Share</h3><div class="row"><button class="btn" id="mImg">Export image</button><button class="btn" id="mCode">Copy play code</button><button class="btn" id="mImport">Import code</button></div>
    <h3>How to</h3><p><span class="kbd">Move</span> drag any car or the ball. Tap a car and drag its yellow knob to turn it. Long-press a car to name it.</p>
    <p><span class="kbd">Draw</span> drag on the field. Pick Arrow, Pass (dashed), Text or Erase at the bottom.</p>
    <p><span class="kbd">Animate</span> tap <b>+ Step</b>, move things to where they go next, repeat, then press play.</p>
+   <p><span class="kbd">Learn</span> tap the yellow cap for lessons, the kickoff trainer and the quiz. Add your own coaching notes to any step with the note button next to the steps.</p>
    <p><span class="kbd">Zoom</span> pinch with two fingers. Double-tap the field to reset.</p>`);
   el.querySelector('#mNew').onclick=()=>{pushHistory();const m=S.mode,mp=S.map;S=newBoard(m,mp);cur=0;zoom=1;panX=panY=0;afterLoad();close();toast('New board')};
   el.querySelector('#mSave').onclick=()=>{close();saveDialog()};
@@ -854,7 +964,8 @@ function openMenu(){
     if(!b.classList.contains('armed')){b.classList.add('armed');b.firstChild&&(b.title='Tap again to delete');setTimeout(()=>b.classList.remove('armed'),2500);return}
     const ps=getPlays().filter(q=>q.id!==b.dataset.del);LS.set('bb.plays',ps);if(S.id===b.dataset.del)delete S.id;b.closest('.item').remove();toast('Play deleted');
     if(!ps.length)el.querySelector('#mPlays').innerHTML='<div class="empty">No saved plays yet.</div>'});
-  el.querySelectorAll('[data-pre]').forEach(b=>b.onclick=()=>{const p=buildPreset(PRESETS[+b.dataset.pre]);pushHistory();S=p;cur=0;zoom=1;panX=panY=0;afterLoad();close();toast(`${p.name}: press play`)});
+  el.querySelector('#mLearn').onclick=el.querySelector('#mL2').onclick=()=>{close();openLearn()};
+  el.querySelector('#mKT').onclick=()=>{close();openTrainer()};el.querySelector('#mQZ').onclick=()=>{close();openQuiz()};el.querySelector('#mGR').onclick=()=>{close();openRules()};
   el.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{const k=b.dataset.set;settings[k]=!settings[k];b.setAttribute('aria-pressed',settings[k]);saveSettings();dirty=true});
   el.querySelectorAll('#mSize button').forEach(b=>b.onclick=()=>{settings.size=+b.dataset.v;saveSettings();el.querySelectorAll('#mSize button').forEach(x=>x.setAttribute('aria-pressed',x===b));dirty=true});
   el.querySelector('#mImg').onclick=()=>{close();exportImage()};
@@ -885,56 +996,531 @@ function importCode(){
     catch(e){toast('That code is not valid. Copy the full code, including BB1:')}};
 }
 
-// ---------- presets ----------
-const mk=(t,c,p,text)=>text?{t,c,p,text}:{t,c,p};
+// ---------- academy: lesson data ----------
+// Coordinates: blue defends y=-5120 (bottom in portrait), orange defends y=+5120. x: -4096 (blue's left) .. 4096.
+// Each step: pos {id:[x,y,label?]} (changes from previous step), m = marks, say = coaching caption.
 const Y='#ffc93c',W='#f4f6fb',B='#3d9bff',O='#ff8a1f',G='#3ddc84',Rd='#ff4d5e';
-const PRESETS=[
- {name:'3s kickoff: go, cheat, boost',mode:3,desc:'Diagonal takes it, second cheats up, third grabs corner boost',steps:[
-   {pos:{},marks:[mk('run',Y,[[-2048,-2560],[-900,-1100],[-250,-300]]),mk('run',B,[[2048,-2560],[1700,-1900],[1100,-1500]]),mk('run',G,[[0,-4608],[-1500,-4500],[-2900,-4150]]),mk('text',Y,[[-1500,-1300]],'Go'),mk('text',B,[[2300,-1600]],'Cheat'),mk('text',G,[[-1500,-3800]],'Boost')]},
-   {pos:{b1:[-260,-320],b2:[1100,-1500],b3:[-2950,-4100],o1:[260,320],o2:[-1100,1500],o3:[2950,4100]},marks:[mk('zone',W,[[-500,-500],[500,500]]),mk('text',W,[[0,800]],'50/50')]},
-   {pos:{ball:[-900,1700],b1:[-150,-80],b2:[700,-200],b3:[-2300,-3000],o1:[150,80],o2:[-700,1200],o3:[2500,3600]},marks:[mk('pass',W,[[-900,1700],[-1600,3000]]),mk('run',B,[[700,-200],[200,900],[-600,2000]]),mk('text',B,[[900,700]],'Follow up')]},
-   {pos:{ball:[-1500,2900],b1:[100,500],b2:[-700,2000],b3:[-1600,-1500],o1:[-200,-200],o2:[-1200,2700],o3:[1500,4400]},marks:[]},
- ]},
- {name:'3s back-post rotation',mode:3,desc:'First man challenges, rotates out the far side, everyone moves up one',steps:[
-   {pos:{ball:[1500,1900],b1:[1100,1150],b2:[-400,-200],b3:[-200,-3000],o1:[1700,3100],o2:[-500,3800],o3:[-1500,1400]},marks:[mk('run',Y,[[1100,1150],[1450,1750]]),mk('text',Y,[[300,1500]],'1st: challenge'),mk('text',B,[[-400,350]],'2nd: support'),mk('text',G,[[-200,-2450]],'3rd: last back')]},
-   {pos:{ball:[-1200,600],b1:[2700,300],b2:[-700,-100],b3:[-300,-1800],o1:[-500,1700],o2:[-200,3600],o3:[-2200,900]},marks:[mk('run',Y,[[2700,300],[3500,-200],[3000,-2400],[1000,-4100]]),mk('run',B,[[-700,-100],[-1150,500]]),mk('run',G,[[-300,-1800],[-500,-700]]),mk('text',Y,[[2600,-2500]],'Back post'),mk('text',B,[[-1700,-500]],'Now 1st')]},
-   {pos:{ball:[-1100,1200],b1:[1000,-4100],b2:[-1150,550],b3:[-500,-700],o1:[-800,2300],o2:[300,3900],o3:[-2600,1600]},marks:[mk('zone',G,[[-1600,-1300],[600,-100]]),mk('text',G,[[-500,-1550]],'New 2nd')]},
- ]},
- {name:'2s rotation: corner to back post',mode:2,desc:'Challenge, rotate wide, teammate takes over the play',steps:[
-   {pos:{ball:[-1500,2000],b1:[-1200,1300],b2:[300,-800],o1:[-1300,2900],o2:[500,4300]},marks:[mk('run',Y,[[-1200,1300],[-1450,1850]]),mk('run',B,[[300,-800],[-300,400]]),mk('text',B,[[900,-300]],'Support')]},
-   {pos:{ball:[-2800,3400],b1:[1800,500],b2:[-900,1500],o1:[-2300,3300],o2:[300,4400]},marks:[mk('run',Y,[[1800,500],[3584,0],[2400,-2600],[500,-4300]]),mk('text',Y,[[2700,-1500]],'Boost + back post'),mk('run',B,[[-900,1500],[-2400,3000]])]},
-   {pos:{ball:[-2900,3700],b1:[500,-3300],b2:[-2500,3100],o1:[-1800,4200],o2:[1200,2400]},marks:[mk('pass',W,[[-2900,3700],[-600,4900]]),mk('text',W,[[-1500,4600]],'Backboard')]},
- ]},
- {name:'Backboard pass play',mode:2,desc:'Corner touch off the back wall, teammate reads the bounce',steps:[
-   {pos:{ball:[-3300,3700],b1:[-3200,3200],b2:[200,1400],o1:[0,4900],o2:[2300,2200]},marks:[mk('pass',W,[[-3300,3700],[-1800,4600],[-500,5050]]),mk('run',B,[[200,1400],[0,2800],[-300,3700]]),mk('text',B,[[900,2600]],'Read it')]},
-   {pos:{ball:[-500,5000],b1:[-3100,3600],b2:[-200,3600],o1:[-700,4700],o2:[1700,3000]},marks:[mk('pass',W,[[-500,5000],[-250,4300]])]},
-   {pos:{ball:[150,5500],b1:[-2600,3000],b2:[0,4300],o1:[-900,4500],o2:[1300,3600]},marks:[mk('text',Y,[[0,3600]],'Goal')]},
- ]},
- {name:'1s shadow defense',mode:1,desc:'Retreat between ball and goal, match speed, challenge on the bad touch',steps:[
-   {pos:{ball:[0,1100],o1:[0,1500],b1:[0,-1300]},marks:[mk('run',O,[[0,1500],[300,-300]]),mk('text',W,[[1100,-1300]],'Face up, keep distance')]},
-   {pos:{ball:[350,-500],o1:[300,-50],b1:[250,-2600]},marks:[mk('run',B,[[250,-2600],[350,-3500]]),mk('zone',G,[[-900,-4200],[900,-2700]]),mk('text',G,[[0,-3100]],'Shadow')]},
-   {pos:{ball:[600,-2300],o1:[550,-1800],b1:[350,-3500]},marks:[mk('run',Y,[[350,-3500],[550,-2550]]),mk('text',Y,[[1500,-3000]],'Heavy touch: go')]},
-   {pos:{ball:[300,-500],o1:[700,-2100],b1:[550,-2400]},marks:[]},
- ]},
+const R=(c,...p)=>({t:'run',c,p}),PS=(c,...p)=>({t:'pass',c,p}),TX=(c,x,y,text)=>({t:'text',c,p:[[x,y]],text}),
+      ZN=(c,x1,y1,x2,y2)=>({t:'zone',c,p:[[x1,y1],[x2,y2]]}),LN=(c,...p)=>({t:'pen',c,p});
+const CATS=[['kick','Kickoffs'],['rot','Rotation'],['off','Attack'],['def','Defense'],['boost','Boost'],['sense','Game sense'],['modes','2s & 1s']];
+const CATN=Object.fromEntries(CATS);
+const LVL=['','Starter','Core','Advanced'];
+const KO3=['diagL','diagR','back'];
+const CONTACT3={b1:[-180,-225,'GO'],b2:[1150,-1450,'CHEAT'],b3:[-2950,-4050,'BOOST'],o1:[180,225],o2:[-1150,1450],o3:[2950,4050]};
+
+const LESSONS=[
+// ===== KICKOFFS =====
+{id:'k1',cat:'kick',lvl:1,title:'3s kickoff: go, cheat, boost',sum:'The one rule every 3s team needs: closest goes, next closest cheats, farthest grabs boost.',gen:KO3,
+ tips:["Closest to the ball goes. Diagonals are closest, then off-centres, then the straight (back) spawn.","Two diagonals? Left goes (left from your own car's view). Same for two off-centres.","Second closest cheats: drive up beside the centre circle and stop behind the ball's line.","Farthest grabs the corner boost on the side away from the cheater, then comes back. They are last back until the play settles.","Agree the rule with your team before the match so nobody hesitates."],
+ bad:["Two players both going for the ball","Cheater driving past the ball before contact","Nobody near the net for the first seconds","Boost player staying in the corner after grabbing boost"],
+ quiz:{q:"Spawns: diagonal left, diagonal right, straight. You are diagonal right. What do you do?",o:["Go for the ball","Cheat up beside the circle","Grab corner boost and go back"],a:1,why:"Two diagonals tie, so left goes. You're second closest, so you cheat. Straight is farthest and grabs boost."}},
+{id:'k2',cat:'kick',lvl:1,title:'Off-centre kickoffs',sum:'No diagonals: the left off-centre goes and drives over the centre boost pad on the way.',gen:['offL','offR','back'],
+ tips:["Off-centre kicker: drive straight over the small pad in front of you, then turn into the ball and flip.","Off-centre is slower than a diagonal, so go instantly. Any hesitation gives them a free hit.","The other off-centre cheats and picks up the small pad on their side on the way.","The straight spawn grabs corner boost on the side away from the cheater."],
+ bad:["Missing the small pad on the way","Turning too late and hitting the ball with the side of your car"],
+ quiz:{q:"Spawns: off-centre left, off-centre right, straight. Who goes?",o:["Off-centre left","Off-centre right","Straight"],a:0,why:"No diagonal. The two off-centres are the same distance, so the left one goes."}},
+{id:'k3',cat:'kick',lvl:1,title:'Diagonal beats off-centre',sum:'A diagonal is always closer than an off-centre, so the diagonal goes, even on the right.',gen:['diagR','offL','back'],
+ tips:["The diagonal is the shortest path to the ball, so the diagonal player goes, left or right.","'Left goes' only breaks a tie between two spawns of the same type.","The off-centre cheats and grabs the small pad in front of them.","The straight spawn grabs boost on the side away from the cheater."],
+ bad:["Off-centre going because 'left goes'","Both players going and bumping each other"],
+ quiz:{q:"You spawn off-centre left. A teammate spawns diagonal right. Who goes?",o:["You, because left goes","Diagonal right, because diagonal is closer","Whoever presses the throttle first"],a:1,why:"'Left goes' is only a tie-break. A diagonal is closer than an off-centre, so the diagonal goes."}},
+{id:'k4',cat:'kick',lvl:2,title:'Kickoff technique: boost, flip, flip',sum:'How to actually win the kickoff: full boost, an early flip for speed, a second flip into the ball.',mode:1,kick:['diagL'],steps:[
+ {say:"Hold boost from the very first moment and aim slightly inside the ball's centre. From a diagonal you drive over a small pad automatically.",pos:{},m:[R(Y,[-2048,-2560],[-1788,-2300],[-1250,-1560]),TX(Y,-2300,-1700,'Boost now')]},
+ {say:"Speed: after the pad, do one quick flip forward while still boosting. Pros use a speed flip; a normal front flip still beats no flip.",pos:{b1:[-1250,-1560],o1:[1250,1560]},m:[TX(G,-2100,-1000,'Flip 1'),R(Y,[-1250,-1560],[-230,-290])]},
+ {say:"About one car length from the ball, flip INTO it. The flip gives the hit its power. Flip too early and you arrive weak; too late and you get bounced.",pos:{b1:[-230,-290],o1:[260,330]},m:[ZN(W,-450,-450,450,450),TX(Y,-1200,-500,'Flip 2')]},
+ {say:"Hit first with full power and the ball goes past them. Aim a little off-centre to send it toward their corner instead of straight at their goalie.",pos:{ball:[1500,2700],b1:[100,350],o1:[700,800]},m:[PS(W,[0,0],[1500,2700]),TX(W,2200,1800,'Into the corner')]}],
+ tips:["Boost the whole way. Never let go of boost before contact.","Final flip about one car length from the ball.","To steer the ball, hit it slightly on the opposite side of where you want it to go.","Practice in free play or against bots: 20 kickoffs from each spawn."],
+ bad:["Letting go of boost to steer","Flipping from too far away","Jumping into the ball without flipping"],
+ quiz:{q:"When should you do your final flip on a kickoff?",o:["As soon as the countdown ends","About one car length before the ball","After the opponent hits it"],a:1,why:"Flipping right before contact puts the flip's power into the ball. Too early and you arrive slow and weak."}},
+{id:'k5',cat:'kick',lvl:1,title:'Won the kickoff: attack!',sum:'The ball goes forward. Who presses, who follows, who stays back.',mode:3,kick:KO3,steps:[
+ {say:"Contact. Blue wins the 50/50 and the ball heads toward Orange's right corner.",pos:CONTACT3,m:[PS(W,[0,0],[1800,3200]),R(B,[1150,-1450],[1300,1700])]},
+ {say:"The cheater is already moving forward, so they become 1st man and press the ball. The kicker recovers as 2nd. The boost player has 100 boost and moves up as 3rd.",pos:{ball:[1800,3200],b1:[200,700,'2nd'],b2:[1300,1700,'1st'],b3:[-1300,-2700,'3rd'],o1:[-300,600],o2:[-500,3900],o3:[2500,3900]},m:[R(B,[1300,1700],[1750,2950]),R(G,[-1300,-2700],[-400,-300])]},
+ {say:"Pressure forces a weak clear into the middle. The 2nd man is in the perfect spot to shoot. The 3rd sits at half to stop any counter.",pos:{ball:[200,3000],b2:[1900,3100],b1:[0,2100],b3:[-400,-300],o3:[2300,3600],o2:[0,4500],o1:[-200,1600]},m:[R(Y,[0,2100],[150,2850]),TX(Y,-1000,2400,'Shoot')]}],
+ tips:["Winning the kickoff is only half the job; the follow-up decides if you score.","Cheater: as soon as the ball goes forward, go. You're the fastest player into their half.","Kicker: land, recover and become 2nd. Don't chase the ball you just hit.","Boost player: come up to half once the ball is in their half."],
+ bad:["Kicker chasing their own kickoff hit","3rd man staying in goal while the team attacks","Everyone driving into the same corner"],
+ quiz:{q:"You win the kickoff into their corner. You were the cheater. What now?",o:["Wait in the middle for a pass","Press the ball as 1st man","Go back to defend"],a:1,why:"You're already moving forward with the best angle, so you press. The kicker recovers behind you as 2nd."}},
+{id:'k6',cat:'kick',lvl:1,title:'Lost the kickoff: defend',sum:'The ball comes your way. Stay calm: the boost player is usually closest.',mode:3,kick:KO3,steps:[
+ {say:"Orange wins it and the ball rolls into your left corner. Your boost player is right there with 100 boost. The cheater must get goal-side fast.",pos:CONTACT3,m:[PS(W,[0,0],[-1600,-3100]),R(G,[-2950,-4050],[-2700,-3600]),R(B,[1150,-1450],[500,-3300])]},
+ {say:"The boost player takes the first touch and clears it up the side wall, away from the middle. The cheater heads to net. The kicker turns around and becomes 2nd.",pos:{ball:[-1600,-3100],b3:[-2700,-3600,'1st'],b2:[500,-3300,'3rd'],b1:[-300,-900,'2nd'],o1:[-500,-1000],o2:[-1300,-700],o3:[1500,3200]},m:[PS(W,[-1600,-3100],[-3700,-400]),TX(W,-2700,-1700,'Clear wide'),R(B,[500,-3300],[0,-4650])]},
+ {say:"Safe. The ball is out wide, someone is in net, and the team can reset and rotate normally.",pos:{ball:[-3700,-400],b3:[-2300,-2900],b2:[0,-4650],b1:[-1000,-1600],o1:[-2100,-900],o2:[-900,300],o3:[800,2400]},m:[]}],
+ tips:["Lost kickoffs are when early goals happen. React fast.","Boost player: you're often closest, with full boost. Take the ball calmly.","Cheater: if the ball gets past you, turn back at once and get between ball and net.","Clear to the side walls, not up the middle where the opponents are waiting."],
+ bad:["Cheater chasing the ball into the corner (now nobody covers the net)","Clearing straight up the middle","Kicker sitting still after losing the 50/50"],
+ quiz:{q:"The kickoff is lost and the ball rolls past you, the cheater. What do you do?",o:["Chase it into the corner","Turn back and get between the ball and the net","Go grab mid boost"],a:1,why:"Your boost player is usually closer to the ball. Your job is to cover the net so a bad touch isn't a goal."}},
+{id:'k7',cat:'kick',lvl:2,title:'Cheating: the right distance',sum:'Close enough to collect, far enough back to defend.',mode:3,kick:KO3,steps:[
+ {say:"The cheater drives up toward the side of the centre circle and stops behind the ball's line. Green is a good spot. Red is too far: if Orange wins it, you're out of the play.",pos:{b1:[-2048,-2560,'GO'],b2:[2048,-2560,'CHEAT'],b3:[0,-4608,'BOOST']},m:[ZN(G,700,-2000,1600,-1100),TX(G,1150,-2350,'Good cheat'),ZN(Rd,300,-600,1300,300),TX(Rd,1600,-150,'Too far'),R(B,[2048,-2560],[1150,-1500])]},
+ {say:"The 50/50 pops toward the cheater's side. Because they're waiting, not rushing, they take it with control.",pos:{b1:[-180,-225],b2:[1150,-1500],b3:[-2950,-4050],o1:[180,225],o2:[-1150,1450],o3:[2950,4050]},m:[PS(W,[0,0],[1300,-900]),R(B,[1150,-1500],[1250,-1100])]},
+ {say:"The cheater takes possession and pushes forward. If the ball had gone past instead, they were still deep enough to turn and defend.",pos:{ball:[1300,-900],b2:[1250,-1250,'1st'],b1:[-300,-500,'2nd'],b3:[-2600,-3200,'3rd']},m:[R(B,[1250,-1250],[1500,600]),TX(B,2200,-300,'Take it')]}],
+ tips:["Good cheat zone: beside the centre circle, behind the ball.","Never drive past the ball's line before contact.","If their kicker always wins, cheat a little less.","Grab small pads as you cheat; don't burn all your boost."],
+ bad:["Cheating straight at the ball and colliding with your own kicker","Cheating so far that a lost kickoff is a free shot for them"],
+ quiz:{q:"Where should the cheater wait during a 3s kickoff?",o:["Right behind the kicker, bumper to bumper","Beside the centre circle, behind the ball's line","In the opponent's half to get there first"],a:1,why:"Beside the circle you can collect a ball that pops your way and still turn back if they win it."}},
+{id:'k8',cat:'kick',lvl:3,title:'Fake and delayed kickoffs',sum:'A rare trick: let them hit a ball with nobody on it, then take it with speed.',mode:3,kick:KO3,steps:[
+ {say:"Fake: Blue's kicker doesn't go. Orange flips hard into a ball with nobody on it, so the ball rolls slowly. Only do this if your team knows the plan.",pos:{b1:[-2048,-2560,'FAKE'],b2:[2048,-2560,'CHEAT'],b3:[0,-4608,'BOOST']},m:[R(O,[2048,2560],[200,250]),TX(Y,-2048,-3200,'Wait'),R(G,[0,-4608],[-2900,-4100])]},
+ {say:"Their free hit rolls into your half, softly. Your kicker, still full on boost, meets it with speed and control.",pos:{o1:[220,280],ball:[-500,-1300],b1:[-1700,-2200],b2:[1150,-1450],b3:[-2950,-4050],o2:[-1150,1450],o3:[2950,4050]},m:[R(Y,[-1700,-2200],[-650,-1500])]},
+ {say:"You arrive faster than the ball and push it past their kicker, who just flipped and has little boost left.",pos:{ball:[-300,900],b1:[-450,-450,'1st'],o1:[100,600],b2:[900,-400,'2nd'],b3:[-2500,-3300,'3rd']},m:[PS(W,[-500,-1300],[-300,900])]}],
+ tips:["Fakes work best against opponents who always flip hard into the ball.","Agree on fakes beforehand; a surprise fake confuses your own team.","Delayed kickoff: drive slowly, let them hit first, then take the loose ball.","Use rarely. If they read it, they get a free touch toward your goal."],
+ bad:["Faking without telling your team","Faking every kickoff"],
+ quiz:{q:"Why can a fake kickoff work?",o:["The ball goes faster","Their hit is soft with nobody on it, and you arrive with boost and control","Hitting first is not allowed"],a:1,why:"An unopposed hit rolls softly. You arrive with speed and boost and take possession."}},
+
+// ===== ROTATION =====
+{id:'r1',cat:'rot',lvl:1,title:'The 3 jobs: 1st, 2nd, 3rd man',sum:'Pressure, support, safety. The triangle that every good 3s team plays.',mode:3,steps:[
+ {say:"Every 3s play has three jobs. The 1st man pressures the ball. The 2nd supports a few car lengths behind. The 3rd stays back as safety. Together you make a triangle.",pos:{ball:[-1800,2800],b1:[-1500,2000,'1st'],b2:[-200,600,'2nd'],b3:[400,-1600,'3rd'],o1:[-1300,3800],o2:[300,4700],o3:[1600,1600]},m:[LN(W,[-1500,2000],[-200,600],[400,-1600],[-1500,2000]),TX(Y,-2700,1500,'Pressure'),TX(B,800,700,'Support'),TX(G,1500,-1600,'Safety'),R(Y,[-1500,2000],[-1750,2650])]},
+ {say:"The 1st man challenges and the ball pops into the middle. The 2nd is in the right place to take it. The 3rd moves up to midfield because the team is attacking.",pos:{ball:[0,2600],b1:[-1750,2700],b2:[-300,1800],b3:[200,-300],o1:[-900,3500],o2:[0,4700],o3:[1300,1200]},m:[R(B,[-300,1800],[-100,2350]),R(Y,[-1750,2700],[-3300,1000])]},
+ {say:"Everyone moves up one job. The old 2nd is now 1st, the old 3rd is 2nd, and the old 1st rotates back as the new 3rd. The jobs move; the triangle stays.",pos:{ball:[100,3300],b1:[-3300,1000,'3rd'],b2:[-100,2400,'1st'],b3:[200,800,'2nd'],o1:[-600,3600],o2:[100,4700],o3:[1400,1800]},m:[LN(W,[-100,2400],[200,800],[-3300,1000],[-100,2400])]}],
+ tips:["1st man: win the ball or force a bad touch.","2nd man: stay 3-4 car lengths behind the 1st, ready for whatever comes out.","3rd man: on offense, push up to around midfield. On defense, guard the net.","Count your teammates. If both are in front of you, you're the 3rd man."],
+ bad:["All three players in the same third of the field","2nd man so close to the 1st that one touch beats both","3rd man sitting in goal while the team attacks"],
+ quiz:{q:"Your team is attacking. You're the 3rd man. Where should you be?",o:["In your own goal","Around midfield, behind both teammates","In the opponent's corner helping the 1st man"],a:1,why:"Around midfield you can stop clears and counters while still being the last player back."}},
+{id:'r2',cat:'rot',lvl:1,title:'Back-post rotation',sum:'After your touch, rotate wide and back to the far post. Everyone moves up one.',mode:3,steps:[
+ {say:"Blue's 1st man challenges the ball on the right side.",pos:{ball:[1500,1900],b1:[1100,1150,'1st'],b2:[-400,-200,'2nd'],b3:[-200,-3000,'3rd'],o1:[1700,3100],o2:[-500,3800],o3:[-1500,1400]},m:[R(Y,[1100,1150],[1450,1750])]},
+ {say:"The ball goes left. The old 1st doesn't turn back into the play: they drive out wide and back toward the far post, grabbing boost on the way. The 2nd takes over as 1st, the 3rd steps up as 2nd.",pos:{ball:[-1200,600],b1:[2700,300],b2:[-700,-100],b3:[-300,-1800],o1:[-500,1700],o2:[-200,3600],o3:[-2200,900]},m:[R(Y,[2700,300],[3500,-200],[3000,-2400],[1000,-4100]),R(B,[-700,-100],[-1150,500]),R(G,[-300,-1800],[-500,-700]),TX(Y,2700,-2700,'Back post')]},
+ {say:"From the back post the new 3rd sees everything: the ball, both teammates and all three opponents.",pos:{ball:[-1100,1200],b1:[1000,-4100,'3rd'],b2:[-1150,550,'1st'],b3:[-500,-700,'2nd'],o1:[-800,2300],o2:[300,3900],o3:[-2600,1600]},m:[LN(G,[1000,-4100],[-1100,1200]),TX(G,1900,-3700,'Sees all')]}],
+ tips:["Back post = the goal post farther from the ball.","From the back post the whole play is in front of you.","Grab small pads or a side big pad on the way.","Rotating ball-side (through the play) blocks teammates and hides the field from you."],
+ bad:["Rotating through the middle of the play","Turning straight back into the ball after your challenge","Parking in goal facing the back wall"],
+ quiz:{q:"The ball is on the left side of the field. You rotate back. Where do you go?",o:["The left post, near the ball","The right post (back post)","Into the left corner"],a:1,why:"The back post is the one away from the ball. From there you can see the ball, the pass and your teammates."}},
+{id:'r3',cat:'rot',lvl:1,title:'Never double commit',sum:'Two players on one ball = one pass beats both. One challenges, one covers.',mode:3,steps:[
+ {say:"Orange brings the ball up. Blue's 1st AND 2nd both drive at it. That's a double commit.",pos:{ball:[-800,-800],o1:[-600,-150],o2:[1000,400],o3:[-300,2500],b1:[-900,-2100,'1st'],b2:[400,-2400,'2nd'],b3:[0,-4400,'3rd']},m:[R(Rd,[-900,-2100],[-800,-1200]),R(Rd,[400,-2400],[-500,-1300]),TX(Rd,1400,-1700,'Both go?')]},
+ {say:"One easy pass beats both of them. Now it's 2 attackers against your goalie.",pos:{ball:[1200,-2700],o1:[-700,-600],o2:[1200,-2100],b1:[-800,-1250],b2:[-450,-1350],b3:[200,-4500]},m:[PS(W,[-800,-800],[1200,-2700]),TX(Rd,2300,-3200,'2 beaten')]},
+ {say:"Again, properly: only the 1st challenges. The 2nd stays a few car lengths back, covering the pass to the right. The 3rd guards the net.",pos:{ball:[-800,-800],o1:[-600,-150],o2:[1000,400],b1:[-850,-1500],b2:[600,-2900],b3:[0,-4400]},m:[R(Y,[-850,-1500],[-800,-1100]),ZN(B,0,-3500,1500,-2300),TX(B,1900,-2000,'Cover pass'),TX(G,1100,-4700,'Net')]},
+ {say:"The same pass now goes straight to the 2nd man. One challenges, one covers, one guards.",pos:{ball:[900,-2400],o1:[-700,-600],o2:[1100,-1600],b1:[-700,-1200],b2:[900,-2700]},m:[R(B,[900,-2700],[900,-2450]),TX(B,1900,-3100,'Cut out')]}],
+ tips:["Before you go, check: is a teammate already going? Then you support.","Use 'I got it!' when you commit, and trust it when a teammate says it.","Support from 3-4 car lengths behind, on the side of the likely pass.","If you're both equally close, the one facing the ball more goes."],
+ bad:["Two players challenging the same ball","Going for the ball without checking teammates","Ignoring a teammate's 'I got it!'"],
+ quiz:{q:"A teammate goes for the ball you were also driving at. What do you do?",o:["Go anyway, two is better than one","Back off and cover the pass or rebound","Go grab big boost"],a:1,why:"Two players on one ball means one pass or bounce beats you both. Covering keeps your team alive."}},
+{id:'r4',cat:'rot',lvl:2,title:"Don't cut off your teammate",sum:'After your touch, rotate out wide, not across the field through the next man\'s lane.',mode:3,steps:[
+ {say:"Blue's 1st just challenged in the corner. The red path cuts across the field straight through the 2nd man's lane. The yellow path goes out wide, takes the side big pad, and heads back.",pos:{ball:[2700,3700],b1:[2400,3300,'1st'],b2:[500,1800,'2nd'],b3:[-300,-200,'3rd'],o1:[1600,4300],o2:[-200,4600],o3:[-1500,1200]},m:[R(Rd,[2400,3300],[1200,2500],[-200,1500]),TX(Rd,-1000,2300,'Cuts across'),R(Y,[2400,3300],[3500,1500],[3584,0],[2600,-2600]),TX(Y,3100,700,'Wide')]},
+ {say:"Because the old 1st went wide, the 2nd has a clear lane to the ball. The 3rd moves up behind.",pos:{ball:[1500,3300],b1:[3584,100,'3rd'],b2:[1200,2700,'1st'],b3:[200,900,'2nd'],o1:[1900,4000],o2:[0,4600]},m:[R(Y,[3584,100],[2400,-2700],[-700,-4400])]},
+ {say:"The old 1st arrives at the back post with 100 boost, ready for anything that comes back.",pos:{b1:[-700,-4400],b2:[1450,3050],b3:[300,1500],ball:[1300,3600]},m:[]}],
+ tips:["After your touch, rotate out to the side, away from teammates' paths.","If a teammate is coming in, you're an obstacle. Get out of the way.","The side big pad is a natural rotation stop.","Glance at your teammates (ball-cam off briefly) before you turn."],
+ bad:["Bumping your own teammate","Rotating through the middle of the field","Stopping in front of the goal you're attacking"],
+ quiz:{q:"You just challenged the ball in their corner. How do you rotate?",o:["Through the middle of the field","Out wide along the side, then back","Stay in the corner and wait"],a:1,why:"Going wide keeps the middle lane open for your 2nd man and lets you pick up the side boost."}},
+{id:'r5',cat:'rot',lvl:1,title:'Boost on the way back',sum:'Rotate through pads that are already on your path. Never cross the field for one.',mode:3,steps:[
+ {say:"You're out of the play with 6 boost. Don't drive across the field for the far big pad (red). Rotate back down your own side: the side big pad and small pads are all on the way (yellow).",pos:{ball:[800,3300],b1:[-2600,3000,'6 boost'],b2:[600,2300,'1st'],b3:[-200,400,'2nd'],o1:[700,4100],o2:[-400,4700],o3:[1800,1700]},m:[R(Y,[-2600,3000],[-3584,0],[-1788,-2300],[-940,-3308],[-600,-4300]),TX(Y,-2600,-1300,'On the way'),R(Rd,[-2600,3000],[-800,2000],[2000,1200],[3584,0]),TX(Rd,1500,500,'Across')]},
+ {say:"The side big pad is right on your rotation path, so take it. Big pads give 100.",pos:{b1:[-3584,0,'100 boost'],ball:[300,3500],b2:[500,2900],b3:[0,1200],o1:[400,4300]},m:[]},
+ {say:"You arrive at the back post full of boost. A player with boost is a threat; a player with zero is a spectator.",pos:{b1:[-600,-4300,'3rd'],ball:[-400,3600],b2:[-200,3000],b3:[300,1300],o1:[0,4400]},m:[]}],
+ tips:["Small pads give 12 and come back after 4 seconds. Big pads give 100 and come back after 10.","Plan your rotation through pads you already pass.","Take a big pad if it's on your path; don't detour across the field.","Aim for 30-60 boost as 3rd man. Position matters more than a full tank."],
+ bad:["Crossing the whole field for a big pad","Going for boost while you're last back","Ignoring small pads"],
+ quiz:{q:"You're rotating back with almost no boost. What's best?",o:["Drive across the field to the far big pad","Take the pads that are on your rotation path","Stay where you are"],a:1,why:"Pads on your path refill you without leaving your team short-handed."}},
+{id:'r6',cat:'rot',lvl:2,title:'When to break rotation',sum:'Rotation is a guide, not a law. If you\'re clearly closest and it\'s safe, take it.',mode:3,steps:[
+ {say:"A clear comes out to your left. You're the 3rd man, but you're far closer than anyone. Waiting for the 'right' player gives Orange a free touch.",pos:{ball:[-1400,-900],b1:[2400,2200,'1st'],b2:[1500,500,'2nd'],b3:[-1200,-2200,'3rd'],o1:[-200,600],o2:[1000,3000],o3:[-300,4600]},m:[R(G,[-1200,-2200],[-1350,-1150]),TX(G,-2500,-1800,'I got it!'),R(B,[1500,500],[300,-2800]),TX(B,1600,-2100,'Cover')]},
+ {say:"So you take it and call 'I got it!'. Your 2nd sees you go and drops back to cover the net. Rotation bends around the play.",pos:{ball:[-1500,500],b3:[-1350,-700,'1st'],b2:[300,-2800,'3rd'],b1:[1600,1500,'2nd'],o1:[-600,1000]},m:[PS(W,[-1500,500],[-3000,2600])]}],
+ tips:["The real goal: someone on the ball and someone back, at all times.","If you're clearly closest and it's safe, take it.","When a teammate breaks rotation, fill in behind them.","Always tell the team with quick chat."],
+ bad:["Leaving a free ball because 'it's not my turn'","Breaking rotation as last man on a 50/50"],
+ quiz:{q:"You're 3rd man. The ball rolls right to you and both teammates are far away. What do you do?",o:["Leave it, it's the 1st man's ball","Take it, call 'I got it!', and let a teammate cover","Go back to net"],a:1,why:"A free ball is worth taking. Calling it lets your teammate drop back and cover for you."}},
+{id:'r7',cat:'rot',lvl:2,title:"The 2nd man's job",sum:'Follow-ups, 50/50s, rebounds and passes all land near the 2nd man.',mode:3,steps:[
+ {say:"Blue's 1st takes the ball forward. The 2nd stays a few car lengths behind and to the side, facing the play. Not too close, not too far.",pos:{ball:[-500,1800],b1:[-600,1200,'1st'],b2:[500,-200,'2nd'],b3:[-300,-2600,'3rd'],o1:[-400,2900],o2:[700,4400],o3:[1800,2500]},m:[ZN(B,-200,-700,1300,500),TX(B,1900,-500,'Read'),R(Y,[-600,1200],[-500,1650])]},
+ {say:"The 1st loses the 50/50 and the ball pops back. Because the 2nd waited with boost, they reach the loose ball first.",pos:{ball:[400,1100],b1:[-500,1700],o1:[-400,2300],b2:[500,300]},m:[PS(W,[-500,1800],[400,1100]),R(B,[500,300],[450,950])]},
+ {say:"The 2nd keeps the pressure going. The old 1st rotates out and the 3rd steps up as the new 2nd.",pos:{ball:[900,3800],b2:[450,1250,'1st'],b1:[-2200,1200,'3rd'],b3:[-200,-700,'2nd'],o1:[-600,2600],o2:[600,4600]},m:[PS(W,[400,1100],[900,3800])]}],
+ tips:["You're the follow-up. Shots, 50/50s, rebounds and passes all land near you.","Stay 3-4 car lengths behind the 1st, not beside them.","Face the play so you can react either way.","Keep some boost; you'll need speed when the ball pops."],
+ bad:["Driving on the 1st man's bumper","Turning away from the play at the wrong moment"],
+ quiz:{q:"Where should the 2nd man usually be?",o:["Right next to the 1st man","3-4 car lengths behind and to the side, facing the play","In goal"],a:1,why:"From there you can collect whatever comes out of the 1st man's challenge."}},
+
+// ===== ATTACK =====
+{id:'o1',cat:'off',lvl:1,title:'Follow up every shot',sum:'Rebounds are free goals. The 2nd man drives in the moment the shot is taken.',mode:3,steps:[
+ {say:"Blue's 1st shoots. The 2nd doesn't stop to watch: they drive toward the goal right away, expecting a rebound.",pos:{ball:[-900,3200],b1:[-1100,2600,'1st'],b2:[400,1700,'2nd'],b3:[0,-500,'3rd'],o1:[-200,4900],o2:[900,4300],o3:[-2200,2200]},m:[PS(W,[-900,3200],[-200,4950]),R(B,[400,1700],[300,3000]),TX(B,1500,2500,'Follow')]},
+ {say:"Their goalie saves, but the ball bounces out in front. Most rebounds land between the penalty spot and the top of the box.",pos:{ball:[400,4100],o1:[-150,4800],b1:[-900,3600],b2:[300,3000]},m:[TX(W,1400,4400,'Save!'),R(B,[300,3000],[350,3800])]},
+ {say:"The 2nd buries the rebound before the goalie recovers. The shooter rotates out and the 3rd moves up.",pos:{ball:[100,5450],b2:[300,3900,'1st'],b1:[-2500,2400,'3rd'],b3:[-200,1000,'2nd'],o1:[-100,4900]},m:[TX(Y,0,4200,'Goal!')]}],
+ tips:["When a teammate shoots, start driving toward the goal straight away.","Arrive with speed but under control; rebounds are unpredictable.","Aim the rebound away from the goalie, at the far post.","3rd man: move up to half when your team is shooting."],
+ bad:["Watching the shot instead of following","All three players crashing the net"],
+ quiz:{q:"Your teammate shoots. You're the 2nd man. What do you do?",o:["Watch to see if it goes in","Drive toward the goal for the rebound","Go back to defend"],a:1,why:"Rebounds come out fast. If you're already moving, you score before the goalie recovers."}},
+{id:'o2',cat:'off',lvl:2,title:'Centre pass from the corner',sum:'The corner is a bad place to shoot and a great place to pass from.',mode:3,steps:[
+ {say:"Blue's 1st has the ball in the corner. A shot from here goes straight into the goalie. Instead, pass it into the middle.",pos:{ball:[3000,3600],b1:[2700,3100,'1st'],b2:[300,1500,'2nd'],b3:[-500,-600,'3rd'],o1:[400,4800],o2:[1700,4200],o3:[-1700,2000]},m:[PS(W,[3000,3600],[200,3400]),R(B,[300,1500],[200,2800]),TX(W,1700,2900,'Centre')]},
+ {say:"The 2nd times their run to meet the pass. Arriving with speed matters more than arriving early.",pos:{ball:[200,3400],b1:[2800,3400],b2:[200,2700],o2:[1500,4300],o1:[300,4800]},m:[R(B,[200,2700],[250,3200])]},
+ {say:"One touch on target from the middle. The passer rotates out wide.",pos:{ball:[600,5450],b2:[300,3500],b1:[3300,1200,'3rd'],b3:[0,800,'2nd'],o1:[100,4900]},m:[TX(Y,0,4300,'Goal')]}],
+ tips:["Corners are for passing, the middle is for shooting.","Pass into the space in front of your teammate, not at their car.","2nd man: don't arrive too early or you'll be sitting still when the ball comes.","Softer passes are easier to shoot."],
+ bad:["Shooting from the corner into the goalie","Passing into the middle with no teammate coming"],
+ quiz:{q:"You have the ball in the opponent's corner and your 2nd is coming into the middle. Best play?",o:["Shoot from the corner","Pass it into the middle in front of them","Carry it back to your half"],a:1,why:"A centre pass gives your teammate a shot from the best angle on the field."}},
+{id:'o3',cat:'off',lvl:2,title:'Backboard pass',sum:'Hit it up the back wall; the ball drops into the middle for your teammate.',mode:3,steps:[
+ {say:"From the corner, Blue's 1st hits the ball up the back wall above the goal, where defenders can't easily reach it.",pos:{ball:[-3300,3900],b1:[-3100,3300,'1st'],b2:[100,1700,'2nd'],b3:[300,-500,'3rd'],o1:[0,4900],o2:[-1800,4200],o3:[1700,2400]},m:[PS(W,[-3300,3900],[-1600,4800],[-500,5100]),R(B,[100,1700],[-100,2900],[-300,3800]),TX(B,1100,2700,'Read it')]},
+ {say:"The ball drops off the back wall into the middle. The 2nd man read the bounce and is already waiting under it.",pos:{ball:[-500,5050],b1:[-3000,3500],b2:[-250,3700],o1:[-600,4700],o2:[-1500,4400]},m:[PS(W,[-500,5050],[-250,4300])]},
+ {say:"Shot from point blank. The goalie had to watch the wall and the ball at the same time.",pos:{ball:[150,5450],b2:[0,4300],b1:[-3300,1500,'3rd'],b3:[0,800,'2nd'],o1:[-900,4600]},m:[TX(Y,0,3600,'Goal')]}],
+ tips:["Hit the ball high on the back wall, toward the middle of the goal.","Receiver: wait about where the penalty spot is and read the drop.","Works best when the goalie is pulled to the near post.","3rd man stays at half; backboard plays often bounce back out."],
+ bad:["Hitting it too low so it rolls to the goalie","Receiver arriving too early and driving under the ball"],
+ quiz:{q:"Where should the receiver wait for a backboard pass?",o:["Under the goal on the goal line","Around the penalty spot, reading the drop","In the opposite corner"],a:1,why:"The ball drops off the wall toward the middle; from there you can meet it facing the goal."}},
+{id:'o4',cat:'off',lvl:2,title:'Infield pass past a challenger',sum:'When an opponent commits to you, pass away from them.',mode:3,steps:[
+ {say:"Blue's 1st is dribbling up the left side and an opponent is coming to challenge. Don't force it. Pass it infield.",pos:{ball:[-3400,1200],b1:[-3500,800,'1st'],b2:[-500,300,'2nd'],b3:[300,-2200,'3rd'],o1:[-2600,2600],o2:[0,4500],o3:[800,1800]},m:[R(O,[-2600,2600],[-3300,1500]),TX(O,-2200,3300,'Challenge'),PS(W,[-3400,1200],[-800,1800])]},
+ {say:"The challenger commits to the 1st man and hits nothing. The 2nd takes the pass with open space in front.",pos:{ball:[-800,1800],o1:[-3300,1400],b1:[-3300,1300],b2:[-700,1300]},m:[R(B,[-700,1300],[-750,1750]),TX(O,-2500,500,'Beaten')]},
+ {say:"Open shot. A simple pass beats a challenger every time.",pos:{ball:[-300,5450],b2:[-600,3000],b1:[-3400,-200,'3rd'],b3:[0,-200,'2nd'],o2:[300,4800]},m:[PS(W,[-800,1800],[-300,5200])]}],
+ tips:["When an opponent commits to you, pass away from them.","Your 2nd should be in the middle, slightly behind you.","Infield passes go toward the middle, where the shot angle is best.","Never pass across your own goal if you're not sure a teammate is there."],
+ bad:["Passing into the middle of your own half with nobody there","Waiting until the challenger takes the ball"],
+ quiz:{q:"An opponent is about to challenge you on the wall, and your 2nd is in the middle. Best play?",o:["Turn into the challenger","Pass it infield to your 2nd","Hit it into their corner"],a:1,why:"The challenger is committed to you, so a pass leaves them out of the play."}},
+{id:'o5',cat:'off',lvl:3,title:'Bump the goalie',sum:'A bump or demo on the last defender right as the shot comes = open net.',mode:3,steps:[
+ {say:"Blue's 1st lines up a shot from the top of the box. The 2nd doesn't wait for a rebound: they drive at the goalie at full speed.",pos:{ball:[400,2300],b1:[300,1700,'1st'],b2:[-1800,2100,'2nd'],b3:[0,-800,'3rd'],o1:[0,4900],o2:[1500,3800],o3:[-500,500]},m:[R(Rd,[-1800,2100],[-200,4800]),TX(Rd,-1900,3700,'Bump'),PS(W,[400,2300],[500,5000])]},
+ {say:"The goalie is bumped out of the goal (or demolished) just before the shot arrives.",pos:{o1:[1300,4700,'BUMPED'],b2:[-150,4700],ball:[450,4300],b1:[400,3100]},m:[]},
+ {say:"Open net. Only do this when your 3rd man is back; after a bump you're out of the play.",pos:{ball:[500,5450],b2:[500,4200],o1:[1900,4300,'']},m:[TX(Y,-300,3800,'Goal')]}],
+ tips:["A demo needs supersonic speed; a bump works at any speed.","Time it with the shot: hit the goalie as the ball is on its way.","Only when your 3rd man is back.","Bumping their last man during a counter-attack works too."],
+ bad:["Chasing demos all over the field","Demoing too early so the goalie respawns in time"],
+ quiz:{q:"When is the best time to bump the opposing goalie?",o:["Any time you see them","Right as your teammate's shot is coming, with your 3rd man back","When you're last man back"],a:1,why:"Timed with the shot, the goalie can't recover. With your 3rd back, you're still safe if it fails."}},
+
+// ===== DEFENSE =====
+{id:'d1',cat:'def',lvl:1,title:'Shadow defense',sum:'Drive back between ball and net, match their speed, challenge on the bad touch.',mode:3,steps:[
+ {say:"Orange carries the ball at you. Blue's 1st doesn't dive in. They drive back in front of the ball, staying between it and the net.",pos:{ball:[600,1400],o1:[700,2000],o2:[-1500,1800],o3:[400,3800],b1:[500,200,'1st'],b2:[-800,-1600,'2nd'],b3:[0,-4300,'3rd']},m:[R(O,[700,2000],[600,-500]),R(B,[500,200],[400,-1500]),TX(B,1700,-600,'Shadow')]},
+ {say:"Match their speed. You're giving them space but no shot, and your teammates get time to get back.",pos:{ball:[450,-600],o1:[550,-100],b1:[350,-1800],b2:[-600,-3000],b3:[0,-4600],o2:[-1600,600]},m:[ZN(B,-300,-2400,1100,-1300)]},
+ {say:"Their dribble gets a little too far from their car. That's the moment: challenge now, with teammates behind you.",pos:{ball:[700,-1300],o1:[800,-800],b1:[500,-1750]},m:[R(Y,[500,-1750],[650,-1450]),TX(Y,1800,-2100,'Heavy touch: go')]},
+ {say:"Cleared to the side. Shadowing turned a dangerous attack into a safe clear.",pos:{ball:[-2800,1500],b1:[700,-1400],o1:[900,-700]},m:[PS(W,[700,-1300],[-2800,1500])]}],
+ tips:["Shadowing = driving back between ball and net, facing the play.","Stay 2-3 car lengths away; too close and they flick over you.","Challenge on a heavy touch, a bad bounce, or when a teammate is ready behind you.","Don't shadow so deep that you're in your own goal when they shoot."],
+ bad:["Diving at a controlled dribble","Turning your back on the ball to drive to net"],
+ quiz:{q:"An opponent is dribbling at you with good control. You're the 1st defender. What do you do?",o:["Dive at the ball straight away","Shadow back and wait for a heavy touch","Go for boost"],a:1,why:"Diving at a controlled dribble invites a flick or fake. Shadowing buys time and waits for their mistake."}},
+{id:'d2',cat:'def',lvl:2,title:'Back-post defense',sum:'When the ball is in your corner, defend from the far post so you can see everything.',mode:3,steps:[
+ {say:"Ball in your left corner. A defender sitting at the near (front) post can't see the middle, and a pass behind them is a free goal.",pos:{ball:[-2600,-3600],o1:[-2300,-3000],o2:[300,-1500],o3:[-200,600],b1:[-1200,-1800,'1st'],b2:[1300,-1900,'2nd'],b3:[-800,-4800,'3rd']},m:[ZN(Rd,-1300,-5100,-400,-4500),TX(Rd,-1900,-4300,'Front post: blind'),R(G,[-800,-4800],[750,-4700])]},
+ {say:"From the back post you see the ball, the pass and every opponent. A shot at the near post still has to cross in front of you.",pos:{b3:[750,-4700]},m:[LN(G,[750,-4700],[-2600,-3600]),LN(G,[750,-4700],[300,-1500]),TX(G,1700,-3500,'See all')]},
+ {say:"The centre pass comes, and the back-post defender steps up into it, facing the play.",pos:{ball:[400,-3300],o2:[350,-2600],b3:[450,-4100],o1:[-2400,-3300]},m:[PS(W,[-2600,-3600],[400,-3300]),R(G,[750,-4700],[450,-4100])]}],
+ tips:["Ball on one side? Defend from the far post.","Facing the ball, you can drive forward into any save.","Rotating to the back post is also how you join the defense.","If the ball is right in front of the net, take the middle."],
+ bad:["Hugging the near post","Sitting on the goal line facing the wall"],
+ quiz:{q:"The ball is in your right corner. Where should the last defender be?",o:["Right post (near the ball)","Left post (back post)","Out in the corner with the ball"],a:1,why:"The back post lets you see the whole play and step up into passes or shots."}},
+{id:'d3',cat:'def',lvl:1,title:'Clear to the corners',sum:'The middle is where the opponents wait. Send clears up the side walls.',mode:3,steps:[
+ {say:"You're defending near your net. Where you send the ball matters. Red: the middle, where Orange is waiting. Green: up the side wall.",pos:{ball:[-1200,-3600],b3:[-900,-4300,'3rd'],b1:[600,-1500,'1st'],b2:[1400,-3000,'2nd'],o1:[-1300,-2700],o2:[500,-500],o3:[-400,1200]},m:[PS(Rd,[-1200,-3600],[300,-300]),TX(Rd,1300,-200,'Middle'),PS(G,[-1200,-3600],[-3800,800]),TX(G,-2800,1500,'Side wall')]},
+ {say:"Clear it up the middle and it lands on an opponent, who shoots straight back.",pos:{ball:[300,-300],o2:[450,-700],b3:[-1000,-3900]},m:[PS(W,[300,-300],[0,-5000]),TX(Rd,1300,-2200,'Shot')]},
+ {say:"Clear it up the side and it goes to a corner where nobody is. Your team has time to reset.",pos:{ball:[-3800,800],o2:[400,-500],b3:[-1100,-3800]},m:[TX(G,-2600,200,'Safe')]}],
+ tips:["Clear toward the side walls and corners.","A soft clear to the side is better than a hard clear to the middle.","If you can't clear well, push the ball into the side wall.","Only clear to the middle when a teammate is clearly there to receive it."],
+ bad:["Booming it up the middle every time","Hitting it across your own goal"],
+ quiz:{q:"You're defending in front of your net. Where should you clear?",o:["Straight up the middle, as hard as you can","Up the side walls, toward the corners","Across the front of your own goal"],a:1,why:"The side walls send the ball away from where the opponents usually wait."}},
+{id:'d4',cat:'def',lvl:1,title:"Last man: don't dive",sum:"If both teammates are ahead of the ball, you're the last line. Hold, don't gamble.",mode:3,steps:[
+ {say:"Both teammates are up the field. You're the last player back. Challenge here and miss, and it's an open net.",pos:{ball:[300,400],o1:[400,1100],o2:[-1800,1400],o3:[1500,2600],b1:[1800,2400,'1st'],b2:[-2500,2200,'2nd'],b3:[200,-1200,'LAST']},m:[R(Rd,[200,-1200],[300,250]),TX(Rd,1300,-500,'Dive in?'),R(G,[200,-1200],[0,-3700]),TX(G,1100,-3500,'Hold')]},
+ {say:"Dive in and lose the 50/50, and they're through with nobody back.",pos:{o1:[700,-800],ball:[600,-1500],b3:[200,500]},m:[PS(W,[600,-1500],[0,-5000]),TX(Rd,1500,-2700,'Open net')]},
+ {say:"Hold instead: shadow back, stay goal-side and wait for teammates to rotate. Now any shot is in front of you.",pos:{b3:[0,-3700],o1:[400,-500],ball:[400,-1100],b1:[1500,500],b2:[-1800,-200]},m:[ZN(G,-800,-4300,800,-3100),R(B,[1500,500],[900,-2200]),R(B,[-1800,-200],[-1000,-2400])]}],
+ tips:["Count teammates: if both are in front of the ball, you're last man.","As last man, only challenge a 50/50 you'll surely win, or a ball about to be shot.","Delaying is winning: every second lets teammates get back.","Call 'Defending...' so they know you're holding."],
+ bad:["Last man challenging at midfield","Going for boost as last man"],
+ quiz:{q:"Both teammates are ahead of the ball and an opponent is coming at you. You're last man. What do you do?",o:["Challenge as early as possible","Hold, shadow back and wait for help","Go for corner boost"],a:1,why:"If you miss, it's an open net. Holding buys time for your team to get back."}},
+{id:'d5',cat:'def',lvl:2,title:'Defending the centre pass',sum:'One pressures the ball, one marks the middle, one holds the back post.',mode:3,steps:[
+ {say:"Orange has the ball in your right corner with a teammate waiting in the middle. Three jobs: the 1st pressures the ball, the 2nd marks the middle, the 3rd holds back post.",pos:{ball:[3000,-3800],o1:[2700,-3200],o2:[0,-2200],o3:[-1500,-400],b1:[2300,-2600,'1st'],b2:[-600,-2800,'2nd'],b3:[-500,-4800,'3rd']},m:[R(Y,[2300,-2600],[2800,-3400]),TX(B,-1600,-2400,'Mark'),TX(G,-1400,-4400,'Back post')]},
+ {say:"The centre pass comes, but the 2nd is already between the pass and the goal and gets there first.",pos:{ball:[100,-3200],o1:[2600,-3500],b1:[2200,-3450],o2:[100,-2600],b2:[-50,-3100],b3:[-500,-4700]},m:[PS(W,[3000,-3800],[100,-3200]),R(B,[-600,-2800],[-50,-3050])]},
+ {say:"Cleared wide. Everyone had one job, and nobody chased the same ball.",pos:{ball:[-3000,0],b2:[-200,-3300]},m:[PS(W,[100,-3200],[-3000,0])]}],
+ tips:["Watch the opponents without the ball. The pass target is the danger.","2nd defender: stay goal-side of the receiver.","Last man holds back post and doesn't chase.","Clear out wide once you win it."],
+ bad:["Two defenders going to the corner","Ignoring the opponent waiting in the middle"],
+ quiz:{q:"Orange has the ball in your corner and a player waiting in the middle. You're the 2nd defender. Your job?",o:["Join the 1st in the corner","Mark the middle, staying goal-side of the receiver","Go up for a counter"],a:1,why:"The centre pass is the real danger. Marking the receiver cuts it out."}},
+{id:'d6',cat:'def',lvl:2,title:'Outnumbered: delay',sum:"2 attackers vs 1 defender? Don't dive. Buy time until your team is back.",mode:3,steps:[
+ {say:"Two attackers, one defender. Diving in would leave the other attacker an open net. Back off and buy time while teammates race back.",pos:{ball:[-500,800],o1:[-400,1500],o2:[1500,1600],o3:[-1500,3500],b3:[0,-2400,'3rd'],b1:[-2500,3200,'1st'],b2:[2600,2600,'2nd']},m:[R(G,[0,-2400],[300,-3600]),R(B,[-2500,3200],[-3000,0],[-1600,-3000]),R(B,[2600,2600],[3100,0],[1600,-3000]),TX(G,1300,-3300,'Delay')]},
+ {say:"Stay in front of the ball and between both attackers. A fake challenge (drive at them, then brake) can force a rushed touch.",pos:{ball:[0,-1400],o1:[-150,-900],o2:[1700,-1300],b3:[200,-3500],b1:[-3000,0],b2:[3100,200]},m:[ZN(G,-400,-4100,800,-2900),TX(G,1500,-4000,'Fake + wait')]},
+ {say:"Your teammates are back. Now it's 3 v 2 in your favour: challenge with support behind you.",pos:{ball:[-300,-2600],o1:[-200,-2000],b3:[-150,-3300],b1:[-1600,-3200],b2:[1600,-3000],o2:[1800,-2200]},m:[R(G,[-150,-3300],[-280,-2850]),TX(G,-1300,-3900,'Now go')]}],
+ tips:["Outnumbered? Delay, don't dive.","Position between the ball and the second attacker's passing lane.","Fake challenges make attackers rush.","Teammates: race back on the outside, then come in."],
+ bad:["Diving in alone against two attackers","Teammates coasting back slowly"],
+ quiz:{q:"It's 2 attackers against you alone. Teammates are racing back. What do you do?",o:["Challenge immediately","Delay: stay between ball and goal and buy time","Leave the net to get boost"],a:1,why:"Every second you delay, your teammates get closer. Then you can challenge with support."}},
+
+// ===== BOOST =====
+{id:'b1',cat:'boost',lvl:1,title:'The boost map',sum:'6 big pads give 100, 28 small pads give 12. Know where they are.',mode:3,kick:KO3,steps:[
+ {say:"Soccar maps have 6 big pads (100 boost each): one on each side at midfield and one in each corner. 28 small pads give 12 each.",pos:{},m:[ZN(Y,-3950,-380,-3220,380),ZN(Y,3220,-380,3950,380),ZN(Y,-3440,-4480,-2700,-3720),ZN(Y,2700,-4480,3440,-3720),ZN(Y,-3440,3720,-2700,4480),ZN(Y,2700,3720,3440,4480),TX(Y,-3000,800,'100'),TX(Y,0,-1700,'Small: 12')]},
+ {say:"Your corner pads are your defensive fuel. The 3rd man lives off them. Don't leave them for Orange to steal.",pos:{},m:[ZN(B,-3440,-4480,-2700,-3720),ZN(B,2700,-4480,3440,-3720),TX(B,0,-3900,'Your corners')]},
+ {say:"Their corner pads are what you take on offense. It fills you up and leaves them empty.",pos:{},m:[ZN(Rd,-3440,3720,-2700,4480),ZN(Rd,2700,3720,3440,4480),TX(Rd,0,3900,'Steal these')]}],
+ tips:["Big pads: 100 boost, back after 10 seconds.","Small pads: 12 boost, back after 4 seconds.","Turn on Boost pads in Menu > Display to see them on every board.","30-60 boost and good position beats 100 boost and bad position."],
+ bad:["Only ever going for big pads","Leaving your corners for the opponents"],
+ quiz:{q:"How much boost does a small pad give?",o:["12","33","100"],a:0,why:"Small pads give 12 and come back after 4 seconds. Big pads give 100 and come back after 10."}},
+{id:'b2',cat:'boost',lvl:2,title:'Steal their corner boost',sum:'When you\'re pinning them in, the 2nd man takes their boost. Starve them.',mode:3,steps:[
+ {say:"Blue is pinning Orange in their half. The ball is on the left, so the 2nd man grabs their right corner boost.",pos:{ball:[-1800,3400],b1:[-1500,2800,'1st'],b2:[500,1900,'2nd'],b3:[300,-300,'3rd'],o1:[-1000,4000],o2:[200,4700],o3:[-2200,1600]},m:[R(B,[500,1900],[2000,3000],[3000,4000]),ZN(Rd,2700,3720,3440,4480),TX(B,1300,2700,'Steal')]},
+ {say:"Now you're full, and the defender who wanted that pad has nothing. Rotate straight back into position as 2nd.",pos:{b2:[2950,4000,'100'],ball:[-1500,3700],o1:[-1300,4200],o2:[0,4800],o3:[-1500,2600]},m:[R(B,[2950,4000],[1000,2800]),TX(O,1300,4700,'Empty')]},
+ {say:"Starving them makes their clears weak and their challenges slow. Do it when it's safe, never as last man.",pos:{b2:[900,2800,'2nd'],ball:[-1200,3900],b1:[-1100,3300]},m:[]}],
+ tips:["Steal when your team has the ball pinned and you're 2nd.","Take the corner away from the ball, then come back fast.","An empty opponent can't challenge or clear well.","Never steal as last man."],
+ bad:["Stealing as the last man back","Taking the corner the ball is about to roll into"],
+ quiz:{q:"When is a good time to steal their corner boost?",o:["When you're last man back","When your team has them pinned and you're the 2nd","Right after kickoff, always"],a:1,why:"As 2nd during pressure you can take it and get back before the play changes."}},
+{id:'b3',cat:'boost',lvl:1,title:"Don't fetch boost as last man",sum:'The small pads in front of your net refill you without leaving the goal.',mode:3,steps:[
+ {say:"You're last back with 10 boost and Orange is coming. Driving out to the side big pad (red) opens the whole middle. The small pads in front of the net (green) keep you home.",pos:{ball:[1500,800],o1:[1200,1500],o2:[-1200,2000],o3:[0,4200],b1:[2000,2800,'1st'],b2:[-1500,2900,'2nd'],b3:[-500,-2400,'10 boost']},m:[R(Rd,[-500,-2400],[-3584,0]),TX(Rd,-2700,-1300,'Big pad?'),R(G,[-500,-2400],[-940,-3308],[0,-2816],[940,-3308],[200,-4300]),TX(G,1700,-3800,'Small pads')]},
+ {say:"Go for the big pad and Orange walks in with an open shot.",pos:{b3:[-3584,0],ball:[600,-2000],o1:[600,-1400]},m:[PS(W,[600,-2000],[0,-5000]),TX(Rd,1500,-2900,'Open net')]},
+ {say:"Three small pads in front of the net give +36 without leaving your post.",pos:{b3:[200,-4300,'46 boost'],ball:[800,-800],o1:[900,-300]},m:[TX(G,1400,-4000,'+36')]}],
+ tips:["Pads in front of your goal: centre, both sides of the box.","Last man needs position more than boost.","Ask for help: 'Need boost!' tells a teammate to cover.","Grab corner boost only when a teammate is back."],
+ bad:["Last man leaving for the side big pad","Panicking about low boost and leaving the net"],
+ quiz:{q:"You're last man with 10 boost and the ball is coming. What do you do?",o:["Go get the side big pad","Grab the small pads near your net and stay in position","Drive up to challenge"],a:1,why:"Position first. The small pads near the net refill you without leaving the goal empty."}},
+
+// ===== GAME SENSE =====
+{id:'g1',cat:'sense',lvl:1,title:'Quick chat that helps',sum:'Tell your team what you\'re doing. It prevents double commits and empty nets.',mode:3,steps:[
+ {say:"Callouts say what you're doing. 'I got it!' means you're going for the ball. 'Defending...' means you're staying back.",pos:{ball:[-1200,600],b1:[-1300,-500,'1st'],b2:[800,-1600,'2nd'],b3:[0,-4000,'3rd'],o1:[-900,1500],o2:[1200,1200],o3:[0,4300]},m:[TX(Y,-2400,-200,'I got it!'),TX(G,1300,-4000,'Defending...')]},
+ {say:"'All yours' or 'Go for it!' gives a ball to a teammate. 'In position' says you're ready for a pass. 'Need boost!' explains why you're going for a pad.",pos:{ball:[-1000,2600],b1:[-1100,1900],b2:[500,600],b3:[100,-1700]},m:[TX(B,1500,800,'In position'),TX(G,1200,-1700,'Need boost!')]},
+ {say:"Keep it positive. 'Nice shot!' after a miss and 'What a save!' (when you mean it) keep everyone playing well. Tilt loses more games than bad mechanics.",pos:{},m:[TX(W,0,0,'Nice shot!')]}],
+ tips:["Only say 'I got it!' when you're really committing.","Trust your teammates' calls.","Bind quick chats so you can press them without looking.","Mute toxic chat. Never spam sarcastic 'What a save!'."],
+ bad:["Spamming chat","Calling 'I got it!' and then not going"],
+ quiz:{q:"A teammate calls 'I got it!' for a ball you were also going for. You:",o:["Go anyway","Back off and support","Spam 'I got it!' back"],a:1,why:"Trusting the call prevents a double commit. Support and be ready for what comes out."}},
+{id:'g2',cat:'sense',lvl:2,title:'Protecting a lead',sum:'Up by one late? You don\'t need a goal; they do. Play safe and use the clock.',mode:3,steps:[
+ {say:"You're up by one with 30 seconds left. You don't need another goal. You need them not to score.",pos:{ball:[800,2800],b1:[600,2100,'1st'],b2:[-400,200,'2nd'],b3:[0,-2600,'3rd'],o1:[500,3700],o2:[-1500,4200],o3:[1700,1500]},m:[TX(W,0,-800,'Up 1 · 0:30'),ZN(G,-1200,-3200,1200,-2000)]},
+ {say:"Keep the ball in their corners and on the walls. Every second it's far from your goal is a second off their clock.",pos:{ball:[3300,3800],b1:[2800,3300],o1:[2400,4200]},m:[PS(W,[800,2800],[3300,3800]),TX(W,2300,2500,'Corner it')]},
+ {say:"Keep two players back, take boost to deny them, and skip risky aerials. Remember: when time hits zero, the game ends when the ball touches the ground.",pos:{b2:[-300,-1200],b3:[0,-3600]},m:[TX(G,1200,-3600,'Two back')]}],
+ tips:["Late lead: safety first, two players back.","Play the ball into their corners and onto the walls.","Take their boost when you can.","At 0:00 the game ends when the ball hits the ground; keep it away from your net."],
+ bad:["Chasing a second goal with all three players","Risky passes across your own half"],
+ quiz:{q:"You're up 1 with 30 seconds left. What's the priority?",o:["Score again fast","Keep the ball far from your net and keep two players back","Go for demos"],a:1,why:"They need a goal, you don't. Safe positioning and corner play run the clock out."}},
+{id:'g3',cat:'sense',lvl:2,title:'Chasing a goal late',sum:'Down by one in the last minute? Push higher, keep the ball in, take smart risks.',mode:3,steps:[
+ {say:"Down by one with a minute left: you need a goal, so take more risk. Push all three players up and keep the ball in their half.",pos:{ball:[-2000,3500],b1:[-1700,2900,'1st'],b2:[0,2200,'2nd'],b3:[400,800,'3rd'],o1:[-1300,4300],o2:[300,4800],o3:[1500,3000]},m:[ZN(Y,-3000,1500,3000,4500),TX(Y,0,1100,'All up')]},
+ {say:"Your 3rd sits at midfield, not in net. A clear that gets past them is a risk worth taking now.",pos:{ball:[0,1200],b3:[200,600],b2:[-600,2000],b1:[-2000,3000]},m:[R(G,[200,600],[50,1000]),TX(G,1300,500,'Keep it in')]},
+ {say:"Last seconds: get the ball toward their net and keep it in the air if you can. While the ball is up, the game isn't over.",pos:{ball:[300,3800],b2:[100,3000],b3:[0,1500],b1:[-1500,3600]},m:[PS(W,[0,1200],[300,3800]),TX(Y,0,4500,'Shoot')]}],
+ tips:["Last minute and losing: push higher than normal.","3rd man at midfield to keep clears in.","Shoot more; any shot can go in.","Keep the ball off the ground in the final seconds."],
+ bad:["Playing it safe when you need a goal","Giving up the last 10 seconds"],
+ quiz:{q:"You're down 1 with 20 seconds left. What should your 3rd man do?",o:["Stay in your own net","Push up to midfield to keep the ball in","Go for boost in your corner"],a:1,why:"You need a goal. Keeping the ball in their half matters more than defending now."}},
+
+// ===== 2s & 1s =====
+{id:'m1',cat:'modes',lvl:1,title:'2s rotation: corner to back post',sum:'Challenge, rotate wide, teammate takes over the play.',mode:2,steps:[
+ {say:"Blue's 1st challenges in the corner. The 2nd moves up to support but stays behind the ball.",pos:{ball:[-1500,2000],b1:[-1200,1300,'1st'],b2:[300,-800,'2nd'],o1:[-1300,2900],o2:[500,4300]},m:[R(Y,[-1200,1300],[-1450,1850]),R(B,[300,-800],[-300,400]),TX(B,1000,-300,'Support')]},
+ {say:"The 1st rotates out wide, through the boost, toward the back post. The 2nd takes over the play.",pos:{ball:[-2800,3400],b1:[1800,500,'2nd'],b2:[-900,1500,'1st'],o1:[-2300,3300],o2:[300,4400]},m:[R(Y,[1800,500],[3584,0],[2400,-2600],[500,-4300]),TX(Y,2800,-1500,'Boost + back'),R(B,[-900,1500],[-2400,3000])]},
+ {say:"The new 1st plays it off the back wall while the other is safely back. In 2s there's no 3rd man, so rotating back is even more important.",pos:{ball:[-2900,3700],b1:[500,-3300],b2:[-2500,3100],o1:[-1800,4200],o2:[1200,2400]},m:[PS(W,[-2900,3700],[-600,4900]),TX(W,-1500,4500,'Backboard')]}],
+ tips:["In 2s, one player on the ball, one back. Always.","Rotate wide through boost, then to the back post.","Talk more than in 3s; there's no safety net.","Don't both chase."],
+ bad:["Both players in the opponent's half with no one back","Rotating through the middle"],
+ quiz:{q:"In 2s your teammate is challenging in the opponent's corner. Where are you?",o:["In the corner with them","Behind the ball, ready to support or defend","In your own goal line"],a:1,why:"In 2s you're both the support and the safety. Stay behind the ball, ready for both."}},
+{id:'m2',cat:'modes',lvl:2,title:'2s backboard pass play',sum:'Corner touch off the back wall, teammate reads the bounce.',mode:2,steps:[
+ {say:"Blue's 1st hits the ball up the back wall. The 2nd starts moving toward the middle to read the drop.",pos:{ball:[-3300,3700],b1:[-3200,3200,'1st'],b2:[200,1400,'2nd'],o1:[0,4900],o2:[2300,2200]},m:[PS(W,[-3300,3700],[-1800,4600],[-500,5050]),R(B,[200,1400],[0,2800],[-300,3700]),TX(B,1000,2600,'Read it')]},
+ {say:"The ball drops off the wall into the middle, and the 2nd is underneath it.",pos:{ball:[-500,5000],b1:[-3100,3600],b2:[-200,3600],o1:[-700,4700],o2:[1700,3000]},m:[PS(W,[-500,5000],[-250,4300])]},
+ {say:"Goal. The passer is already rotating back.",pos:{ball:[150,5500],b1:[-2600,3000],b2:[0,4300],o1:[-900,4500],o2:[1300,3600]},m:[TX(Y,0,3600,'Goal')]}],
+ tips:["Hit high on the back wall.","Receiver waits around the penalty spot.","Passer rotates back right after the pass."],
+ bad:["Passer staying in the corner to watch"],
+ quiz:{q:"You just hit a backboard pass in 2s. What next?",o:["Wait in the corner","Rotate back toward your half","Drive at the goal too"],a:1,why:"With only two players, someone must be back. The passer rotates while the receiver shoots."}},
+{id:'m3',cat:'modes',lvl:1,title:'1s shadow defense',sum:'Retreat between ball and goal, match speed, challenge on the bad touch.',mode:1,steps:[
+ {say:"The opponent is coming at you with the ball. Face up and keep your distance.",pos:{ball:[0,1100],o1:[0,1500],b1:[0,-1300]},m:[R(O,[0,1500],[300,-300]),TX(W,1200,-1300,'Face up')]},
+ {say:"Drive back in front of them, between ball and net. Match their speed.",pos:{ball:[350,-500],o1:[300,-50],b1:[250,-2600]},m:[R(B,[250,-2600],[350,-3500]),ZN(G,-900,-4200,900,-2700),TX(G,0,-3100,'Shadow')]},
+ {say:"Heavy touch! The ball is too far from their car. Go now.",pos:{ball:[600,-2300],o1:[550,-1800],b1:[350,-3500]},m:[R(Y,[350,-3500],[550,-2550]),TX(Y,1600,-3000,'Go')]},
+ {say:"You win it and push the ball away, past them.",pos:{ball:[300,-500],o1:[700,-2100],b1:[550,-2400]},m:[]}],
+ tips:["In 1s, patience wins. Let them make the mistake.","Stay 2-3 car lengths away while shadowing.","Challenge on heavy touches and bad bounces."],
+ bad:["Diving at every touch"],
+ quiz:{q:"In 1s, the opponent is dribbling at you with control. Best move?",o:["Challenge immediately","Shadow and wait for a heavy touch","Go for boost"],a:1,why:"A controlled dribble beats a diving challenge. Wait for their mistake."}},
 ];
-function buildPreset(P){
-  const S2={name:P.name,map:'dfh',mode:P.mode,frames:[]};
-  const base=kickoffObjs(P.mode,'dfh');let prev=base;
-  P.steps.forEach(st=>{
-    const objs=prev.map(o=>{const n={...o};const q=st.pos[o.id];if(q){n.x=q[0];n.y=q[1]}return n});
-    S2.frames.push({objs,marks:clone(st.marks)});prev=objs;
+
+const RULES=[
+ ['One on the ball, one in support, one back.','That is the 3s triangle. The jobs rotate; the shape stays.'],
+ ['Never double commit.','If a teammate is going, you cover the pass or the rebound.'],
+ ['Rotate wide, then back post.','Out of the play, along the side, toward the far post. Never through the middle.'],
+ ['Clear to the side walls.','The middle is where the opponents are waiting.'],
+ ['Count your teammates.',"Both ahead of the ball? You're last man. Don't dive."],
+ ['Grab pads on the way.','Small pads add up. Never cross the field for boost.'],
+ ['Shadow, don\'t dive.','Against a controlled dribble, retreat and wait for the heavy touch.'],
+ ['Follow up every shot.','Rebounds are the easiest goals in the game.'],
+ ['Pass from corners, shoot from the middle.','Corner shots go into the goalie.'],
+ ['Kickoff: closest goes.','Next closest cheats, farthest grabs boost. Left goes on a tie.'],
+ ['Talk.',"'I got it!', 'Defending...', 'Need boost!'. Then trust your teammates' calls."],
+ ['Stay positive.','Tilt loses more games than bad mechanics.'],
+];
+
+// ---------- kickoff roles + generated kickoff lessons ----------
+const KD={diagL:1,diagR:1,offL:2,offR:2,back:3};
+function koRoles(k){
+  const s=k.slice().sort((a,b)=>KD[a]-KD[b]||KO[a][0]-KO[b][0]);
+  const go=s[0], rest=s.slice(1);
+  // tie for cheat (two off-centres left after a diagonal): the one on the far side from the kicker cheats
+  if(rest.length>=2&&KD[rest[0]]===KD[rest[1]]&&Math.sign(KO[rest[0]][0])===Math.sign(KO[go][0]))[rest[0],rest[1]]=[rest[1],rest[0]];
+  return {go,tie:k.some(x=>x!==go&&KD[x]===KD[go]),cheat:rest[0]||null,boost:k.length>=3?rest[1]:null,net:k.length>=4?rest[2]:null};
+}
+const sgn=sp=>Math.sign(KO[sp][0]);
+function cheatSpot(sp){const s=sgn(sp);return sp.startsWith('diag')?[s*1150,-1450]:sp.startsWith('off')?[s*1000,-2050]:[0,-2700]}
+function boostSide(r){return r.cheat&&sgn(r.cheat)?-sgn(r.cheat):(sgn(r.go)?-sgn(r.go):-1)}
+function koTargets(k,r){const T={};T[r.go]=[0,0];if(r.cheat)T[r.cheat]=cheatSpot(r.cheat);if(r.boost)T[r.boost]=[boostSide(r)*3072,-4096];if(r.net)T[r.net]=[0,-4700];return T}
+const nm=sp=>SPOT_NAME[sp];
+function koSay(k,r){
+  const n=k.length,bs=boostSide(r)<0?'left':'right';
+  if(n===1)return "In 1s you always go. Boost straight at the ball and flip into it.";
+  let s=`${nm(r.go)} goes`+(r.tie?` (two ${KD[r.go]===1?'diagonals':'off-centres'}, so left goes). `:' (closest to the ball). ');
+  s+=`${nm(r.cheat)} cheats up`+(n===2?' a little and stays ready to defend.':' beside the circle.');
+  if(r.boost)s+=` ${nm(r.boost)} grabs the ${bs} corner boost, then heads back.`;
+  if(r.net)s+=` ${nm(r.net)} stays in net.`;
+  return s;
+}
+function roleSummary(k){const r=koRoles(k);return [`${nm(r.go)} goes`,r.cheat&&`${nm(r.cheat)} cheats`,r.boost&&`${nm(r.boost)} boost`,r.net&&`${nm(r.net)} net`].filter(Boolean).join(' · ')}
+function genKick(k){
+  const n=k.length,r=koRoles(k),bs=boostSide(r),T=koTargets(k,r);
+  const cs=r.cheat&&sgn(r.cheat)?sgn(r.cheat):(sgn(r.go)?-sgn(r.go):1);
+  const id=sp=>'b'+(k.indexOf(sp)+1),oid=sp=>'o'+(k.indexOf(sp)+1);
+  const st=[{pos:{},m:[]},{pos:{},m:[]},{pos:{},m:[]}];
+  const put=(i,sp,p,lab)=>{st[i].pos[id(sp)]=lab===undefined?[p[0],p[1]]:[p[0],p[1],lab];st[i].pos[oid(sp)]=[-p[0],-p[1]]};
+  const LAB={go:'GO',cheat:'CHEAT',boost:'BOOST',net:'NET'};
+  const roleOf=sp=>sp===r.go?'go':sp===r.cheat?'cheat':sp===r.boost?'boost':'net';
+  const [gx,gy]=KO[r.go],gd=Math.hypot(gx,gy),contact=[gx/gd*230,gy/gd*230];
+  const via=sp=>{const t=sp.slice(0,3),s=sgn(sp);return t==='dia'?[s*1788,-2300]:t==='off'?[0,-2816]:[0,-2816]};
+  for(const sp of k){const role=roleOf(sp);put(0,sp,KO[sp],n>1?LAB[role]:undefined)}
+  st[0].m.push(R(Y,KO[r.go],via(r.go),contact));
+  if(r.cheat){const c=r.cheat,p=c.startsWith('off')?[[sgn(c)*940,-3308]]:[];st[0].m.push(R(B,KO[c],...p,T[c]))}
+  if(r.boost)st[0].m.push(R(G,KO[r.boost],T[r.boost]));
+  st[0].say=koSay(k,r)+(n>=3?' Rule: closest goes, next closest cheats, farthest gets boost.':'');
+  // contact
+  put(1,r.go,contact);if(r.cheat)put(1,r.cheat,T[r.cheat]);if(r.boost)put(1,r.boost,[bs*2950,-4050]);if(r.net)put(1,r.net,[0,-4800]);
+  st[1].m.push(ZN(W,-450,-450,450,450));
+  const tech=r.go.startsWith('diag')?'From a diagonal: boost the whole way, drive over the small pad in front, and flip into the ball about one car length before contact.':
+    r.go.startsWith('off')?'From off-centre: drive over the centre small pad, turn in, then flip into the ball. Go instantly; off-centre is slower than a diagonal.':
+    'From straight back: the longest kickoff. Hold boost, take the centre pad, flip early for speed and again into the ball.';
+  st[1].say=tech+(r.cheat?' The cheater waits behind the ball\'s line.':'')+(r.boost?' The boost player fills up to 100.':'');
+  // aftermath (we win it toward the cheater's side)
+  st[2].pos.ball=[cs*2200,2700];
+  st[2].pos[id(r.go)]=[-cs*200,800,n>1?(n===2?'BACK':'2nd'):undefined];if(n===1)st[2].pos[id(r.go)]=[cs*300,800];
+  st[2].pos[oid(r.go)]=[-cs*400,500];
+  if(r.cheat){st[2].pos[id(r.cheat)]=[cs*1600,1500,'1st'];st[2].pos[oid(r.cheat)]=[-cs*700,4200];st[2].m.push(R(B,[cs*1600,1500],[cs*2050,2450]))}
+  if(r.boost){st[2].pos[id(r.boost)]=[bs*900,-2600,'3rd'];st[2].pos[oid(r.boost)]=[cs*2600,3500]}
+  if(r.net){st[2].pos[id(r.net)]=[0,-4500,'4th'];st[2].pos[oid(r.net)]=[0,4800]}
+  if(n===2)st[2].pos[id(r.go)]=[-cs*500,-600,'BACK'];
+  st[1].m.push(PS(W,[0,0],[cs*2200,2700]));
+  const side=cs>0?'right':'left';
+  st[2].say=n===1?"Follow your hit, but if they get to the ball first, get back between ball and net.":
+    n===2?`Say we win it toward their ${side} corner. The cheater presses as 1st. The kicker recovers and drops back as the last man.`:
+    `Say we win it toward their ${side} corner. The cheater is already moving, so they press as 1st. The kicker recovers as 2nd. The boost player comes up as 3rd with 100 boost.`;
+  return st;
+}
+const KO_TIPS=["Closest goes. Diagonal beats off-centre beats straight.","Tie? Left goes (left from your own car's view).","Next closest cheats beside the circle, behind the ball's line.","Farthest grabs corner boost on the side away from the cheater, then comes back."];
+function koLesson(k){return {id:'ko:'+k.join(),cat:'kick',lvl:1,title:`${k.length}s kickoff: ${kickName(k)}`,sum:roleSummary(k),gen:k,tips:KO_TIPS,bad:[],quiz:null}}
+function lessonById(id){if(!id)return null;if(String(id).startsWith('ko:')){const k=id.slice(3).split(',');return k.length&&k.every(s=>KO[s])?koLesson(k):null}return LESSONS.find(l=>l.id===id)||null}
+
+function buildLesson(P){
+  const map=mapObj().arena==='soccar'?S.map:'dfh';
+  const kick=P.gen||P.kick||null, mode=P.gen?P.gen.length:P.mode, steps=P.gen?genKick(P.gen):P.steps;
+  const S2={name:P.title,map,mode,kick:kick&&kick.length===mode?kick.slice():null,lessonId:P.id,frames:[]};
+  let prev=kickoffObjs(mode,map,kick&&kick.length===mode?kick:null);
+  steps.forEach(st=>{
+    const objs=prev.map(o=>{const n={...o};const q=st.pos&&st.pos[o.id];if(q){n.x=q[0];n.y=q[1];if(q.length>2){if(q[2])n.label=q[2];else delete n.label}}return n});
+    const f={objs,marks:clone(st.m||[])};if(st.say)f.say=st.say;S2.frames.push(f);prev=objs;
   });
-  // auto angles: face direction of travel to the next step, else keep / face ball
   const n=S2.frames.length;
   for(let i=0;i<n;i++)for(const o of S2.frames[i].objs){if(o.kind!=='car')continue;
     const nx=i<n-1?S2.frames[i+1].objs.find(q=>q.id===o.id):null, pv=i>0?S2.frames[i-1].objs.find(q=>q.id===o.id):null;
-    const ball=S2.frames[i].objs.find(q=>q.kind==='ball');
-    if(i===0)continue;
-    if(pv&&Math.hypot(o.x-pv.x,o.y-pv.y)>200)o.a=Math.atan2(o.y-pv.y,o.x-pv.x);
-    else o.a=Math.atan2(ball.y-o.y,ball.x-o.x);
-    if(nx&&Math.hypot(nx.x-o.x,nx.y-o.y)<200&&pv&&Math.hypot(o.x-pv.x,o.y-pv.y)<200)o.a=Math.atan2(ball.y-o.y,ball.x-o.x);
+    const ball=S2.frames[i].objs.find(q=>q.kind==='ball'), faceBall=Math.atan2(ball.y-o.y,ball.x-o.x);
+    if(i===0){if(kick)continue;o.a=nx&&Math.hypot(nx.x-o.x,nx.y-o.y)>600?Math.atan2(nx.y-o.y,nx.x-o.x):faceBall;continue}
+    if(pv&&Math.hypot(o.x-pv.x,o.y-pv.y)>200)o.a=Math.atan2(o.y-pv.y,o.x-pv.x);else o.a=faceBall;
   }
   return S2;
+}
+
+// ---------- academy: progress + UI ----------
+const prog=Object.assign({done:{}},LS.get('bb.learn',{}));
+const saveProg=()=>LS.set('bb.learn',prog);
+let coachHidden=false;
+function shuffleQ(q){const idx=q.o.map((_,i)=>i);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]]}return {q:q.q,o:idx.map(i=>q.o[i]),a:idx.indexOf(q.a),why:q.why}}
+function quizHtml(q){return `<div class="quiz"><p class="qq">${esc(q.q)}</p>${q.o.map((o,i)=>`<button class="qopt" data-i="${i}"><span class="qk">${'ABC'[i]}</span>${esc(o)}</button>`).join('')}<div class="why-slot"></div></div>`}
+function wireQuiz(box,q,onAnswer,retry){
+  const opts=[...box.querySelectorAll('.qopt')], slot=box.querySelector('.why-slot');
+  opts.forEach(b=>b.onclick=()=>{if(box.dataset.done)return;box.dataset.done=1;const i=+b.dataset.i, ok=i===q.a;
+    opts.forEach((x,j)=>{x.disabled=true;if(j===q.a)x.classList.add('ok');else if(j===i)x.classList.add('no')});
+    slot.innerHTML=`<div class="why ${ok?'good':''}"><b>${ok?'Correct!':'Not quite.'}</b> ${esc(q.why)}</div>`+(!ok&&retry?'<button class="btn" data-retry style="margin-top:8px">Try again</button>':'');
+    const rt=slot.querySelector('[data-retry]');if(rt)rt.onclick=()=>{delete box.dataset.done;opts.forEach(x=>{x.disabled=false;x.classList.remove('ok','no')});slot.innerHTML=''};
+    onAnswer&&onAnswer(ok)});
+}
+const canLink=()=>/^https?:/.test(location.protocol)&&!/claude\.(ai|site)|claudeusercontent/.test(location.host);
+function watchLesson(L){
+  stopPlay();pushHistory();S=buildLesson(L);cur=0;zoom=1;panX=panY=0;coachHidden=false;afterLoad();
+  toast(S.frames.length>1?'Tap Next to play each step':'Read the note below the board');
+}
+function lessonItem(L){const d=prog.done[L.id];return `<button class="les${d?' done':''}" data-l="${L.id}"><span class="ck">${d?'✓':''}</span><span class="lm"><b>${esc(L.title)}</b><small>${esc(L.sum)}</small></span><span class="lv lv${L.lvl}">${LVL[L.lvl]}</span></button>`}
+function openLearn(){
+  const total=LESSONS.length, done=LESSONS.filter(l=>prog.done[l.id]).length, nextL=LESSONS.find(l=>!prog.done[l.id]);
+  const {el,close}=modal(`<h2>Academy</h2><p>Learn 3s as a team: kickoffs, rotation, attack, defense, boost and game sense. Every lesson plays on the board step by step, with a coach note on each step.</p>
+   <div class="progrow"><div class="prog"><i style="width:${Math.round(done/total*100)}%"></i></div><span>${done}/${total} done</span></div>
+   ${nextL?`<button class="nextup" id="lnNext"><span class="lbl">${done?'Continue':'Start here'}</span><b>${esc(nextL.title)}</b><small>${CATN[nextL.cat]} · ${LVL[nextL.lvl]}</small></button>`:'<div class="nextup"><span class="lbl">All done</span><b>Every lesson complete. GG!</b><small>Keep sharp with the trainer and the quiz.</small></div>'}
+   <div class="hero"><button class="hc" id="lnKick">${svg('kick')}<b>Kickoff trainer</b><small>Who goes? Drill every spawn</small></button><button class="hc" id="lnQuiz">${svg('quiz')}<b>Situation quiz</b><small>${LESSONS.length} game situations</small></button><button class="hc" id="lnRules">${svg('star')}<b>Golden rules</b><small>12 rules for 3s</small></button></div>
+   <div class="chips" id="lnChips">${[['all','All'],...CATS].map(([k,n])=>`<button class="chip" data-c="${k}">${n}</button>`).join('')}</div><div class="list" id="lnList"></div>`,false,'tall');
+  const render=c=>{settings.lcat=c;saveSettings();el.querySelectorAll('.chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===c));
+    const cats=c==='all'?CATS:CATS.filter(x=>x[0]===c);
+    el.querySelector('#lnList').innerHTML=cats.map(([k,n])=>{const ls=LESSONS.filter(l=>l.cat===k);const dn=ls.filter(l=>prog.done[l.id]).length;
+      return `<h3>${n} <span class="cnt">${dn}/${ls.length}</span></h3>`+ls.map(lessonItem).join('')}).join('');
+    el.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{close();openLesson(b.dataset.l)})};
+  el.querySelectorAll('.chip').forEach(b=>b.onclick=()=>render(b.dataset.c));
+  render(CATN[settings.lcat]?settings.lcat:'all');
+  const nb=el.querySelector('#lnNext');if(nb)nb.onclick=()=>{close();openLesson(nextL.id)};
+  el.querySelector('#lnKick').onclick=()=>{close();openTrainer()};
+  el.querySelector('#lnQuiz').onclick=()=>{close();openQuiz()};
+  el.querySelector('#lnRules').onclick=()=>{close();openRules()};
+}
+function openLesson(id,toQuiz){
+  const L=lessonById(id);if(!L)return;
+  const steps=L.gen?3:L.steps.length, idx=LESSONS.indexOf(L), next=idx>=0?LESSONS[idx+1]:null;
+  const list=(a,cls)=>a&&a.length?`<ul class="tipl ${cls}">${a.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:'';
+  const q=L.quiz?shuffleQ(L.quiz):null;
+  const roleBox=L.gen?`<div class="kowrap">${koSvg(L.gen,koRoles(L.gen),96)}<div>${koLegend(L.gen)}</div></div>`:'';
+  const {el,close}=modal(`<div class="lhead"><span class="lv lv${L.lvl}">${LVL[L.lvl]}</span><span class="lbl">${CATN[L.cat]} · ${steps} steps</span>${prog.done[L.id]?'<span class="donebadge">✓ Done</span>':''}</div>
+   <h2>${esc(L.title)}</h2><p>${esc(L.sum)}</p>${roleBox}
+   <button class="btn pri wide" id="lsWatch">${svg('play')}Watch on the board</button>
+   ${L.tips&&L.tips.length?'<h3>What to do</h3>'+list(L.tips,'ok'):''}
+   ${L.bad&&L.bad.length?'<h3>Common mistakes</h3>'+list(L.bad,'no'):''}
+   ${q?'<h3 id="lsQ">Check yourself</h3>'+quizHtml(q):''}
+   <div class="row" style="margin-top:16px">${next?'<button class="btn" id="lsNext">Next lesson ›</button>':''}<button class="btn" id="lsAll">All lessons</button>${canLink()&&!L.gen?'<button class="btn" id="lsLink">Copy link</button>':''}</div>`,false,'tall');
+  el.querySelector('#lsWatch').onclick=()=>{close();watchLesson(L)};
+  if(q)wireQuiz(el.querySelector('.quiz'),q,ok=>{if(ok&&LESSONS.includes(L)&&!prog.done[L.id]){prog.done[L.id]=1;saveProg();toast('Lesson complete ✓')}},true);
+  const nb=el.querySelector('#lsNext');if(nb)nb.onclick=()=>{close();openLesson(next.id)};
+  el.querySelector('#lsAll').onclick=()=>{close();openLearn()};
+  const lk=el.querySelector('#lsLink');if(lk)lk.onclick=()=>{const u=location.origin+location.pathname+'#l='+L.id;try{navigator.clipboard.writeText(u).then(()=>toast('Link copied. Send it to a teammate'),()=>toast(u))}catch(e){toast(u)}};
+  if(toQuiz){const h=el.querySelector('#lsQ');if(h)setTimeout(()=>h.scrollIntoView({block:'start'}),60)}
+}
+function openRules(){
+  const {el,close}=modal(`<h2>Golden rules of 3s</h2><p>Screenshot this. If everyone on the team follows these, you'll win more games than with any mechanic.</p>
+   <ol class="rules">${RULES.map(([t,d])=>`<li><b>${esc(t)}</b><small>${esc(d)}</small></li>`).join('')}</ol>
+   <div class="row" style="margin-top:14px"><button class="btn pri" id="ruAll">Back to Academy</button></div>`,false,'tall');
+  el.querySelector('#ruAll').onclick=()=>{close();openLearn()};
+}
+function openQuiz(){
+  const pool=LESSONS.filter(l=>l.quiz);let score=0,count=0,last=null;
+  const {el,close}=modal(`<h2>Situation quiz</h2><p id="qzS">Answer as many as you like. Each one links to its lesson.</p><div id="qzBox"></div>`,false,'tall');
+  const nextQ=()=>{let L;do{L=pool[Math.floor(Math.random()*pool.length)]}while(pool.length>1&&L===last);last=L;const q=shuffleQ(L.quiz);
+    const box=el.querySelector('#qzBox');
+    box.innerHTML=`<div class="lhead"><span class="lv lv${L.lvl}">${LVL[L.lvl]}</span><span class="lbl">${CATN[L.cat]}</span></div>${quizHtml(q)}<div class="row" style="margin-top:12px"><button class="btn pri" id="qzN">Next question</button><button class="btn" id="qzW">Open lesson</button></div>`;
+    wireQuiz(box.querySelector('.quiz'),q,ok=>{count++;if(ok){score++;if(!prog.done[L.id]){prog.done[L.id]=1;saveProg()}}el.querySelector('#qzS').innerHTML=`Score <b>${score}/${count}</b>`});
+    box.querySelector('#qzN').onclick=nextQ;box.querySelector('#qzW').onclick=()=>{close();openLesson(L.id)};
+    el.scrollTop=0};
+  nextQ();
+}
+function koLegend(k){const r=koRoles(k);const row=(sp,cls,t,d)=>sp?`<div class="role ${cls}"><b>${k.indexOf(sp)+1} · ${t}</b><small>${nm(sp)}. ${d}</small></div>`:'';
+  return row(r.go,'go','GO',k.length>1?(r.tie?'Tie, so left goes.':'Closest to the ball.'):'Always you in 1s.')+row(r.cheat,'ch','CHEAT',k.length===2?'Up a little, ready to defend.':'Beside the circle, behind the ball.')+row(r.boost,'bo','BOOST',`${boostSide(r)<0?'Left':'Right'} corner, then back.`)+row(r.net,'nt','NET','Stays in goal.')}
+// off-centre spawns are only 512 apart: spread them in the diagram so both markers stay readable
+const koXY=sp=>sp.startsWith('off')?[sgn(sp)*620,KO[sp][1]]:KO[sp];
+function koSvg(k,r,w){
+  const h=Math.round(w*1.34);let a='',c='';
+  if(r){const T=koTargets(k,r);[[r.go,'#ffc93c'],[r.cheat,'#3d9bff'],[r.boost,'#3ddc84'],[r.net,'#ffffff']].forEach(([sp,col])=>{if(!sp)return;const [x,y]=koXY(sp),t=T[sp];
+    a+=`<line x1="${x}" y1="${-y}" x2="${t[0]}" y2="${-t[1]}" stroke="${col}" stroke-width="170" stroke-linecap="round"${sp===r.go?'':' stroke-dasharray="320 260"'}/><circle cx="${t[0]}" cy="${-t[1]}" r="200" fill="${col}"/>`})}
+  k.forEach((sp,i)=>{const [x,y]=koXY(sp);const col=!r?'#fff':sp===r.go?'#ffc93c':sp===r.cheat?'#3d9bff':sp===r.boost?'#3ddc84':'#fff';
+    c+=`<circle cx="${-x}" cy="${y}" r="400" fill="#ff8a1f" stroke="#fff" stroke-width="70" opacity=".8"/>`;
+    c+=`<circle cx="${x}" cy="${-y}" r="540" fill="#2f86f0" stroke="${col}" stroke-width="${r?210:90}"/><text x="${x}" y="${-y+40}" fill="#fff" font-size="600" font-weight="700" text-anchor="middle" dominant-baseline="middle" font-family="Chakra Petch,Arial,sans-serif">${i+1}</text>`});
+  const pads=[[-3072,4096],[3072,4096],[-3072,-4096],[3072,-4096],[-3584,0],[3584,0]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="230" fill="#ffc93c" opacity=".75"/>`).join('');
+  return `<svg viewBox="-4400 -5900 8800 11800" width="${w}" height="${h}" aria-hidden="true"><rect x="-893" y="-6000" width="1786" height="880" fill="#ff8a1f" opacity=".5"/><rect x="-893" y="5120" width="1786" height="880" fill="#2f86f0" opacity=".5"/><path d="M-2944 -5120H2944L4096 -3968V3968L2944 5120H-2944L-4096 3968V-3968Z" fill="#2f7a37" stroke="#9fb3c8" stroke-width="160"/><line x1="-4096" y1="0" x2="4096" y2="0" stroke="#fff" stroke-opacity=".6" stroke-width="80"/><circle r="1000" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="70"/>${pads}<circle r="330" fill="#fff"/>${a}${c}</svg>`;
+}
+function openTrainer(){
+  let m=S.mode===2?2:3, k=null, phase='go', allOk=true, streak=0, best=LS.get('bb.kbest',0);
+  const {el,close}=modal(`<h2>Kickoff trainer</h2><p>You're blue. A random spawn appears: pick the right job until it's automatic.</p>
+   <div class="row" style="align-items:center;justify-content:space-between"><div class="seg" id="ktM"><button data-m="2">2s</button><button data-m="3">3s</button></div><span class="streak" id="ktS"></span></div>
+   <div class="kt"><div id="ktPic"></div><div id="ktQ" class="ktq"></div></div>
+   <h3>Every spawn</h3><div id="ktAll" class="list"></div>`,false,'tall');
+  const syncS=()=>{el.querySelector('#ktS').innerHTML=`Streak <b>${streak}</b> · Best <b>${best}</b>`};
+  const all=()=>{el.querySelector('#ktAll').innerHTML=combos(m).map(c=>`<div class="item kitem">${koSvg(c,koRoles(c),40)}<div class="meta"><b>${esc(kickName(c))}</b><small>${esc(roleSummary(c))}</small></div><button class="btn" data-w="${c.join()}">Watch</button></div>`).join('');
+    el.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{close();watchLesson(koLesson(b.dataset.w.split(',')))})};
+  const newRound=()=>{const cs=combos(m);let c;do{c=cs[Math.floor(Math.random()*cs.length)]}while(k&&cs.length>1&&c.join()===k.join());k=c;phase='go';allOk=true;ask()};
+  const ask=()=>{const r=koRoles(k), want=phase==='go'?r.go:r.cheat;
+    el.querySelector('#ktPic').innerHTML=koSvg(k,null,132);
+    el.querySelector('#ktQ').innerHTML=`<p class="qq">${phase==='go'?'Who goes for the ball?':'Good. Now, who cheats?'}</p>${k.map((sp,i)=>{const dis=phase==='cheat'&&sp===r.go;return `<button class="qopt" data-sp="${sp}"${dis?' disabled':''}><span class="qk">${i+1}</span>${nm(sp)}${dis?' · goes':''}</button>`}).join('')}`;
+    el.querySelectorAll('#ktQ [data-sp]').forEach(b=>b.onclick=()=>{const ok=b.dataset.sp===want;
+      el.querySelectorAll('#ktQ [data-sp]').forEach(x=>{x.disabled=true;if(x.dataset.sp===want)x.classList.add('ok');else if(x===b)x.classList.add('no')});
+      if(!ok)allOk=false;
+      setTimeout(()=>{if(ok&&phase==='go'&&m===3){phase='cheat';ask()}else reveal()},ok?450:900)})};
+  const reveal=()=>{const r=koRoles(k);
+    if(allOk){streak++;if(streak>best){best=streak;LS.set('bb.kbest',best)}}else streak=0;syncS();
+    el.querySelector('#ktPic').innerHTML=koSvg(k,r,132);
+    el.querySelector('#ktQ').innerHTML=`<div class="why ${allOk?'good':''}"><b>${allOk?'Correct!':'Not quite.'}</b> ${esc(koSay(k,r))}</div>${koLegend(k)}<div class="row" style="margin-top:10px"><button class="btn pri" id="ktN">Next spawn</button><button class="btn" id="ktW">Watch it</button></div>`;
+    el.querySelector('#ktN').onclick=newRound;el.querySelector('#ktW').onclick=()=>{close();watchLesson(koLesson(k))}};
+  const setM=v=>{m=v;el.querySelectorAll('#ktM button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.m===m));all();k=null;newRound()};
+  el.querySelectorAll('#ktM button').forEach(b=>b.onclick=()=>setM(+b.dataset.m));
+  syncS();setM(m);
+}
+function openNote(){
+  const f=frame();
+  const {el,close}=modal(`<h2>Step ${cur+1} note</h2><p>Explain what happens on this step. Notes show under the board while the play runs, and travel inside play codes.</p><textarea id="ntIn" class="note" maxlength="400" placeholder="e.g. 2nd man: hold back, cover the pass">${esc(f.say||'')}</textarea><div class="row" style="margin-top:12px"><button class="btn pri" id="ntOk">Save note</button>${f.say?'<button class="btn bad" id="ntDel">Remove</button>':''}</div>`,true);
+  const inp=el.querySelector('#ntIn');setTimeout(()=>inp.focus(),50);
+  const set=v=>{pushHistory();const fr=frame();if(v)fr.say=v;else delete fr.say;coachHidden=false;changed();syncCoach();close()};
+  el.querySelector('#ntOk').onclick=()=>set(inp.value.trim());const d=el.querySelector('#ntDel');if(d)d.onclick=()=>set('');
+}
+function syncCoach(fi){
+  const el=$('#coach');if(!el)return;
+  if(fi==null)fi=cur;
+  const L=lessonById(S.lessonId), n=S.frames.length, has=S.frames.some(f=>f.say);
+  const show=!coachHidden&&!!(L||has);
+  if(el.hidden===show)el.hidden=!show;
+  if(!show)return;
+  el.classList.toggle('min',!!settings.coachMin);
+  $('#chMin').innerHTML=svg(settings.coachMin?'up':'down');
+  $('#chTag').textContent=L?`${CATN[L.cat]} lesson`:'Play notes';
+  $('#chTitle').textContent=L?L.title:(S.name||'Your play');
+  fi=Math.max(0,Math.min(n-1,fi));const say=S.frames[fi].say;
+  $('#chSay').innerHTML=`<span class="sn">STEP ${fi+1}/${n}</span>`+(say?esc(say):'<i>No note on this step. Tap the pencil to add one.</i>');
+  $('#chPrev').disabled=playing||fi<=0;
+  const last=fi>=n-1;
+  $('#chNext').textContent=playing?'Pause':(!last?'Next step ›':(L&&L.quiz?'Take the quiz ›':(n>1?'Replay':'Done')));
+  $('#chInfo').hidden=!L;
+}
+function initCoach(){
+  $('#chClose').innerHTML=svg('x');$('#chEdit').innerHTML=svg('pen');
+  $('#chMin').onclick=()=>{settings.coachMin=!settings.coachMin;saveSettings();syncCoach()};
+  $('#chClose').onclick=()=>{coachHidden=true;syncCoach();toast('Notes hidden. The note button brings them back')};
+  $('#chPrev').onclick=()=>{if(cur>0){stopPlay();cur--;afterFrame()}};
+  $('#chNext').onclick=()=>{if(playing){stopPlay();return}const n=S.frames.length;if(cur<n-1){play(true);return}
+    const L=lessonById(S.lessonId);if(L&&L.quiz){openLesson(L.id,true);return}
+    if(L&&!L.quiz&&LESSONS.includes(L)&&!prog.done[L.id]){prog.done[L.id]=1;saveProg()}
+    if(n>1){cur=0;afterFrame();play()}else coachHidden=true,syncCoach()};
+  $('#chInfo').onclick=()=>openLesson(S.lessonId);
+  $('#chEdit').onclick=openNote;
+  $('#chTag').parentElement.querySelector('.ch-title').onclick=()=>{settings.coachMin=!settings.coachMin;saveSettings();syncCoach()};
+}
+function openWelcome(){
+  const {el,close}=modal(`<h2>New: the Academy</h2><p>${LESSONS.length} lessons for 3s: kickoffs, rotation, attack, defense, boost and game sense. Each one plays on the board step by step with a coach note, tips, common mistakes and a quick quiz.</p>
+   <p>Plus a <b>kickoff trainer</b> for every spawn, a <b>situation quiz</b>, and the <b>golden rules</b>. Tap the yellow cap button any time.</p>
+   <div class="row" style="margin-top:12px"><button class="btn pri" id="wlGo">${svg('cap')}Start learning</button><button class="btn" id="wlNo">Later</button></div>`,true);
+  el.querySelector('#wlGo').onclick=()=>{close();openLearn()};el.querySelector('#wlNo').onclick=close;
 }
 
 // ---------- PWA bits when hosted standalone ----------
@@ -945,8 +1531,12 @@ if(!/claude\.(ai|site)|claudeusercontent/.test(location.host)&&location.protocol
 }
 
 // ---------- boot ----------
-buildStatic();setTool('run');buildTop();buildFrames();syncUndo();syncPlay();
-if(!LS.get('bb.seen2',false)){LS.set('bb.seen2',true);setTimeout(()=>toast('Drag a car or ball to move it. Drag the field to draw'),600)}
+buildStatic();initCoach();setTool('run');buildTop();buildFrames();syncUndo();syncPlay();
+window.addEventListener('hashchange',()=>{const m=location.hash.match(/^#l=([\w:,]+)/);if(m&&lessonById(decodeURIComponent(m[1]))){document.querySelectorAll('.modal').forEach(x=>x.remove());openLesson(decodeURIComponent(m[1]))}});
+const hm=location.hash.match(/^#l=([\w:,]+)/);
+if(hm&&lessonById(decodeURIComponent(hm[1])))setTimeout(()=>openLesson(decodeURIComponent(hm[1])),300);
+else if(!LS.get('bb.seenAcademy',false)){LS.set('bb.seenAcademy',true);LS.set('bb.seen2',true);setTimeout(openWelcome,500)}
+else if(!LS.get('bb.seen2',false)){LS.set('bb.seen2',true);setTimeout(()=>toast('Drag a car or ball to move it. Drag the field to draw'),600)}
 })();
 </script>
 
