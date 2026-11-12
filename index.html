@@ -132,7 +132,7 @@ svg{display:block}
 .sw2::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .15s}
 .sw2[aria-pressed="true"]{background:var(--blue)}
 .sw2[aria-pressed="true"]::after{transform:translateX(20px)}
-input[type=text],textarea{width:100%;font:500 16px var(--f-body);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+input[type=text],input[type=password],textarea{width:100%;font:500 16px var(--f-body);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 textarea{height:110px;font:12px ui-monospace,Menlo,monospace;resize:none}
 .pop{position:fixed;z-index:40;display:flex;gap:6px;padding:8px;border-radius:14px;background:var(--panel);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .pop button{width:34px;height:34px;border-radius:50%;border:3px solid transparent}
@@ -144,6 +144,7 @@ textarea{height:110px;font:12px ui-monospace,Menlo,monospace;resize:none}
 #learnBtn{background:var(--boost);color:#1a1405;position:relative}
 #learnBtn.new::after{content:"";position:absolute;top:3px;right:3px;width:10px;height:10px;border-radius:50%;background:var(--danger);border:2px solid var(--panel)}
 @media (max-width:420px){.seg button{min-width:30px;padding:0 4px}}
+@media (max-width:440px) and (orientation:portrait){#top{gap:4px;padding:6px 6px}#top>.ib{width:36px}#mapBtn{padding:0 7px;gap:6px}#modeSeg button{min-width:27px;padding:0 3px}}
 #coach{grid-area:coach;display:flex;flex-direction:column;gap:6px;padding:8px 10px;background:var(--panel);border-top:1px solid var(--line);height:clamp(132px,24vh,190px);min-height:0;min-width:0}
 #coach[hidden]{display:none}
 #coach.min{height:auto}
@@ -242,6 +243,166 @@ textarea.note{height:120px;font:500 16px/1.4 var(--f-body)}
 .chk{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--panel2);cursor:pointer}
 .chk input{width:22px;height:22px;accent-color:#3ddc84;flex:none}
 .hint{font-size:12.5px;color:var(--dim);margin-top:10px}
+/* Players / accounts */
+#plBtn{position:relative}
+#plBtn.on::after{content:"";position:absolute;top:5px;right:5px;width:9px;height:9px;border-radius:50%;background:#3ddc84;border:2px solid var(--panel)}
+.acc label{display:block;font:600 12px var(--f-display);letter-spacing:.06em;color:var(--dim);margin:10px 0 4px;text-transform:uppercase}
+.acc .err{color:var(--danger);min-height:20px;margin-top:8px;font-weight:600}
+.pstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 12px}
+.pstats div{background:var(--panel2);border-radius:12px;padding:10px;text-align:center}
+.pstats b{display:block;font:700 26px var(--f-display)}.pstats small{color:var(--dim)}
+.pstats .g b{color:#3ddc84}
+.pdot{width:10px;height:10px;border-radius:50%;flex:none;background:#56607a}.pdot.on{background:#3ddc84;box-shadow:0 0 0 3px rgba(61,220,132,.2)}
+.item.me{outline:1px solid var(--boost)}
+/* Rank Up */
+/* Improve tools */
+.xpbar{display:flex;align-items:center;gap:8px;margin:4px 0 12px;padding:8px 10px;background:linear-gradient(90deg,#1a2342,#141b2f);border:1px solid #2c3a62;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%)}
+.xpbar .lvl{font:700 italic 12px var(--f-display);color:var(--dim);white-space:nowrap}.xpbar .lvl b{font-size:20px;color:var(--boost)}
+.xpt{flex:1;height:9px;background:#202a45;border-radius:5px;overflow:hidden}.xpt i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#8fd0ff);box-shadow:0 0 10px var(--blue)}
+.xpn{font:600 11px var(--f-display);color:var(--dim);white-space:nowrap}.fire{font:700 13px var(--f-display);white-space:nowrap}
+.tipday{padding:12px 14px;border-left:3px solid var(--boost);background:var(--panel2);font:600 15px/1.4 var(--f-body)}
+.nextup.glow{animation:glow 1.8s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 2px rgba(255,201,60,.5),0 0 22px rgba(255,201,60,.35)}}
+.nextup.warn{background:linear-gradient(120deg,rgba(255,77,94,.22),rgba(255,138,31,.1));border-color:rgba(255,77,94,.6)}.nextup.warn .lbl{color:#ff8d98}
+.spark{position:relative;height:96px;background:var(--panel2);border-radius:12px;padding:4px 0;overflow:hidden}.spark svg{width:100%;height:90px;display:block}
+.spark span{position:absolute;font:600 10.5px var(--f-display);color:var(--dim)}.sp-a{top:6px;left:8px}.sp-b{bottom:6px;left:8px}.sp-c{top:6px;right:10px;color:var(--fg)!important}.sp-c b{color:var(--boost)}
+.weak{background:var(--panel2);border-radius:12px;padding:10px 12px;margin-bottom:8px;border-left:3px solid var(--danger)}
+.wk-h{display:flex;align-items:center;gap:8px}.wk-h b{font:700 15px var(--f-display);flex:1}.wk-h small{color:var(--dim)}
+.wk-n{width:24px;height:24px;display:grid;place-items:center;background:var(--danger);color:#fff;font:700 italic 13px var(--f-display);transform:skewX(-10deg)}
+.weak p{margin:6px 0 8px;color:var(--fg)}.weak .btn{height:36px;font-size:12.5px;padding:0 10px}.weak .btn svg{width:15px;height:15px}
+.res{width:30px;height:30px;flex:none;display:grid;place-items:center;font:700 italic 15px var(--f-display);transform:skewX(-10deg)}.res.W{background:#1c6b3d;color:#bfffd8}.res.L{background:#5a1b24;color:#ffc4cb}
+.badc{color:#ff8d98!important;display:block}
+.wl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.wl button{height:56px;font:700 italic 22px var(--f-display);letter-spacing:.06em;background:var(--panel2);border:1px solid var(--line);clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.wl button[data-r="W"][aria-pressed="true"]{background:#1c6b3d;border-color:#3ddc84;color:#eafff2}.wl button[data-r="L"][aria-pressed="true"]{background:#7a1f2c;border-color:var(--danger);color:#fff}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tags button{height:34px;padding:0 11px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);font:600 12.5px var(--f-display);color:var(--dim)}
+.tags button[aria-pressed="true"]{background:rgba(255,77,94,.2);border-color:var(--danger);color:#fff}
+.mrow{display:flex;align-items:center;gap:6px;margin-bottom:6px;background:var(--panel2);border-radius:12px;padding:6px}
+.mst{flex:none;width:92px;height:34px;font:700 10px var(--f-display);letter-spacing:.06em;text-transform:uppercase;border-radius:8px;background:#26304d;color:var(--dim)}
+.mst.s1{background:rgba(255,201,60,.2);color:var(--boost);border:1px solid rgba(255,201,60,.5)}.mst.s2{background:rgba(61,220,132,.2);color:#6ff0a6;border:1px solid rgba(61,220,132,.5)}
+.mn{flex:1;min-width:0;text-align:left;display:flex;flex-direction:column}.mn b{font:600 14px var(--f-display)}.mn small{color:var(--dim);font-size:11.5px}
+.mrow .btn{height:34px;padding:0 10px;font-size:12px}
+.card h3 .emb{margin-right:4px;vertical-align:-4px}
+.breath{display:flex;flex-direction:column;align-items:center;gap:14px;margin:14px 0 4px}
+.bcirc{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,rgba(61,155,255,.35),rgba(61,155,255,.08));border:2px solid var(--blue);box-shadow:0 0 30px rgba(61,155,255,.35);transition:transform 4s ease-in-out}
+.bcirc span{font:700 italic 15px var(--f-display);text-transform:uppercase;text-align:center}
+.sess{text-align:center;margin:8px 0 14px}.ss-b{font:700 italic 20px var(--f-display);text-transform:uppercase}
+.ss-t{font:700 italic 64px/1.1 var(--f-display);color:var(--boost);text-shadow:0 0 22px rgba(255,201,60,.4)}.ss-n{color:var(--dim);font:600 12px var(--f-display);letter-spacing:.1em;text-transform:uppercase}
+.hc-wide{grid-column:1/-1;background:linear-gradient(120deg,#22306a,#151c33 60%,#3a2410)!important;border-color:#3b4f8f!important}
+.cmp{background:var(--panel2);border-radius:12px;padding:9px 12px;margin-bottom:6px}
+.cmp-h{display:flex;align-items:center;gap:8px;margin-bottom:5px}.cmp-h b{font:600 13.5px var(--f-display);flex:1}
+.bdg{font:700 9px var(--f-display);letter-spacing:.12em;padding:3px 6px;transform:skewX(-12deg)}.bdg.bad{background:var(--danger);color:#fff}.bdg.good{background:#3ddc84;color:#06240f}
+.cmp-r{display:grid;grid-template-columns:44px 1fr 52px;align-items:center;gap:8px;font-size:12px;color:var(--dim)}.cmp-r>b{text-align:right;color:var(--fg);font:700 13px var(--f-display)}
+.cmp-b{height:8px;background:#202a45;border-radius:4px;overflow:hidden}.cmp-b i{display:block;height:100%;background:#56607a;border-radius:4px}
+.cmp-b i.me{background:var(--blue)}.cmp-b i.me.bad{background:var(--danger)}.cmp-b i.me.good{background:#3ddc84}
+.xpways{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.xpways span{background:var(--panel2);border-radius:10px;padding:8px 10px;font-size:13px;color:var(--dim)}.xpways b{color:var(--boost);font:700 italic 14px var(--f-display);margin-right:6px}
+.place{width:30px;height:30px;flex:none;display:grid;place-items:center;font:700 italic 15px var(--f-display);background:var(--line);transform:skewX(-10deg)}
+.place.p1{background:linear-gradient(#ffe07a,#d9a400);color:#2a1d00}.place.p2{background:linear-gradient(#f2f5fa,#9aa6bb);color:#1a1f2a}.place.p3{background:linear-gradient(#e7a36a,#9a5a28);color:#241200}
+
+/* Rocket League style: angled tabs and cards, italic display headings, boost gauges, goal-style splash text */
+.card h2{font-style:italic;text-transform:uppercase;letter-spacing:.03em;display:flex;align-items:center;gap:10px}
+.card h2::before{content:"";flex:none;width:6px;height:20px;background:linear-gradient(var(--boost),var(--orange));transform:skewX(-16deg);border-radius:2px}
+.banner{position:relative;margin:-4px 0 12px;padding:14px 16px 12px;font:700 italic 26px/1 var(--f-display);letter-spacing:.04em;text-transform:uppercase;color:#fff;
+  background:linear-gradient(100deg,#1a2a6c 0%,#2b5fd9 38%,#0d1220 38.2%,#0d1220 61.8%,#e0661b 62%,#ff8a1f 100%);clip-path:polygon(0 0,100% 0,calc(100% - 16px) 100%,0 100%);border-radius:10px 0 0 10px;text-shadow:0 2px 0 rgba(0,0,0,.4),0 0 18px rgba(255,201,60,.35);overflow:hidden}
+.banner span{display:block;font:700 11px var(--f-display);letter-spacing:.3em;color:var(--boost);margin-bottom:4px;font-style:normal}
+.banner::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 14px,rgba(255,255,255,.05) 14px 16px);pointer-events:none}
+.banner.coachb{background:linear-gradient(100deg,#3a2a00,#a87a00 45%,#0d1220 45.2%,#0d1220 100%)}
+.seg.tabs{background:none;gap:5px;padding:0}
+.seg.tabs button{background:var(--panel2);clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%);border-radius:0;font-style:italic;text-transform:uppercase;letter-spacing:.04em}
+.seg.tabs button[aria-pressed="true"]{background:linear-gradient(180deg,#ffe07a,var(--boost));color:#1a1405}
+.hc{clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);background:linear-gradient(160deg,#1e2a4a,#141b2f);border-color:#2c3a62;position:relative}
+.hc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--blue),transparent 50%,var(--orange));opacity:.7}
+.hc svg{filter:drop-shadow(0 0 6px rgba(255,201,60,.5))}
+.hc:active{transform:scale(.98)}
+.nextup{clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.emb{flex:none;vertical-align:middle;display:inline-block}
+.rkpick button{display:inline-flex;align-items:center;gap:6px;padding:0 12px 0 8px}
+.rkhead{display:flex;align-items:center;gap:12px}.rkhead b{display:block;font:700 italic 22px var(--f-display);text-transform:uppercase;color:var(--rc);text-shadow:0 0 14px color-mix(in srgb,var(--rc) 50%,transparent)}
+.gauge{position:relative;width:72px;height:72px;flex:none;display:grid;place-items:center}
+.gauge svg{position:absolute;inset:0}
+.gauge b{position:relative;font:700 italic 17px var(--f-display);margin-top:-6px}
+.gauge small{position:absolute;bottom:3px;left:0;right:0;text-align:center;font:600 8.5px var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.trtop{display:flex;align-items:center;gap:12px}.trtop p{margin:0}
+.packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.pack{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:10px 12px 12px;background:linear-gradient(160deg,#1e2a4a,#141b2f);border:1px solid #2c3a62;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);border-radius:10px 0 10px 10px;position:relative}
+.pack b{font:700 15px/1.15 var(--f-display)}.pack small{color:var(--dim);font-size:12px;line-height:1.3}
+.pk-top{display:flex;justify-content:space-between;width:100%;gap:6px}
+.pk-tag{font:700 9.5px var(--f-display);letter-spacing:.14em;padding:3px 7px;background:var(--boost);color:#1a1405;transform:skewX(-12deg);display:inline-block}
+.pk-n{font:600 10.5px var(--f-display);color:var(--dim);letter-spacing:.04em}
+.pk-acc{width:100%;height:5px;background:#202a45;border-radius:3px;overflow:hidden;margin-top:4px}.pk-acc i{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--boost))}
+#trBar.top{top:52px;bottom:auto}
+#ptHit{position:absolute;inset:0;z-index:5;cursor:crosshair;touch-action:none}
+#simHit{position:absolute;inset:0;z-index:5;touch-action:none;cursor:grab}
+#simBar{position:absolute;left:8px;right:8px;top:8px;z-index:6;background:rgba(10,14,24,.9);border:1px solid #2c3a62;border-bottom:3px solid var(--blue);padding:6px 10px 8px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%);pointer-events:auto}
+.sm-h{display:flex;align-items:center;gap:8px}.sm-sc{font:700 italic 18px var(--f-display);flex:1;text-align:center;background:linear-gradient(90deg,var(--blue),transparent 45%,transparent 55%,var(--orange));padding:2px 0}
+.sm-t{font:700 italic 16px var(--f-display);color:var(--boost)}.sm-a{font:600 10px var(--f-display);color:var(--dim);letter-spacing:.06em}.sm-a b{color:#6ff0a6;font-size:14px}
+.sm-r{font:700 italic 13px var(--f-display);text-transform:uppercase;letter-spacing:.04em;margin-top:4px;color:var(--boost)}.sm-r.ok{color:#6ff0a6}
+.sm-m{font-size:12.5px;color:var(--dim);min-height:17px}.sm-m.bad{color:#ff8d98;font-weight:700}.sm-m.good{color:#6ff0a6;font-weight:700}
+.sklv{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:4px 0 6px}
+.skl{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;background:var(--panel2);text-align:center;font-size:11.5px;color:var(--dim);clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.skl b{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#26304d;font:700 14px var(--f-display);color:var(--fg)}
+.skl.now{outline:2px solid var(--boost);color:var(--fg)}.skl.now b{background:var(--boost);color:#1a1405}.skl.pass b{background:#3ddc84;color:#06240f}
+.sk10{display:grid;grid-template-columns:repeat(11,1fr);gap:4px}.sk10 button{height:42px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;font:700 15px var(--f-display)}
+.sk10 button[aria-pressed="true"]{background:var(--boost);color:#1a1405;border-color:var(--boost)}
+.skhist{display:flex;gap:4px;align-items:flex-end;height:74px;background:var(--panel2);border-radius:12px;padding:8px}
+.skhist span{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:2px}.skhist i{width:100%;background:#56607a;border-radius:3px 3px 0 0;min-height:2px}.skhist span.p i{background:#3ddc84}.skhist b{font:700 10px var(--f-display);color:var(--dim)}
+.hc-sim{background:linear-gradient(120deg,#123a7a,#151c33 55%,#5a2a08)!important;border-color:#3d9bff!important;box-shadow:0 0 18px rgba(61,155,255,.25)}
+.simres{display:flex;align-items:center;justify-content:center;gap:14px;margin:10px 0}
+.grade{width:64px;height:64px;display:grid;place-items:center;font:700 italic 44px var(--f-display);transform:skewX(-10deg);background:var(--line);color:#fff}
+.grade.gS{background:linear-gradient(#fff3b0,#ffc93c);color:#2a1d00;box-shadow:0 0 24px rgba(255,201,60,.6)}.grade.gA{background:#1c6b3d}.grade.gB{background:#1e4f9a}.grade.gC{background:#7a4a10}.grade.gD{background:#5a1b24}
+.ptbar.top{top:52px;bottom:auto}
+.ptclock{height:7px;background:#202a45;border-radius:4px;overflow:hidden;margin-top:4px}.ptclock i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--danger),var(--boost));box-shadow:0 0 8px var(--boost)}
+.nextup.plan{background:linear-gradient(120deg,rgba(61,155,255,.25),rgba(61,220,132,.12));border-color:rgba(61,155,255,.6)}.nextup.plan .lbl{color:#8fc4ff}
+.hc-pt{background:linear-gradient(120deg,#0f4d2e,#151c33 60%)!important;border-color:#2f8a5a!important}
+#trBar,.ptbar{position:absolute;left:8px;right:8px;bottom:8px;z-index:6;background:rgba(10,14,24,.92);border:1px solid #2c3a62;border-top:3px solid var(--boost);padding:8px 10px 10px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.tb-h{display:flex;align-items:center;gap:8px}.tb-h b{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:700 italic 14px var(--f-display);text-transform:uppercase}
+.tb-n{font:700 11px var(--f-display);color:var(--boost);letter-spacing:.08em}
+.tb-sc{display:flex;gap:6px;font:700 12px var(--f-display)}.tb-sc i{font-style:normal}.tb-sc .h{color:#3ddc84}.tb-sc .m{color:var(--danger)}
+.tb-t{font:700 15px var(--f-display);margin-top:4px}.tb-say{color:var(--dim);font-size:13px;line-height:1.35;margin:2px 0 8px;min-height:18px}
+.tb-b{display:flex;gap:6px}.tb-b .btn{flex:1;justify-content:center;height:40px}.tb-b svg{width:16px;height:16px}
+.btn.hit{background:#1c6b3d;border-color:#3ddc84;color:#eafff2}.btn.miss{background:#5a1b24;border-color:var(--danger);color:#ffe9ec}
+.splash{position:fixed;inset:0;z-index:90;display:grid;place-items:center;pointer-events:none}
+.splash span{font:700 italic 54px var(--f-display);text-transform:uppercase;letter-spacing:.02em;color:#fff;-webkit-text-stroke:2px #1a1405;
+  background:linear-gradient(180deg,#fff7c2,var(--boost) 45%,var(--orange));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 4px 0 rgba(0,0,0,.5)) drop-shadow(0 0 22px rgba(255,140,30,.7));animation:spl 1.25s cubic-bezier(.2,1.4,.4,1) forwards;transform:skewX(-10deg)}
+.splash.miss span{background:linear-gradient(180deg,#fff,#ff8d98 50%,var(--danger));-webkit-background-clip:text;background-clip:text}
+.splash.cd span,.splash.go span{font-size:96px;animation-duration:.6s}
+@keyframes spl{0%{opacity:0;transform:skewX(-10deg) scale(2.2)}18%{opacity:1;transform:skewX(-10deg) scale(1)}75%{opacity:1;transform:skewX(-10deg) scale(1.04)}100%{opacity:0;transform:skewX(-10deg) scale(.9) translateY(-20px)}}
+.rolet{display:inline-block;font:700 9.5px var(--f-display);letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;margin-left:4px;background:var(--blue);color:#06142b;transform:skewX(-12deg);vertical-align:2px}
+.rolet.g{background:var(--orange);color:#2a1300}
+.pcard{background:var(--panel2);border-radius:12px;padding:10px 12px;margin-bottom:8px;border-left:3px solid var(--blue)}
+.pc-h{display:flex;align-items:center;gap:8px}.pc-h b{font:700 15px var(--f-display);flex:1}.pc-h small{color:var(--dim)}
+.pc-s{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}.pc-s span{background:var(--panel);border-radius:8px;padding:6px;text-align:center;font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.pc-s b{display:block;font:700 italic 16px var(--f-display);color:var(--fg);letter-spacing:0;text-transform:none}
+.pc-c{display:flex;gap:6px;flex-wrap:wrap}
+select,input[type=date],input[type=datetime-local]{height:40px;font:500 15px var(--f-body);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0 10px;color-scheme:dark;max-width:100%}
+.pc-c select{flex:1;min-width:110px}
+.form2{display:flex;flex-direction:column;gap:8px}.form2 input[type=text]{width:100%}
+.hwi{display:flex;gap:6px;align-items:stretch}.hwi .chk{flex:1}.hwi .chk span{display:flex;flex-direction:column;gap:2px}.hwi small{color:var(--dim)}.hwi .due{color:var(--boost)}
+.okc{color:#6ff0a6!important;display:block}
+.meta>small{display:block}
+.item .meta small{display:block}
+.seg.tabs button{font-size:13px;padding:0 6px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.msg{font:600 17px/1.45 var(--f-body);white-space:pre-wrap}
+
+.rkb{display:inline-block;font:700 10px var(--f-display);letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:6px;background:color-mix(in srgb,var(--rc) 22%,transparent);color:var(--rc);border:1px solid color-mix(in srgb,var(--rc) 55%,transparent);vertical-align:2px;margin-left:4px;white-space:nowrap}
+.rkpick{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.rkpick button{height:36px;padding:0 12px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);font:600 13px var(--f-display);color:var(--dim)}
+.rkpick button[aria-pressed="true"]{background:var(--rc);border-color:var(--rc);color:#10131c}
+.rkpick button:disabled{opacity:.35}
+.rkcard{margin:12px 0 4px;padding:12px 14px;border-radius:14px;background:linear-gradient(120deg,color-mix(in srgb,var(--rc) 20%,transparent),transparent);border:1px solid color-mix(in srgb,var(--rc) 50%,transparent)}
+.rkcard .rkb{margin:0}.rkcard p{margin:8px 0 0}
+.road{display:flex;flex-direction:column;gap:6px}
+.rstep{display:flex;flex-direction:column;gap:2px;padding:10px 12px 10px 14px;border-radius:12px;background:var(--panel2);border-left:4px solid var(--rc)}
+.rstep b{font:700 14px var(--f-display);color:var(--rc)}.rstep small{color:var(--dim)}
+.meth{border-radius:12px;background:var(--panel2);margin-bottom:6px}
+.meth summary{list-style:none;cursor:pointer;padding:11px 12px;display:flex;flex-direction:column;gap:2px}
+.meth summary::-webkit-details-marker{display:none}
+.meth summary b{font:600 14.5px var(--f-display)}.meth summary small{color:var(--dim)}
+.meth[open] summary{border-bottom:1px solid var(--line)}
+.meth .tipl,.meth .why2,.meth .spday{margin:8px 10px}.meth .tipl li{background:var(--panel)}.meth .why2{padding-bottom:10px;color:var(--dim)}
+.spday{display:flex;flex-direction:column;gap:5px;padding-bottom:4px}.spday>b{font:700 12px var(--f-display);letter-spacing:.08em;color:var(--boost);text-transform:uppercase}.spday .chk{background:var(--panel)}
+.tag.coach{font:700 10px var(--f-display);letter-spacing:.1em;padding:3px 6px;border-radius:6px;background:var(--boost)!important;color:#1a1405!important;vertical-align:2px;margin-left:4px}
 </style>
 
 <div id="app">
@@ -251,6 +412,7 @@ textarea.note{height:120px;font:500 16px/1.4 var(--f-body)}
     <button id="mapBtn" aria-label="Choose map"><span class="sw"></span><span class="nm"></span><span class="ar"></span></button>
     <div class="seg" id="modeSeg" role="group" aria-label="Game mode"></div>
     <button class="ib" id="saveBtn" aria-label="Save play"></button>
+    <button class="ib" id="plBtn" aria-label="Players and account" title="Players"></button>
   </div>
   <div id="stage"><canvas id="cv" aria-label="Tactics board"></canvas><div id="hist"><button class="ib" id="undoBtn" aria-label="Undo"></button><button class="ib" id="redoBtn" aria-label="Redo"></button></div></div>
   <div id="coach" hidden>
@@ -295,6 +457,7 @@ const I={
  plus:'<path d="M12 5v14M5 12h14"/>',
  reset:'<path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v5h5"/>',
  kick:'<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.3" fill="currentColor"/><circle cx="15" cy="15" r="1.3" fill="currentColor"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/><circle cx="9" cy="15" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/>',
+ people:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 14.6c2.7.1 4.4 1.8 5 4.6"/>',
  cap:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c3.5 2.7 8.5 2.7 12 0v-4.5"/><path d="M22 9v6"/>',
  quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.6v.3"/><circle cx="12" cy="17" r=".6" fill="currentColor"/>',
  star:'<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/>',
@@ -827,6 +990,7 @@ function buildStatic(){
   $('#delFrameBtn').onclick=delFrame;
   const lb=$('#learnBtn');lb.innerHTML=svg('cap');if(!LS.get('bb.openedLearn',false))lb.classList.add('new');
   lb.onclick=()=>{LS.set('bb.openedLearn',true);lb.classList.remove('new');openLearn()};
+  try{const _i=LS.get('bb.imp',{});const d=new Date(),k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');if(!(_i.daily||{})[k])lb.classList.add('new')}catch(e){}
   $('#noteBtn').innerHTML=svg('note');$('#noteBtn').onclick=()=>{coachHidden=false;openNote()};
 }
 function setTool(k){tool=k;document.querySelectorAll('.tool').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===k));dirty=true}
@@ -964,7 +1128,7 @@ function openMenu(){
   const {el,close}=modal(`<h2>Boost Board</h2><p>Tactics whiteboard for Rocket League. Everything saves on this device.</p>
    <div class="row"><button class="btn pri" id="mLearn">${svg('cap')}Academy</button><button class="btn" id="mNew">New board</button><button class="btn" id="mSave">Save play</button><button class="btn" id="mReset">Reset positions</button><button class="btn" id="mKick">Kickoff spawns</button></div>
    <h3>My plays</h3><div class="list" id="mPlays">${plays.length?plays.map(p=>`<div class="item"><span class="tag">${p.mode}v${p.mode}</span><div class="meta"><b>${esc(p.name)}</b><small>${p.frames.length} step${p.frames.length>1?'s':''} · ${esc((MAPS.find(m=>m.id===p.map)||MAPS[0]).name)} · ${fmtDate(p.updated)}</small></div><button class="btn" data-load="${p.id}">Open</button><button class="btn bad" data-del="${p.id}" aria-label="Delete ${esc(p.name)}">${svg('trash').replace('<svg','<svg width="18" height="18"')}</button></div>`).join(''):'<div class="empty">No saved plays yet. Build one, then tap the save icon.</div>'}</div>
-   <h3>Learn</h3><div class="row"><button class="btn" id="mL2">Lessons</button><button class="btn" id="mKT">Kickoff trainer</button><button class="btn" id="mQZ">Situation quiz</button><button class="btn" id="mGR">Golden rules</button><button class="btn" id="mCO">For Coach</button></div>
+   <h3>Learn</h3><div class="row"><button class="btn pri" id="mPL">Today's plan</button><button class="btn" id="mPT">Read the play</button><button class="btn" id="mSIM">Rotation sim</button><button class="btn" id="mRK">Rank Up</button><button class="btn" id="mIM">Tools</button><button class="btn" id="mDY">Daily challenge</button><button class="btn" id="mBC">Replay stats</button><button class="btn" id="mTR">Custom training</button>${isCoach()?'<button class="btn pri" id="mHB">Coach Hub</button>':''}<button class="btn" id="mL2">Lessons</button><button class="btn" id="mKT">Kickoff trainer</button><button class="btn" id="mQZ">Situation quiz</button><button class="btn" id="mGR">Golden rules</button>${isCoach()?'<button class="btn" id="mCO">For Coach</button>':''}</div>
    <h3>Display</h3>${tg('pads','Boost pads','6 big and 28 small pads on Soccar and Snow Day')}${tg('ghosts','Previous step ghosts','Faded cars show where everyone was one step ago')}${tg('labels','Player numbers and names','Long-press a car to name it')}${tg('face','Cars face where you drag','Turn off to keep the angle while moving')}
    <div class="tog"><span>Car and ball size<small>Bigger is easier to grab on a phone</small></span><div class="seg" id="mSize">${[[0.85,'S'],[1,'M'],[1.25,'L']].map(([v,l])=>`<button data-v="${v}" aria-pressed="${settings.size===v}">${l}</button>`).join('')}</div></div>
    <h3>Share</h3><div class="row"><button class="btn" id="mImg">Export image</button><button class="btn" id="mCode">Copy play code</button><button class="btn" id="mImport">Import code</button></div>
@@ -982,7 +1146,7 @@ function openMenu(){
     const ps=getPlays().filter(q=>q.id!==b.dataset.del);LS.set('bb.plays',ps);if(S.id===b.dataset.del)delete S.id;b.closest('.item').remove();toast('Play deleted');
     if(!ps.length)el.querySelector('#mPlays').innerHTML='<div class="empty">No saved plays yet.</div>'});
   el.querySelector('#mLearn').onclick=el.querySelector('#mL2').onclick=()=>{close();openLearn()};
-  el.querySelector('#mKT').onclick=()=>{close();openTrainer()};el.querySelector('#mQZ').onclick=()=>{close();openQuiz()};el.querySelector('#mGR').onclick=()=>{close();openRules(+curTab()||3)};el.querySelector('#mCO').onclick=()=>{close();openLearn('coach')};
+  el.querySelector('#mRK').onclick=()=>{close();openLearn('rank')};el.querySelector('#mPL').onclick=()=>{close();openPlan()};el.querySelector('#mPT').onclick=()=>{close();openPT()};el.querySelector('#mSIM').onclick=()=>{close();openSim()};el.querySelector('#mIM').onclick=()=>{close();openLearn('tools')};el.querySelector('#mDY').onclick=()=>{close();openDaily()};el.querySelector('#mBC').onclick=()=>{close();openReplayStats()};el.querySelector('#mTR').onclick=()=>{close();openTraining()};{const hb=el.querySelector('#mHB');if(hb)hb.onclick=()=>{close();openHub()}}el.querySelector('#mKT').onclick=()=>{close();openTrainer()};el.querySelector('#mQZ').onclick=()=>{close();openQuiz()};el.querySelector('#mGR').onclick=()=>{close();openRules(+curTab()||3)};if(isCoach())el.querySelector('#mCO').onclick=()=>{close();openLearn('coach')};
   el.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{const k=b.dataset.set;settings[k]=!settings[k];b.setAttribute('aria-pressed',settings[k]);saveSettings();dirty=true});
   el.querySelectorAll('#mSize button').forEach(b=>b.onclick=()=>{settings.size=+b.dataset.v;saveSettings();el.querySelectorAll('#mSize button').forEach(x=>x.setAttribute('aria-pressed',x===b));dirty=true});
   el.querySelector('#mImg').onclick=()=>{close();exportImage()};
@@ -1806,7 +1970,7 @@ function initCoach(){
   $('#chPrev').onclick=()=>{if(cur>0){stopPlay();cur--;afterFrame()}};
   $('#chNext').onclick=()=>{if(playing){stopPlay();return}const n=S.frames.length;if(cur<n-1){play(true);return}
     const L=lessonById(S.lessonId);if(L&&L.quiz){openLesson(L.id,true);return}
-    if(L&&!L.quiz&&LESSONS.includes(L)&&!prog.done[L.id]){prog.done[L.id]=1;saveProg()}
+    if(L&&!L.quiz&&LESSONS.includes(L)&&!prog.done[L.id]){prog.done[L.id]=1;saveProg();pushStats()}
     if(n>1){cur=0;afterFrame();play()}else coachHidden=true,syncCoach()};
   $('#chInfo').onclick=()=>openLesson(S.lessonId);
   $('#chEdit').onclick=openNote;
@@ -1819,25 +1983,289 @@ function openWelcome(){
   el.querySelector('#wlGo').onclick=()=>{close();openLearn()};el.querySelector('#wlNo').onclick=close;
 }
 
+// ---------- academy: Rank Up (pick your rank, plan to climb, learning methods, mechanics ladder, 30-day sprint, daily routine) ----------
+const RANKS=[
+ {id:'bronze',n:'Bronze',c:'#c0814a',
+  you:'You are learning to control the car. Most goals here come from open nets and whiffs, not from good plays.',
+  hold:['Missing the ball when you go for it','Driving without boost management (empty all the time)','Everybody chasing the ball at once'],
+  focus:['Hit the ball with the front of your car, every time, in free play','Use powerslide to turn around quickly','Pick up the small pads on your way, not only the big ones','Stay back when a teammate is already going for the ball'],
+  mech:['drive','slide','jump','flip'],les:['k1','r1','r3','d3','b1'],
+  next:'1 to 3 weeks with 30 minutes of free play a day'},
+ {id:'silver',n:'Silver',c:'#b7c3d6',
+  you:'You can hit the ball, but not where you want. Games are chaos: three players in the same corner, nobody in net.',
+  hold:['Double committing with a teammate','Hitting the ball without looking where it goes','Never using the half-flip, so you turn around slowly'],
+  focus:['Before you hit it, look where the ball will go: towards their side, or into a corner','Learn the half-flip to get back fast','If a teammate is going, you go back or wait','Shoot towards the far post'],
+  mech:['halfflip','powershot','aerial1','kick1'],les:['r3','r2','o7','d1','k5','k6'],
+  next:'2 to 4 weeks'},
+ {id:'gold',n:'Gold',c:'#f2c14e',
+  you:'You can shoot and save. Aerials start to show up. Most goals against you come from bad rotation, not bad mechanics.',
+  hold:['Overcommitting: everybody up, nobody back','Going for aerials you cannot win','Panic clears straight to the opponent in the middle'],
+  focus:['Learn the 1st, 2nd, 3rd man jobs','Rotate back post when you go back to defend','Shadow defense instead of diving at the ball','Clear to the corners, not the middle'],
+  mech:['fastaerial','shadow','dribble1','readbb'],les:['r1','r2','d1','d3','r5','k4'],
+  next:'1 to 2 months'},
+ {id:'plat',n:'Platinum',c:'#5fc9e6',
+  you:'You have the basics. Platinum is the "hard stuck" rank: mechanics are OK, but decisions and speed are slow.',
+  hold:['Playing too slow: waiting on the ball, not challenging','Bad boost: going for corner boosts and leaving the play','Not following up shots'],
+  focus:['Play faster: challenge early when you are 1st man','Grab small pads, keep 30 to 60 boost','Follow up every shot as 2nd man','Win the kickoff with a speed flip or a fast front flip'],
+  mech:['speedflip','wavedash','airroll','wall','fifty'],les:['o1','r5','b1','k4','o8','r11'],
+  next:'1 to 3 months'},
+ {id:'diamond',n:'Diamond',c:'#3d7cff',
+  you:'Players are fast and can aerial. You lose games to good passing and to players who read the play earlier than you.',
+  hold:['Not passing: everyone tries to score alone','Losing 50/50s','Getting beaten by simple flicks and dribbles'],
+  focus:['Centre passes from the corner and backboard passes','Pre-jump and stay grounded vs dribbles','Read where your teammate will put the ball','Count the opponents before you go up'],
+  mech:['flick','recover','airdribble1','halfvolley','boost'],les:['o2','o3','o6','d5','g5','r6'],
+  next:'1 to 3 months'},
+ {id:'champ',n:'Champion',c:'#a26bff',
+  you:'Everyone can aerial and pass. Mechanics start to decide games: air dribbles, flip resets and fast recoveries.',
+  hold:['Slow recoveries after a touch','Forcing mechanics in the wrong situation','Bad positioning on defense when the play is fast'],
+  focus:['Recover in under a second after every touch (land on wheels, wavedash, keep speed)','Use mechanics only when they are open, not every time','Defend the backboard and the double tap','Use demos to open space'],
+  mech:['ceiling','musty','reset1','doubletap','chain'],les:['d8','o5','g4','r10','d6'],
+  next:'2 to 6 months'},
+ {id:'gc',n:'Grand Champion',c:'#ff4d6d',
+  you:'Very high level. Players punish every mistake. Speed, consistency and decisions matter more than new tricks.',
+  hold:['Small positioning mistakes','Not being consistent with mechanics under pressure','Mental: tilt in long sessions'],
+  focus:['Play at full speed and keep it: never stop moving','Consistent flip resets and double taps under pressure','Perfect boost control and steals','Review every goal you concede'],
+  mech:['reset2','zap','redirect','speed'],les:['b2','g2','g3','o9','r8'],
+  next:'3 to 12 months (many players never reach SSL)'},
+ {id:'ssl',n:'Supersonic Legend',c:'#ffffff',
+  you:'The top rank. A very small share of all players. Everything from the ranks below, at full speed, every game.',
+  hold:['Staying here needs daily play','Small mistakes are punished instantly'],
+  focus:['Keep a daily routine','Review pro and SSL replays','Play with a steady duo or trio','Rest well: mental and physical health matter here'],
+  mech:['speed','reset2','redirect'],les:['g2','g3','o9'],
+  next:'You made it. Keep it.'},
+];
+const TIERS=['I','II','III'];
+const MECHS={
+ drive:{n:'Driving with boost control',r:0,how:'Free play: drive around the field and never let your boost hit 0. Tap boost, do not hold it all the time.',why:'You arrive faster and still have boost for the ball.'},
+ slide:{n:'Powerslide turns',r:0,how:'Hold powerslide while you turn to spin around tight. Bind it to a button you can hold with a finger, not your thumb.',why:'Turns that take one second instead of three.'},
+ jump:{n:'Jump timing',r:0,how:'Free play: let the ball bounce and hit it at the highest point with one jump. Then two jumps.',why:'Every shot and save starts with a good jump.'},
+ flip:{n:'Front flip shots',r:0,how:'Drive into the ball, jump, then flip forward just before you touch it.',why:'Turns a soft touch into a real shot.'},
+ halfflip:{n:'Half-flip',r:1,how:'Drive backwards, jump, flip backwards, then right away cancel the flip (push the stick forward) and air roll to land on your wheels.',why:'Turn around 180 degrees at speed. The best way to get back on defense.'},
+ powershot:{n:'Power shot',r:1,how:'Hit the ball on the ground with speed and flip into it at the last moment. Aim with the corner of your car.',why:'Hard shots that keepers cannot react to.'},
+ aerial1:{n:'Basic aerial',r:1,how:'Jump, tilt the car back, then boost. Start with slow balls in free play or a "rookie aerials" training pack.',why:'You can now hit balls in the air.'},
+ kick1:{n:'Fast front-flip kickoff',r:1,how:'Boost the whole way, jump and front flip once near the ball, then flip again into it.',why:'Win more kickoffs, or at least do not lose them badly.'},
+ fastaerial:{n:'Fast aerial',r:2,how:'Jump and boost at the same time, tilt back, then press jump a second time very fast and keep boosting.',why:'Reach high balls before the other team.'},
+ shadow:{n:'Shadow defense',r:2,how:'Drive back towards your goal between the ball and the net, at the same speed as the attacker. Challenge when they make a mistake.',why:'Most attackers lose the ball if you do not dive in.'},
+ dribble1:{n:'Ground dribble',r:2,how:'Pop the ball onto your roof in free play and drive slowly. Small steering, little boost.',why:'Control the ball and set up flicks later.'},
+ readbb:{n:'Reading the backboard',r:2,how:'Watch where the ball hits the back wall and goes. Go there instead of chasing it.',why:'Easy saves and easy goals.'},
+ speedflip:{n:'Speed flip kickoff',r:3,how:'Boost, turn slightly, jump, diagonal flip and cancel the flip right away, air roll to land straight. Practice in free play against the kickoff ball.',why:'The fastest kickoff. Used at every high rank.'},
+ wavedash:{n:'Wavedash',r:3,how:'Jump, tilt the nose slightly back, then flip forward right before your back wheels touch the ground.',why:'Speed boost without boost and faster recoveries.'},
+ airroll:{n:'Air roll control',r:3,how:'Bind air roll left or right. Practice in the air: keep your nose towards the ball while rolling.',why:'Better aerials and landings.'},
+ wall:{n:'Wall play and wall clears',r:3,how:'Drive up the wall, jump off it towards the ball. Practice hitting balls off the side wall towards the middle.',why:'Many plays happen on the walls at this rank.'},
+ fifty:{n:'Winning 50/50s',r:3,how:'Hit the ball with a front flip at the same time as the opponent, aiming low. Do not jump too early.',why:'You win the ball more often than you lose it.'},
+ flick:{n:'Flicks (45 degree and diagonal)',r:4,how:'Dribble the ball, jump once, wait a moment, then diagonal flip into it.',why:'Scoring from a dribble.'},
+ recover:{n:'Fast recovery',r:4,how:'After every touch, land on your wheels: air roll, wavedash on landing, keep speed.',why:'Ready for the next play while others are still upside down.'},
+ airdribble1:{n:'Air dribble from the wall',r:4,how:'Pop the ball off the wall, follow it with small boost taps and keep the ball on your nose.',why:'Attacks the other team cannot stop easily.'},
+ halfvolley:{n:'Half-volley',r:4,how:'Hit the ball right after it bounces, with a flip. Practice with bouncing balls in free play.',why:'Fast powerful shots from the air.'},
+ boost:{n:'Boost stealing and control',r:4,how:'Go through the opponent\'s corner boost when it is safe, and always use the small pads.',why:'They run out, you do not.'},
+ ceiling:{n:'Ceiling shot',r:5,how:'Drive up the wall to the ceiling with the ball, drop off the ceiling, keep your flip, then hit the ball.',why:'Surprise shots with a saved flip.'},
+ musty:{n:'Musty flick',r:5,how:'With the ball on your roof, jump, tilt the nose up, then back-flip into it.',why:'A powerful flick that is hard to read.'},
+ reset1:{n:'Flip reset (basic)',r:5,how:'In the air, touch the ball with all four wheels: you get your flip back. Start in a training pack or with slow balls.',why:'A second flip in the air for a strong shot.'},
+ doubletap:{n:'Double tap',r:5,how:'Hit the ball towards the backboard, follow it and hit it again into the net.',why:'Keepers have to save twice.'},
+ chain:{n:'Chain dashes',r:5,how:'Wavedash again and again right as you land, on the ground or off walls.',why:'Keep top speed without boost.'},
+ reset2:{n:'Consistent flip resets',r:6,how:'Get the reset from the wall and from the ground, and use it under pressure.',why:'Needed to beat good GC and SSL keepers.'},
+ zap:{n:'Zap dash and speed tech',r:6,how:'Advanced dash tech to reach top speed. Learn after wavedash and chain dashes.',why:'Faster than others with less boost.'},
+ redirect:{n:'Mid-air redirects',r:6,how:'Turn passes in the air towards the net with one touch.',why:'Goals from passes that nobody can read.'},
+ speed:{n:'Speed and consistency',r:6,how:'Play everything you know at full speed for whole games.',why:'This is what separates GC from SSL.'},
+};
+const METHODS=[
+ {t:'One skill per session',time:'Every session',how:['Pick ONE thing for today (example: "back post rotation" or "half-flip").','Practice it for 15 minutes, then play games and focus only on that thing.','After the session, ask yourself: did I do it more than yesterday?'],why:'Your brain learns faster when you train one thing at a time. Trying to fix everything at once fixes nothing.'},
+ {t:'Free play warm-up',time:'10 to 15 min',how:['Hit the ball 50 times without letting it stop.','Mix ground shots, aerials and wall hits.','Do not play ranked cold.'],why:'Your first games are better, and you get thousands of extra touches every month.'},
+ {t:'Training packs',time:'10 to 20 min',how:['In Training, search by type: "shadow defense", "aerials", "saves", "dribble", "redirects".','Play each shot until you hit it 3 times in a row.','Pick packs for your rank, not SSL packs.'],why:'The same shot again and again builds the muscle memory fast.'},
+ {t:'Workshop maps (PC)',time:'10 to 20 min',how:['On PC, workshop maps give obstacle courses, aerial rings and dribble challenges.','Aerial ring maps are great for boost control and air roll.','Do one map a day and try to beat your best time.'],why:'Fun practice that builds car control better than games do.'},
+ {t:'Replay review',time:'15 min, twice a week',how:['Save a replay of a game you lost.','Watch every goal you conceded from your own car.','Ask: where was I 5 seconds before the goal? What should I have done?','Draw the play on this board to see it clearly.'],why:'Most players never look back. This is the fastest way to find your real mistakes.'},
+ {t:'The 5 conceded goals',time:'10 min',how:['After a session, pick 5 goals you let in.','For each one write ONE word: "rotation", "boost", "overcommit", "whiff", "slow".','The word you wrote the most is your focus for next week.'],why:'It tells you exactly what to train, so you never waste practice.'},
+ {t:'Play 1s for mechanics',time:'2 to 3 games',how:['Play 1v1 to practice ball control, shadow defense and 50/50s.','In 1s every mistake is yours, so you learn fast.','Do not tilt: 1s is training, not your main rank.'],why:'More touches per game than any other mode.'},
+ {t:'Play against better players',time:'Weekly',how:['Ask a higher ranked friend for private 1v1s.','Pay attention to what beats you, and ask them how they do it.','Play some games with your team in private match on a plan.'],why:'You learn fastest from players who are just above you.'},
+ {t:'Watch one pro player only',time:'20 min',how:['Watch a pro or SSL replay or stream.','Do NOT watch the ball. Follow ONE player the whole time.','Look at where they go after they touch the ball, and when they take boost.'],why:'You copy positioning and decisions, not only flashy goals.'},
+ {t:'Casual for new, ranked for known',time:'Always',how:['Try new mechanics in casual or private matches.','In ranked, use only what you can do 7 times out of 10.','Move a mechanic to ranked once it works in casual.'],why:'You climb faster without throwing games while you learn.'},
+ {t:'Stop rules (tilt control)',time:'Every session',how:['Stop ranked after 2 losses in a row, or after 3 losses total.','Take a 10 minute break, then play casual or training.','Never play ranked angry.'],why:'Tilted players lose more rank than they gain.'},
+ {t:'Short daily beats long weekly',time:'Daily',how:['30 to 60 minutes every day is better than 6 hours on Sunday.','Sleep is when your brain saves new skills.','Stretch your hands and wrists before long sessions.'],why:'Steady practice grows skill fastest.'},
+ {t:'Settings check',time:'Once',how:['Use ball cam most of the time.','A common camera start: FOV 110, distance 260 to 280, height 90 to 110, angle -3 to -5, stiffness 0.35 to 0.5. Adjust from there.','Bind powerslide and air roll to buttons you can hold while using the sticks.','Set the controller deadzone low (about 0.05 to 0.1) if your stick does not drift.'],why:'Good settings make mechanics easier. Change them once, then stop changing.'},
+ {t:'Practice journal',time:'2 min',how:['After each session write: what I trained, my rank, one thing I did well, one thing to fix.','Read it before your next session.'],why:'You see your progress and keep a clear goal.'},
+ {t:'Learn from this app',time:'10 min',how:['Use the 3s / 2s / 1s lessons for positioning.','Do the kickoff trainer until a 10 streak.','Use the situation quiz to test your game sense.'],why:'Game sense is half of climbing. You can train it even when you cannot play.'},
+];
+// 30-day sprint: 4 weeks, each day has tasks. Honest: SSL in a month only works if you are already close (GC).
+const SPRINT=[
+ {w:'Week 1: Reset and audit',goal:'Fix settings, build a warm-up, find your 3 biggest mistakes.',days:[
+  ['Settings check (camera, binds, deadzone)','Free play warm-up 15 min','Play 5 ranked games, save the replays'],
+  ['Warm-up 15 min','Replay review: the 5 conceded goals','Write your top 3 mistakes in the journal'],
+  ['Warm-up','Training pack for mistake #1, 20 min','5 ranked games focused on mistake #1'],
+  ['Warm-up','Academy: 3 lessons for your mode','Kickoff trainer to a 10 streak'],
+  ['Warm-up','Training pack for mistake #2, 20 min','5 ranked games focused on mistake #2'],
+  ['Warm-up','1v1 with a better friend, 20 min','Replay review, 15 min'],
+  ['Rest day or casual only','Watch one pro player for 20 min (follow one player)']]},
+ {w:'Week 2: Mechanics block',goal:'Add one or two mechanics from your rank ladder. Train them daily.',days:[
+  ['Warm-up','Mechanic A: 25 min in free play / training','Casual games: try mechanic A'],
+  ['Warm-up','Mechanic A: 20 min','Recovery practice: land on wheels after every touch','5 ranked games'],
+  ['Warm-up','Mechanic B: 25 min','Casual games: try mechanic B'],
+  ['Warm-up','Mechanics A + B, 15 min each','5 ranked games, use only what works 7/10'],
+  ['Warm-up','Workshop / aerial rings map, 20 min','5 ranked games'],
+  ['Warm-up','1s: 3 games for ball control','Replay review'],
+  ['Rest day','Write in the journal: what improved this week?']]},
+ {w:'Week 3: Game sense and speed',goal:'Play faster and smarter: rotation, boost and reads.',days:[
+  ['Warm-up','Academy: rotation lessons','5 ranked games: say your job (1st/2nd/3rd) in your head'],
+  ['Warm-up','Situation quiz: 20 questions','5 ranked games: keep 30 to 60 boost from small pads'],
+  ['Warm-up','Watch one pro player 20 min','5 ranked games: copy one thing they did'],
+  ['Warm-up','Shadow defense pack 15 min','5 ranked games: shadow instead of diving'],
+  ['Warm-up','Mechanics A + B, 15 min','5 ranked games at full speed'],
+  ['Warm-up','Private match with your team: practice passing plays','Replay review'],
+  ['Rest day','Golden rules: read them all once']]},
+ {w:'Week 4: Ranked push',goal:'Play your best games. Keep the warm-up and the stop rules.',days:[
+  ['Warm-up 15 min','Ranked: up to 10 games, stop after 2 losses in a row'],
+  ['Warm-up','Ranked push','Replay review of one loss'],
+  ['Warm-up','Ranked push','Kickoff trainer 5 min'],
+  ['Warm-up','Ranked push','Journal: what wins you games?'],
+  ['Warm-up','Ranked push','Mechanics touch-up 10 min'],
+  ['Warm-up','Ranked push with your duo / trio'],
+  ['Warm-up','Last push','Write your new rank and next month\'s goal']]},
+];
+const ROUTINES={
+ 30:[['Warm-up free play',10],['Training pack for your focus',10],['Ranked or casual with your focus',10]],
+ 60:[['Warm-up free play',10],['Mechanic of the week',15],['Training pack for your focus',10],['Ranked games',20],['Journal',5]],
+ 120:[['Warm-up free play',15],['Mechanic of the week',25],['Training packs',15],['Workshop map / 1s',15],['Ranked games',40],['Replay review',10]],
+};
+let rk=LS.get('bb.rank',{r:-1,t:0,goal:7,sp:{},mins:60});
+const saveRk=()=>LS.set('bb.rank',rk);
+const rankName=(r,t)=>r<0?'Not set':RANKS[r].n+(r<7?' '+TIERS[t]:'');
+const rankCode=(r,t)=>r<0?'':RANKS[r].id+(r<7?t+1:'');
+function rankFromCode(c){if(!c)return null;const m=/^([a-z]+)(\d?)$/.exec(c);if(!m)return null;const r=RANKS.findIndex(x=>x.id===m[1]);if(r<0)return null;return {r,t:m[2]?+m[2]-1:0}}
+function rankBadge(c){const x=rankFromCode(c);if(!x)return '';const R=RANKS[x.r];return rankEmblem(x.r,x.t,22)+`<span class="rkb" style="--rc:${R.c}">${esc(x.r===7?'SSL':x.r===6?'GC '+TIERS[x.t]:R.n+' '+TIERS[x.t])}</span>`}
+function pushRank(){if(!NET.name||!NET.fb)return;const {D,db}=NET.fb;D.set(D.ref(db,'rank/'+NET.name.toLowerCase()),rk.r<0?null:rankCode(rk.r,rk.t)).catch(()=>{})}
+function sprintDone(){let n=0,t=0;SPRINT.forEach((w,wi)=>w.days.forEach((d,di)=>d.forEach((_,ti)=>{t++;if(rk.sp[wi+'.'+di+'.'+ti])n++})));return [n,t]}
+function renderRank(body,close){
+  const r=rk.r, R=r>=0?RANKS[r]:null, [sd,st]=sprintDone();
+  body.innerHTML=`<button class="nextup plan" id="rkPlan"><span class="lbl">Start here every day</span><b>Today's plan</b><small>Your daily list: what to train, built from your rank and your games</small></button><p>Pick your rank and your goal. You get a plan for your rank, the mechanics to learn next, ways to practice and a 30-day sprint.</p>
+   <h3>Your rank</h3><div class="rkpick" id="rkCur">${RANKS.map((x,i)=>`<button data-r="${i}" style="--rc:${x.c}" aria-pressed="${i===r}">${rankEmblem(i,i===r?rk.t:0,20)}${x.n}</button>`).join('')}</div>
+   ${r>=0&&r<7?`<div class="seg tabs" id="rkTier">${TIERS.map((x,i)=>`<button data-t="${i}" aria-pressed="${i===rk.t}">${R.n} ${x}</button>`).join('')}</div>`:''}
+   <h3>Goal</h3><div class="rkpick" id="rkGoal">${RANKS.map((x,i)=>`<button data-g="${i}" style="--rc:${x.c}" aria-pressed="${i===rk.goal}"${i<=r?' disabled':''}>${x.n}</button>`).join('')}</div>
+   ${R?rankPlan(r):'<div class="empty">Pick your rank above to get your plan.</div>'}
+   <div class="hero" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:12px">
+    <button class="hc" id="rkSprint">${svg('star')}<b>30-day sprint</b><small>Fastest path up. ${sd}/${st} tasks done</small></button>
+    <button class="hc" id="rkMeth">${svg('cap')}<b>Ways to learn</b><small>${METHODS.length} practice methods that work</small></button>
+    <button class="hc" id="rkMech">${svg('kick')}<b>Mechanics ladder</b><small>What to learn at each rank</small></button>
+    <button class="hc" id="rkDay">${svg('play')}<b>Daily routine</b><small>30, 60 or 120 minutes</small></button>
+    <button class="hc" id="rkTrain">${svg('kick')}<b>Custom training</b><small>Packs of shots. Track hit / miss</small></button>
+    <button class="hc" id="rkHw">${svg('note')}<b>Coach homework</b><small>${NET.name?(myHw().filter(h=>!h.done).length+' task(s) from your coach'):'Log in to see it'}</small></button>
+   </div>
+   <button class="nextup" id="rkSSL" style="margin-top:10px"><span class="lbl">Real talk</span><b>Can you reach SSL in 1 month?</b><small>What is possible, and the fastest way up from any rank</small></button>
+   <p class="hint">${NET.name?'Your rank shows next to your name in Players.':'Log in (Players button) to show your rank next to your name.'}</p>`;
+  const re=()=>renderRank(body,close);
+  body.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{rk.r=+b.dataset.r;if(rk.goal<=rk.r)rk.goal=Math.min(7,rk.r+1);saveRk();pushRank();re()});
+  body.querySelectorAll('#rkTier [data-t]').forEach(b=>b.onclick=()=>{rk.t=+b.dataset.t;saveRk();pushRank();re()});
+  body.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{rk.goal=+b.dataset.g;saveRk();re()});
+  body.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{close();openLesson(b.dataset.l)});
+  body.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>openMech(b.dataset.m));
+  body.querySelector('#rkPlan').onclick=()=>{close();openPlan()};
+  body.querySelector('#rkSprint').onclick=()=>{close();openSprint()};
+  body.querySelector('#rkMeth').onclick=()=>{close();openMethods()};
+  body.querySelector('#rkMech').onclick=()=>{close();openLadder()};
+  body.querySelector('#rkDay').onclick=()=>{close();openRoutine()};
+  body.querySelector('#rkSSL').onclick=()=>{close();openSSL()};
+  body.querySelector('#rkTrain').onclick=()=>{close();openTraining()};
+  body.querySelector('#rkHw').onclick=()=>{close();openHomework()};
+}
+function rankPlan(r){
+  const R=RANKS[r], steps=[];for(let i=r+1;i<=rk.goal&&i<8;i++)steps.push(RANKS[i]);
+  const list=(a,cls)=>`<ul class="tipl ${cls}">${a.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`;
+  const les=R.les.map(lessonById).filter(Boolean);
+  return `<div class="rkcard" style="--rc:${R.c}"><div class="rkhead">${rankEmblem(r,rk.t,54)}<div><span class="lbl">Your rank</span><b>${esc(rankName(r,rk.t))}</b></div></div><p>${esc(R.you)}</p></div>
+   <h3>What holds you back</h3>${list(R.hold,'no')}
+   <h3>Your focus</h3>${list(R.focus,'ok')}
+   <h3>Mechanics to learn now</h3><div class="list">${R.mech.map(k=>`<button class="les" data-m="${k}"><span class="lm"><b>${esc(MECHS[k].n)}</b><small>${esc(MECHS[k].why)}</small></span></button>`).join('')}</div>
+   ${les.length?`<h3>Lessons for you</h3><div class="list">${les.map(lessonItem).join('')}</div>`:''}
+   ${steps.length?`<h3>Road to ${esc(RANKS[rk.goal].n)}</h3><div class="road">${steps.map(s=>`<div class="rstep" style="--rc:${s.c}"><b>${esc(s.n)}</b><small>Learn: ${s===steps[0]?esc(R.focus[0]):esc(RANKS[RANKS.indexOf(s)-1].focus[0])}</small><small>Usual time from the rank before: ${esc(RANKS[RANKS.indexOf(s)-1].next)}</small></div>`).join('')}</div>`:''}`;
+}
+function openMech(k){
+  const M=MECHS[k];
+  const {el}=modal(`<div class="lhead"><span class="lbl">Learn at ${esc(RANKS[M.r].n)}</span></div><h2>${esc(M.n)}</h2>
+   <h3>How to practice</h3><p>${esc(M.how)}</p><h3>Why it helps</h3><p>${esc(M.why)}</p>
+   <p class="hint">Practice it in free play or a training pack first. Use it in ranked once it works 7 times out of 10.</p>
+   <div class="row" style="margin-top:10px"><button class="btn pri" id="mkSk">Take the skill test</button></div>`,true);
+  el.querySelector('#mkSk').onclick=()=>{el.parentElement.remove();openSkill(k)};
+}
+function openLadder(){
+  const {el,close}=modal(`<h2>Mechanics ladder</h2><p>What most players learn at each rank. You do not need everything to climb: game sense wins more games than tricks until Champion.</p>
+   ${RANKS.slice(0,7).map((R,i)=>`<h3><span class="rkb" style="--rc:${R.c}">${esc(R.n)}</span></h3><div class="list">${Object.entries(MECHS).filter(([,m])=>m.r===i).map(([k,m])=>`<button class="les" data-m="${k}"><span class="lm"><b>${esc(m.n)}</b><small>${esc(m.why)}</small></span></button>`).join('')}</div>`).join('')}
+   <div class="row" style="margin-top:14px"><button class="btn" id="lbBack">Back to Rank Up</button></div>`,false,'tall');
+  el.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>openMech(b.dataset.m));
+  el.querySelector('#lbBack').onclick=()=>{close();openLearn('rank')};
+}
+function openMethods(){
+  const {el,close}=modal(`<h2>Ways to learn</h2><p>Practice methods that make you climb faster. Pick 2 or 3 and do them every week.</p>
+   <div class="list">${METHODS.map((m,i)=>`<details class="meth"><summary><b>${esc(m.t)}</b><small>${esc(m.time)}</small></summary><ul class="tipl ok">${m.how.map(h=>`<li>${esc(h)}</li>`).join('')}</ul><p class="why2"><b>Why:</b> ${esc(m.why)}</p></details>`).join('')}</div>
+   <div class="row" style="margin-top:14px"><button class="btn" id="mtBack">Back to Rank Up</button></div>`,false,'tall');
+  el.querySelector('#mtBack').onclick=()=>{close();openLearn('rank')};
+}
+function openRoutine(){
+  const {el,close}=modal(`<h2>Daily routine</h2><p>How much time do you have today?</p>
+   <div class="seg tabs" id="rtM">${[30,60,120].map(m=>`<button data-m="${m}">${m} min</button>`).join('')}</div><div id="rtB"></div>
+   <div class="row" style="margin-top:14px"><button class="btn" id="rtBack">Back to Rank Up</button></div>`,true);
+  const R=rk.r>=0?RANKS[rk.r]:null;
+  const show=m=>{rk.mins=m;saveRk();el.querySelectorAll('#rtM button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.m===m));
+    el.querySelector('#rtB').innerHTML=`<div class="list">${ROUTINES[m].map(([t,n])=>`<div class="item"><span class="tag">${n} MIN</span><div class="meta"><b>${esc(t)}</b>${R&&/focus/.test(t)?`<small>Your focus: ${esc(R.focus[0])}</small>`:''}${R&&/Mechanic/.test(t)?`<small>Try: ${esc(MECHS[R.mech[0]].n)}</small>`:''}</div></div>`).join('')}</div>
+    <p class="hint">Same routine every day for a week, then change the focus. Stop ranked after 2 losses in a row.</p>`};
+  el.querySelectorAll('#rtM button').forEach(b=>b.onclick=()=>show(+b.dataset.m));show(ROUTINES[rk.mins]?rk.mins:60);
+  el.querySelector('#rtBack').onclick=()=>{close();openLearn('rank')};
+}
+function openSprint(){
+  const [sd,st]=sprintDone();
+  const {el,close}=modal(`<h2>30-day sprint</h2><p>The fastest honest path up, from any rank. Tick tasks as you do them. Miss a day? Just continue: consistency beats perfection.</p>
+   <div class="progrow"><div class="prog"><i id="spBar" style="width:${Math.round(sd/st*100)}%"></i></div><span id="spN">${sd}/${st} tasks</span></div>
+   ${SPRINT.map((w,wi)=>`<details class="meth"${wi===curWeek()?' open':''}><summary><b>${esc(w.w)}</b><small>${esc(w.goal)}</small></summary>
+    ${w.days.map((d,di)=>`<div class="spday"><b>Day ${wi*7+di+1}</b>${d.map((t,ti)=>`<label class="chk"><input type="checkbox" data-k="${wi}.${di}.${ti}"${rk.sp[wi+'.'+di+'.'+ti]?' checked':''}><span>${esc(t)}</span></label>`).join('')}</div>`).join('')}</details>`).join('')}
+   <p class="hint">Day 29 and 30: play your best games, then write your new rank and next month's goal in your journal.</p>
+   <div class="row" style="margin-top:14px"><button class="btn" id="spBack">Back to Rank Up</button><button class="btn bad" id="spReset">Start over</button></div>`,false,'tall');
+  el.querySelectorAll('input[data-k]').forEach(c=>c.onchange=()=>{if(c.checked)rk.sp[c.dataset.k]=1;else delete rk.sp[c.dataset.k];saveRk();clearTimeout(window._ps);window._ps=setTimeout(pushStats,1500);const [a,b]=sprintDone();el.querySelector('#spBar').style.width=Math.round(a/b*100)+'%';el.querySelector('#spN').textContent=a+'/'+b+' tasks'});
+  el.querySelector('#spBack').onclick=()=>{close();openLearn('rank')};
+  el.querySelector('#spReset').onclick=()=>{if(!confirm('Clear all ticks and start the sprint again?'))return;rk.sp={};saveRk();close();openSprint()};
+}
+function curWeek(){for(let w=0;w<SPRINT.length;w++)if(SPRINT[w].days.some((d,di)=>d.some((_,ti)=>!rk.sp[w+'.'+di+'.'+ti])))return w;return 3}
+function openSSL(){
+  const {el,close}=modal(`<h2>SSL in 1 month?</h2>
+   <p><b>The honest answer:</b> SSL in under a month is realistic only if you are already Grand Champion and close to it. Supersonic Legend is a very small share of all players, and most players who reach it took years.</p>
+   <p><b>But</b> you CAN climb a lot in one month from any rank. Players who follow a clear plan often go up 1 to 2 full ranks in a month, much faster than players who only play ranked.</p>
+   <h3>The fastest way up</h3><ul class="tipl ok">
+    <li>Fix positioning first. Below Champion, rotation and decisions win more games than mechanics.</li>
+    <li>Play every day, 1 to 2 hours, with a warm-up first.</li>
+    <li>Train ONE weakness at a time. Find it with the 5 conceded goals review.</li>
+    <li>Learn the mechanics for your rank on the ladder, not the SSL ones.</li>
+    <li>Play with a steady teammate and talk about plays.</li>
+    <li>Use the stop rules. Tilt is the biggest rank killer.</li>
+    <li>Sleep well. Skills are saved while you sleep.</li></ul>
+   <h3>Things that do NOT work</h3><ul class="tipl no">
+    <li>Only playing ranked for hours without practice.</li>
+    <li>Learning flashy mechanics before you can rotate.</li>
+    <li>Blaming teammates. Look at your own replays.</li>
+    <li>Paying someone to play on your account. It is against the rules and you will drop right back.</li></ul>
+   <h3>Typical time between ranks</h3><div class="list">${RANKS.slice(0,7).map((R,i)=>`<div class="item"><span class="rkb" style="--rc:${R.c}">${esc(R.n)}</span><div class="meta"><small>to ${esc(RANKS[i+1].n)}: ${esc(R.next)}</small></div></div>`).join('')}</div>
+   <p class="hint">These are rough guides with daily practice. Everyone is different.</p>
+   <div class="row" style="margin-top:14px"><button class="btn pri" id="sslGo">${svg('star')}Start the 30-day sprint</button><button class="btn" id="sslBack">Back</button></div>`,false,'tall');
+  el.querySelector('#sslGo').onclick=()=>{close();openSprint()};
+  el.querySelector('#sslBack').onclick=()=>{close();openLearn('rank')};
+}
+
 // ---------- academy: mode tabs (3s / 2s / 1s / For Coach) ----------
 const CATI=Object.fromEntries(CATS.map((c,i)=>[c[0],i]));
 LESSONS.sort((a,b)=>CATI[a.cat]-CATI[b.cat]);
 const lessonTag=L=>L.tag||(L.gen?L.gen.length:L.mode)||3;
 const inTag=(L,t)=>lessonTag(L)===t||(L.also||[]).includes(t);
 const lessonsFor=t=>LESSONS.filter(l=>inTag(l,t));
-const TABS=[['3','3s'],['2','2s'],['1','1s'],['coach','For Coach']];
+const ALLTABS=[['rank','Rank'],['tools','Tools'],['3','3s'],['2','2s'],['1','1s'],['coach','Coach']];
+// The For Coach course is only for the owner account (see COACH_ID).
+const tabsNow=()=>ALLTABS.filter(t=>t[0]!=='coach'||isCoach());
 const TAGINFO={
  3:{intro:'Learn 3s as a team: kickoffs, rotation, attack, defense, boost, game sense and teamwork. Every lesson plays on the board step by step, with a coach note on each step.',rules:()=>RULES,rn:'Golden rules of 3s'},
  2:{intro:'2s is about trust: one on the ball, one behind it. Learn kickoffs, swapping jobs, defending as two and when to play safe.',rules:()=>RULES2,rn:'Golden rules of 2s'},
  1:{intro:'1s is patience, boost and reading your opponent. Learn how to defend a dribble, recover fast and punish mistakes.',rules:()=>RULES1,rn:'Golden rules of 1s'},
 };
-function curTab(){return TABS.some(t=>t[0]===settings.ltab)?settings.ltab:'3'}
+function curTab(){return tabsNow().some(t=>t[0]===settings.ltab)?settings.ltab:'3'}
 function openLearn(tab){
   if(tab)settings.ltab=String(tab);
-  const {el,close}=modal(`<h2>Academy</h2><div class="seg tabs" id="lnTabs" role="tablist">${TABS.map(([k,n])=>`<button data-t="${k}" role="tab">${n}</button>`).join('')}</div><div id="lnBody"></div>`,false,'tall');
+  const {el,close}=modal(`<div class="banner"><span>BOOST BOARD</span>ACADEMY</div><div class="seg tabs" id="lnTabs" role="tablist">${tabsNow().map(([k,n])=>`<button data-t="${k}" role="tab">${n}</button>`).join('')}</div><div id="lnBody"></div>`,false,'tall');
   const body=el.querySelector('#lnBody');
   const show=t=>{settings.ltab=t;saveSettings();el.querySelectorAll('#lnTabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t));
-    if(t==='coach')renderCourse(body,close);else renderTag(body,+t,close);el.scrollTop=0};
+    if(t==='coach')renderCourse(body,close);else if(t==='rank')renderRank(body,close);else if(t==='tools')renderTools(body,close);else renderTag(body,+t,close);el.scrollTop=0};
   el.querySelectorAll('#lnTabs button').forEach(b=>b.onclick=()=>show(b.dataset.t));
   show(curTab());
 }
@@ -1874,7 +2302,7 @@ const unitTitle=u=>coach.titles[u.id]||u.title;
 const unitDone=u=>{const d=coach.done[u.id]||{};return u.check.filter((_,i)=>d[i]).length};
 function renderCourse(body,close){
   const us=units(), totC=us.reduce((a,u)=>a+u.check.length,0), dnC=us.reduce((a,u)=>a+unitDone(u),0);
-  body.innerHTML=`<div class="coachhead"><span class="ch-tag">FOR COACH</span><h3 class="ctitle">Main course: playing 3s together</h3>
+  body.innerHTML=`<button class="nextup" id="cuHub"><span class="lbl">Coach Hub</span><b>Your team: roles, homework, messages, team packs</b><small>See every player's rank, training and homework</small></button><div class="coachhead"><span class="ch-tag">FOR COACH</span><h3 class="ctitle">Main course: playing 3s together</h3>
    <p>The coach's plan for the team: what every player does with their teammates, how to talk, and how to keep each other up. Players can read it too, and anyone can add notes.</p></div>
    <div class="progrow"><div class="prog"><i style="width:${totC?Math.round(dnC/totC*100):0}%"></i></div><span>${dnC}/${totC} team goals</span></div>
    <div class="list">${us.map((u,i)=>{const n=unitDone(u),c=u.check.length,full=c&&n===c;return `<button class="unit${full?' done':''}" data-u="${u.id}"><span class="un">${full?'✓':i+1}</span><span class="lm"><b>${esc(unitTitle(u))}</b><small>${esc(u.goal||'Your own unit')}</small></span>${c?`<span class="cnt">${n}/${c}</span>`:''}${coach.notes[u.id]?`<span class="hasnote" title="Has coach notes">${svg('note')}</span>`:''}</button>`}).join('')}</div>
@@ -1883,6 +2311,7 @@ function renderCourse(body,close){
   body.querySelectorAll('[data-u]').forEach(b=>b.onclick=()=>{close();openUnit(b.dataset.u)});
   body.querySelector('#cuAdd').onclick=()=>{const id='c'+Date.now().toString(36);coach.extra.push({id,title:'My unit',goal:'',talk:[],drills:[],check:[]});saveCoach();close();openUnit(id,true)};
   const sh=body.querySelector('#cuShare');if(sh)sh.onclick=shareCoach;
+  body.querySelector('#cuHub').onclick=()=>{close();openHub()};
 }
 function openUnit(id,editTitle){
   const us=units(), i=us.findIndex(u=>u.id===id);if(i<0)return;const u=us[i], next=us[i+1];
@@ -1944,14 +2373,1035 @@ if(!/claude\.(ai|site)|claudeusercontent/.test(location.host)&&location.protocol
   if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 
+// ---------- accounts + players (our own login on a Firebase Realtime Database) ----------
+// A login key = hash of name + password. keys/<key> holds the name; nobody can list keys, so the key works as proof
+// of the password and the password itself is never stored or sent. names/<name> = public profile, pres/<name> = open
+// app connections (removed by the server when the app closes or loses internet), last/<name> = last seen.
+const NET={name:null,key:null,ready:null,fb:null,stopP:null};
+// The owner / coach account. Only it sees the For Coach course; everyone sees the Coach tag in Players.
+const COACH_ID='witherthecoach';
+function isCoach(){return !!NET.name&&NET.name.toLowerCase()===COACH_ID}
+const FB_CFG={apiKey:"AIzaSyCiZ7sfaHtmDuvQiq0yDuHcVfev7GTKuL0",authDomain:"boost-board-rl26.firebaseapp.com",databaseURL:"https://boost-board-rl26-default-rtdb.firebaseio.com",projectId:"boost-board-rl26",appId:"1:74755205453:web:612c4a6346bfdb75742f04"};
+const FBV='10.12.2', NAME_RE=/^[A-Za-z0-9_]{3,16}$/;
+// SHA-256 in plain JS (crypto.subtle is missing on plain-http pages, e.g. testing over Wi-Fi).
+function sha256hex(str){
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const b=new TextEncoder().encode(str), l=b.length, n=((l+9+63)>>6)<<6, m=new Uint8Array(n);m.set(b);m[l]=0x80;
+  const dv=new DataView(m.buffer);dv.setUint32(n-4,l*8>>>0);dv.setUint32(n-8,Math.floor(l/0x20000000));
+  let h=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];const w=new Uint32Array(64);
+  const r=(x,y)=>(x>>>y)|(x<<(32-y));
+  for(let o=0;o<n;o+=64){
+    for(let i=0;i<16;i++)w[i]=dv.getUint32(o+i*4);
+    for(let i=16;i<64;i++){const a=w[i-15],c=w[i-2];w[i]=(w[i-16]+(r(a,7)^r(a,18)^(a>>>3))+w[i-7]+(r(c,17)^r(c,19)^(c>>>10)))>>>0}
+    let [A,B,C,D,E,F,G,H]=h;
+    for(let i=0;i<64;i++){const t1=(H+(r(E,6)^r(E,11)^r(E,25))+((E&F)^(~E&G))+K[i]+w[i])>>>0,t2=((r(A,2)^r(A,13)^r(A,22))+((A&B)^(A&C)^(B&C)))>>>0;H=G;G=F;F=E;E=(D+t1)>>>0;D=C;C=B;B=A;A=(t1+t2)>>>0}
+    h=h.map((v,i)=>(v+[A,B,C,D,E,F,G,H][i])>>>0);
+  }
+  return h.map(v=>v.toString(16).padStart(8,'0')).join('');
+}
+function loginKey(n,p){let k='bb1|'+n.toLowerCase()+'|'+p;for(let i=0;i<1500;i++)k=sha256hex(k+'|'+i);return k}
+function netLoad(){
+  if(NET.ready)return NET.ready;
+  NET.ready=(async()=>{
+    const B=`https://www.gstatic.com/firebasejs/${FBV}/`;
+    const [A,D]=await Promise.all([import(B+'firebase-app.js'),import(B+'firebase-database.js')]);
+    const db=D.getDatabase(A.initializeApp(FB_CFG));
+    NET.fb={D,db};
+    // Logged in before on this device? Check the saved key still matches, then go online.
+    const s=LS.get('bb.acct',null);
+    if(s&&s.n&&s.k){
+      const v=await D.get(D.ref(db,'keys/'+s.k)).then(x=>x.val()).catch(()=>undefined);
+      if(v===s.n.toLowerCase())setMe(s.n,s.k);else if(v===null)LS.set('bb.acct',null);
+    }
+    return NET.fb;
+  })().catch(e=>{NET.ready=null;throw e});
+  return NET.ready;
+}
+function setMe(n,k){
+  if(NET.stopP){NET.stopP();NET.stopP=null}
+  NET.name=n;NET.key=k;
+  if(n){LS.set('bb.acct',{n,k});LS.set('bb.name',n);NET.stopP=presence(n.toLowerCase());syncRank(n.toLowerCase());teamListen();pushStats()}
+  syncPl();
+}
+// Each open copy of the app adds a connection; the server removes it by itself when the app closes or goes offline.
+function presence(id){
+  const {D,db}=NET.fb, conns=D.ref(db,'pres/'+id), lastRef=D.ref(db,'last/'+id);
+  let c=null;
+  const off=D.onValue(D.ref(db,'.info/connected'),s=>{
+    if(s.val()!==true)return;
+    c=D.push(conns);
+    D.onDisconnect(c).remove().then(()=>D.onDisconnect(lastRef).set(D.serverTimestamp())).then(()=>D.set(c,true)).then(()=>D.set(lastRef,D.serverTimestamp())).catch(()=>{});
+  });
+  return ()=>{off();if(!c)return Promise.resolve();const x=c;c=null;return Promise.all([D.onDisconnect(x).cancel(),D.remove(x),D.set(lastRef,D.serverTimestamp())]).catch(()=>{})};
+}
+// Rank set on this phone wins; otherwise take the one saved on the account.
+function syncRank(id){const {D,db}=NET.fb;if(rk.r>=0){pushRank();return}D.get(D.ref(db,'rank/'+id)).then(s=>{const x=rankFromCode(s.val());if(x&&rk.r<0){rk.r=x.r;rk.t=x.t;if(rk.goal<=rk.r)rk.goal=Math.min(7,rk.r+1);saveRk()}}).catch(()=>{})}
+function syncPl(){const b=$('#plBtn');if(b)b.classList.toggle('on',!!NET.name)}
+function openAccount(startTab){
+  let tab=startTab||(LS.get('bb.name','')?'in':'up');
+  const {el,close}=modal(`<h2>Players</h2><p>Make a free account with just a character name and a password. No email needed.</p>
+   <div class="seg tabs" id="acTabs"><button type="button" data-t="up">Sign up</button><button type="button" data-t="in">Log in</button></div>
+   <form class="acc" id="acForm" autocomplete="on"><label for="acName">Character name</label><input type="text" id="acName" maxlength="16" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="e.g. BoostKing">
+   <label for="acPass">Password</label><input type="password" id="acPass" maxlength="64" placeholder="6 or more characters">
+   <div class="err" id="acErr" role="alert"></div>
+   <div class="row"><button class="btn pri" id="acGo" type="submit"></button></div>
+   <p class="hint" id="acHint"></p></form>`,true);
+  const nm=el.querySelector('#acName'),pw=el.querySelector('#acPass'),er=el.querySelector('#acErr'),go=el.querySelector('#acGo');
+  nm.value=LS.get('bb.name','');
+  const sync=()=>{el.querySelectorAll('#acTabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===tab));
+    go.disabled=false;go.textContent=tab==='up'?'Create account':'Log in';pw.autocomplete=tab==='up'?'new-password':'current-password';
+    el.querySelector('#acHint').textContent=tab==='up'?'Name: 3 to 16 letters, numbers or _. Remember your password: with no email it cannot be reset.':'Use the name and password you signed up with.'};
+  el.querySelectorAll('#acTabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;er.textContent='';sync()});sync();
+  setTimeout(()=>(nm.value?pw:nm).focus(),50);
+  el.querySelector('#acForm').onsubmit=async e=>{
+    e.preventDefault();
+    const n=nm.value.trim(),p=pw.value,id=n.toLowerCase();
+    if(!NAME_RE.test(n)){er.textContent='Name must be 3 to 16 letters, numbers or _ (no spaces).';return}
+    if(p.length<6){er.textContent='Password must be at least 6 characters.';return}
+    go.disabled=true;go.textContent='Please wait...';er.textContent='';
+    try{
+      const {D,db}=await netLoad();
+      const k=loginKey(n,p);
+      if(tab==='up'){
+        const taken=(await D.get(D.ref(db,'names/'+id))).exists();
+        if(taken){sync();er.textContent='That name is taken. Pick another one.';return}
+        await D.update(D.ref(db),{['names/'+id]:{name:n,joined:D.serverTimestamp()},['keys/'+k]:id});
+        setMe(n,k);
+      }else{
+        const v=(await D.get(D.ref(db,'keys/'+k))).val();
+        if(v!==id){sync();er.textContent='Wrong name or password.';return}
+        const prof=(await D.get(D.ref(db,'names/'+id))).val();
+        setMe((prof&&prof.name)||n,k);
+      }
+      close();toast(tab==='up'?'Welcome, '+NET.name+'!':'Logged in as '+NET.name);setTimeout(openPlayers,250);
+    }catch(x){sync();er.textContent=/permission/i.test(x&&x.message||'')?'That name is taken. Pick another one.':'No connection. Check your internet and try again.'}
+  };
+}
+function openPlayers(){
+  if(!NET.name){
+    const {el,close}=modal(`<h2>Players</h2><p class="hint" id="plWait">Connecting...</p>`,true);
+    netLoad().then(()=>{close();NET.name?openPlayers():openAccount()})
+      .catch(()=>{el.querySelector('#plWait').textContent='Could not connect. Players needs the internet; the rest of Boost Board works offline.'});
+    return;
+  }
+  const {D,db}=NET.fb, me=NET.name.toLowerCase();
+  const {el,close}=modal(`<h2>Players</h2><p>Logged in as <b>${esc(NET.name)}</b>${isCoach()?' <span class="tag coach">Coach</span> You are the owner: you see everything, including the For Coach course in the Academy.':''}</p>
+   <div class="pstats"><div class="g"><b id="pOn">-</b><small>Online now</small></div><div><b id="pOff">-</b><small>Offline</small></div><div><b id="pAll">-</b><small>Total players</small></div></div>
+   <div class="list" id="pList"><div class="empty">Loading players...</div></div>
+   <div class="row" style="margin-top:14px">${isCoach()?'<button class="btn pri" id="pHub">Coach Hub</button>':''}<button class="btn" id="pHw">Homework</button><button class="btn" id="pTr">Training</button><button class="btn" id="pOut">Log out</button></div>`,false,'tall');
+  {const h=el.querySelector('#pHub');if(h)h.onclick=()=>{close();openHub()};el.querySelector('#pHw').onclick=()=>{close();openHomework()};el.querySelector('#pTr').onclick=()=>{close();openTraining()}}
+  const data={names:null,pres:{},last:{},rank:{}};
+  const draw=()=>{
+    if(!data.names)return;
+    const all=Object.entries(data.names).map(([id,v])=>({id,name:(v&&v.name)||id,on:!!(data.pres[id]&&Object.keys(data.pres[id]).length),rk:data.rank[id],last:data.last[id]||(v&&v.joined)||0}));
+    all.sort((a,b)=>(b.on-a.on)||(b.last-a.last));
+    const on=all.filter(p=>p.on).length;
+    el.querySelector('#pOn').textContent=on;el.querySelector('#pOff').textContent=all.length-on;el.querySelector('#pAll').textContent=all.length;
+    el.querySelector('#pList').innerHTML=all.map(p=>`<div class="item${p.id===me?' me':''}"><span class="pdot${p.on?' on':''}"></span><div class="meta"><b>${esc(p.name)}${p.id===me?' (you)':''}${p.id===COACH_ID?' <span class="tag coach">Coach</span>':''}${rankBadge(p.rk)}${(TEAMD.roster[p.id]||{}).role?` <span class="rolet">${esc(TEAMD.roster[p.id].role)}</span>`:''}${(TEAMD.roster[p.id]||{}).grp?` <span class="rolet g">${esc(TEAMD.roster[p.id].grp)}</span>`:''}</b><small>${p.on?'Online now':'Last seen '+(p.last?ago(p.last):'a while ago')}</small></div></div>`).join('')||'<div class="empty">No players yet.</div>';
+  };
+  const fail=()=>{el.querySelector('#pList').innerHTML='<div class="empty">Could not load players.</div>'};
+  const offs=['names','pres','last','rank'].map(k=>D.onValue(D.ref(db,k),s=>{data[k]=s.val()||{};draw()},fail));
+  const stop=()=>offs.forEach(f=>f());
+  // Stop listening once the window is closed.
+  const obs=new MutationObserver(()=>{if(!el.isConnected){stop();obs.disconnect()}});obs.observe(document.body,{childList:true});
+  el.querySelector('#pOut').onclick=async()=>{close();const st=NET.stopP;NET.stopP=null;if(st)await st();NET.name=NET.key=null;LS.set('bb.acct',null);if(NET.teamOff){NET.teamOff();NET.teamOff=null}TEAMD={msg:null,hw:[],roster:{},packs:[]};syncPl();toast('Logged out')};
+}
+function ago(t){const s=Math.max(0,(Date.now()-t)/1000);if(s<90)return 'just now';const m=s/60;if(m<60)return Math.round(m)+' min ago';const h=m/60;if(h<36)return Math.round(h)+' h ago';return Math.round(h/24)+' days ago'}
+window.BBNet={NET,openAccount,openPlayers,openDaily:()=>openDaily(),openGameLog:m=>openGameLog(m),openDoctor:n=>openDoctor(n),openMental:()=>openMental(),openSession:()=>openSession(),openGlossary:()=>openGlossary(),openMechTracker:()=>openMechTracker(),openXPBoard:()=>openXPBoard(),openPT:()=>openPT(),openSkill:k=>openSkill(k),openSim:()=>openSim(),simStart:(m,h)=>simStart(m,h),simState:()=>SIM&&{t:SIM.t,role:SIM.role,ok:SIM.ok,good:SIM.good,total:SIM.total,score:SIM.score,dbl:SIM.dbl,last:SIM.last,ball:SIM.ball},startPT:m=>startPT(m),openPlan:()=>openPlan(),ptPool:()=>ptPool(),openReplayStats:(a,b)=>openReplayStats(a,b),openHub:(...a)=>openHub(...a),openTraining:(...a)=>openTraining(...a),openHomework:(...a)=>openHomework(...a)};
+{const b=$('#plBtn');b.innerHTML=svg('people');b.onclick=openPlayers;
+ // Logged in before? Reconnect quietly so you show as online.
+ if(LS.get('bb.acct',null))netLoad().catch(()=>{});}
+// ---------- RL-style visuals: rank emblems, boost gauge, splash text ----------
+function rankEmblem(r,t,sz){
+  sz=sz||28;const R=RANKS[r];if(!R)return '';const c=R.c, id='re'+r+'_'+t+'_'+Math.random().toString(36).slice(2,6);
+  const chev=r<7?Array.from({length:(t||0)+1},(_,i)=>`<path d="M9 ${21-i*4.2}l7 -3.6 7 3.6" stroke="#0b0f1a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`).join(''):'';
+  const shape=r===7?'<path d="M16 1l4.2 9.3L30 11.7l-7.3 6.8L24.6 29 16 23.9 7.4 29l1.9-10.5L2 11.7l9.8-1.4z"/>'
+    :r===6?'<path d="M4 4l6 4 6-6 6 6 6-4v13c0 6.5-5.3 11.3-12 13.5C9.3 28.3 4 23.5 4 17z"/>'
+    :r>=4?'<path d="M16 1.5l12.5 6.5v9.5c0 7-5.6 11.6-12.5 13.5C9.1 29.1 3.5 24.5 3.5 17.5V8z"/>'
+    :'<path d="M16 2.5l11.5 5.5v9.5c0 6.5-5 10.6-11.5 12.5C9.5 28.1 4.5 24 4.5 17.5V8z"/>';
+  return `<svg class="emb" width="${sz}" height="${sz}" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".35" stop-color="${c}"/><stop offset="1" stop-color="${c}" stop-opacity=".55"/></linearGradient></defs>
+   <g fill="url(#${id})" stroke="${c}" stroke-width="1.2" style="filter:drop-shadow(0 0 3px ${c}88)">${shape}</g>${chev}${r===7?'<circle cx="16" cy="15.5" r="2.6" fill="#0b0f1a"/>':''}</svg>`;
+}
+// Boost-meter style ring gauge (0..100).
+function gauge(pct,big,small,col){
+  pct=Math.max(0,Math.min(100,pct||0));const r=26,C=2*Math.PI*r,len=C*.75,on=len*pct/100;
+  return `<div class="gauge"><svg viewBox="0 0 64 64" width="72" height="72"><circle cx="32" cy="32" r="${r}" fill="none" stroke="#202a45" stroke-width="7" stroke-dasharray="${len} ${C}" transform="rotate(135 32 32)" stroke-linecap="round"/>
+   <circle cx="32" cy="32" r="${r}" fill="none" stroke="${col||'var(--boost)'}" stroke-width="7" stroke-dasharray="${on} ${C}" transform="rotate(135 32 32)" stroke-linecap="round" style="filter:drop-shadow(0 0 4px ${col||'#ffc93c'})"/></svg>
+   <b>${big}</b><small>${small}</small></div>`;
+}
+function splash(text,kind){
+  const d=document.createElement('div');d.className='splash '+(kind||'');d.innerHTML=`<span>${esc(text)}</span>`;document.body.appendChild(d);
+  setTimeout(()=>d.remove(),1300);
+}
+
+// ---------- custom training: packs of shots you watch on the board, then do in Rocket League and log hit / miss ----------
+// Built-in shots use the lesson format (steps with pos + marks). Shot helper: setup step, then where the ball and you go.
+function SH(title,s1,s2,say1,say2,more){
+  const st=[{say:say1,pos:Object.assign({b1:[...s1.me,'YOU'],ball:s1.ball},s1.o?{o1:s1.o}:{}),m:s1.m||[]},
+    {say:say2,pos:Object.assign({b1:s2.me,ball:s2.ball},s2.o?{o1:s2.o}:{}),m:[R(Y,s1.me,s2.me),PS(W,s1.ball,s2.ball)].concat(s2.m||[])}];
+  if(more)st.push(more);return {title,steps:st};
+}
+const PACKS=[
+ {id:'p_shoot',name:'Shooting: far post',lvl:1,mode:1,icon:'kick',desc:'Rolling and bouncing balls. Aim for the far post, low and hard.',shots:[
+  SH('Rolling from the right',{ball:[1900,2900],me:[700,1300],o:[0,5000]},{ball:[-750,5150],me:[700,3300]},'The ball rolls across from the right. Drive to meet it in front of you.','Flip into it and aim for the FAR post (left). Low shots are harder to save.'),
+  SH('Rolling from the left',{ball:[-1900,2900],me:[-700,1300],o:[0,5000]},{ball:[750,5150],me:[-700,3300]},'Same shot, other side. The ball rolls in from the left.','Far post again: this time the right post.'),
+  SH('Bouncing ball, middle',{ball:[0,2600],me:[0,700],o:[0,5000]},{ball:[700,5150],me:[0,2500]},'The ball bounces towards you in the middle.','Hit it just after it bounces with a flip (half-volley). Aim to a corner, not at the goalie.'),
+  SH('Pass from the corner',{ball:[3300,4300],me:[200,1800],o:[-300,5000]},{ball:[0,3700],me:[0,3300]},'Your teammate centres it from the corner. Wait in the middle, do not rush in.','Meet the pass in front of the goal...',
+   {say:'...and shoot first-time to the open side. The goalie is still moving across.',pos:{ball:[-800,5150],b1:[-100,3800]},m:[PS(W,[0,3700],[-800,5150])]}),
+  SH('Off the backboard',{ball:[600,4300],me:[600,2000],o:[0,4900]},{ball:[0,5000],me:[300,3800]},'A shot hits the backboard. Read where it comes down.','Get under it early and tap it in before the goalie recovers.')]},
+ {id:'p_saves',name:'Saves: back post',lvl:1,mode:1,icon:'kick',desc:'Shots at your net. Come from the back post, save to the corner.',shots:[
+  SH('Far post shot',{ball:[1400,-2700],me:[-900,-4700],o:[1600,-2300]},{ball:[-2600,-3600],me:[-450,-4950]},'They shoot from the right. You come in from the back post (left side of your goal).','Stay in front of the far post and push the ball out to the CORNER, not the middle.'),
+  SH('Near post shot',{ball:[-1500,-3600],me:[700,-4700],o:[-1700,-3100]},{ball:[-3200,-4100],me:[-650,-4950]},'Shot from the left, close in. The near post is the danger.','Slide across to the near post and save it wide.'),
+  SH('Lob over you',{ball:[0,-2500],me:[0,-3900],o:[0,-2000]},{ball:[1800,-4200],me:[0,-5000]},'They chip it high. Do not jump forward: go BACK into the net first.','Jump from the goal line and push it out to the side.'),
+  SH('Rebound',{ball:[300,-4500],me:[-800,-4900],o:[900,-3500]},{ball:[2400,-3800],me:[200,-4800]},'The ball bounced off the post and the shooter is coming.','Get there first and clear it hard to the side wall.'),
+  SH('Backboard read',{ball:[0,-4700],me:[600,-3600],o:[-400,-3400]},{ball:[-2900,-4000],me:[-200,-4600]},'A shot hits YOUR backboard. Do not chase it into the wall.','Read where it drops in front of the net and clear it to the corner.')]},
+ {id:'p_shadow',name:'Shadow defense',lvl:2,mode:1,icon:'kick',desc:'Do not dive in. Shadow, wait for the mistake, then challenge.',shots:[
+  SH('Dribble down the middle',{ball:[0,-600],me:[400,-1700],o:[0,-400]},{ball:[0,-2800],me:[200,-3700],o:[0,-2600]},'They dribble at you through the middle. You are in front of them.','Drive BACK at their speed, between the ball and your net. Do not jump.',
+   {say:'They touch it too far: NOW challenge, low and with a flip.',pos:{ball:[0,-3200],b1:[0,-3300],o1:[0,-2700]},m:[R(G,[200,-3700],[0,-3350])]}),
+  SH('Down the right wing',{ball:[2400,-800],me:[1400,-2000],o:[2400,-600]},{ball:[2200,-3200],me:[900,-4000],o:[2300,-3000]},'They come down the right side.','Shadow between them and the near post. Make them go to the corner.'),
+  SH('Down the left wing',{ball:[-2400,-800],me:[-1400,-2000],o:[-2400,-600]},{ball:[-2200,-3200],me:[-900,-4000],o:[-2300,-3000]},'Same on the left.','Shadow, stay goal-side, and wait for a bad touch.'),
+  SH('Fake challenge',{ball:[0,-2400],me:[0,-3600],o:[0,-2200]},{ball:[0,-2600],me:[0,-3100],o:[0,-2400]},'They slow down and wait for you.','Drive at them a little to make them flick early, then stop and stay back.')]},
+ {id:'p_aerial',name:'Aerials',lvl:2,mode:1,icon:'kick',desc:'Balls in the air. Jump, tilt back, boost. Hit through the middle of the ball.',shots:[
+  SH('Floating ball in front of goal',{ball:[0,3600],me:[0,800],o:[0,5000],m:[TX(Y,700,3600,'High')]},{ball:[-700,5150],me:[0,3400]},'The ball floats high in front of their goal.','Fast aerial: jump and boost together, then press jump again. Aim for a corner.'),
+  SH('Side-wall pass',{ball:[3800,2400],me:[600,600],o:[300,5000]},{ball:[700,3800],me:[500,3500]},'Your teammate passes off the side wall. The ball comes across high.','Take off early, meet it in the air in front of goal, and redirect it in.'),
+  SH('Clear a high ball',{ball:[0,-3600],me:[0,-5000],o:[300,-2200],m:[TX(Y,700,-3600,'High')]},{ball:[-3000,-1000],me:[0,-3700]},'A high ball drops in front of YOUR goal.','Aerial out from the net and hit it to the side, away from the middle.'),
+  SH('Backboard aerial',{ball:[400,5000],me:[400,2000],o:[0,4600]},{ball:[0,5150],me:[200,4300]},'The ball rises up their backboard.','Jump early and meet it as it comes off the wall. Push it down into the net.')]},
+ {id:'p_rot',name:'3s rotation reps',lvl:1,mode:3,icon:'kick',desc:'After your touch: rotate out wide and back post.',shots:[
+  {title:'Shot, then rotate',steps:[{say:'You (1st man) shoot from the right.',pos:{ball:[1200,3800],b1:[1100,3300,'YOU'],b2:[-600,1600,'2nd'],b3:[0,-800,'3rd'],o1:[0,4900],o2:[-1500,2500],o3:[1800,800]}},
+   {say:'After the shot, do NOT turn back into the play. Rotate out wide and back towards your back post. Your 2nd man follows up.',pos:{ball:[-300,5150],b1:[2800,1200],b2:[-300,3600],b3:[0,0]},m:[R(Y,[1100,3300],[3500,2600],[2800,1200]),PS(W,[1200,3800],[-300,5150]),R(B,[-600,1600],[-300,3600])]}]},
+  {title:'Lost challenge, go back post',steps:[{say:'You lost the challenge on their side. The ball is coming back.',pos:{ball:[-800,1200],b1:[-500,3400,'YOU'],b2:[800,800,'2nd'],b3:[0,-2200,'3rd'],o1:[-700,1700],o2:[1500,4000],o3:[-2500,-200]}},
+   {say:'Go back on the FAR side of the field to your back post. Pick up small pads on the way. Do not drive through the middle.',pos:{b1:[1800,-3800],ball:[-1200,-1500],o1:[-1100,-1200],b3:[-600,-3000]},m:[R(Y,[-500,3400],[2500,800],[1800,-3800])]}]}]},
+];
+let tr=Object.assign({packs:[],res:{}},LS.get('bb.train',{}));
+const saveTr=()=>LS.set('bb.train',tr);
+let TEAMD={msg:null,hw:[],roster:{},packs:[]};
+const allPacks=()=>[...PACKS,...(TEAMD.packs||[]).map(p=>({...p,team:true})),...tr.packs.map(p=>({...p,mine:true,ref:p}))];
+const packById=id=>allPacks().find(p=>p.id===id);
+let TR=null; // running training: {pack,i,hits,miss,log}
+function shotToS(p,s){
+  if(s.frames)return {name:s.title,map:s.map||'dfh',mode:s.mode||p.mode||3,frames:clone(s.frames)};
+  return buildLesson({id:'',title:s.title,mode:p.mode||1,steps:s.steps});
+}
+function packAcc(id){const r=tr.res[id];return r&&r.last!=null?r.last:null}
+function openTraining(){
+  const ps=allPacks(), tot=Object.values(tr.res).reduce((a,r)=>a+(r.hits||0),0), shots=Object.values(tr.res).reduce((a,r)=>a+(r.shots||0),0);
+  const card=p=>{const a=packAcc(p.id);return `<button class="pack" data-p="${p.id}"><span class="pk-top"><span class="pk-tag">${p.team?'TEAMD':p.mine?'MINE':['','STARTER','CORE','ADVANCED'][p.lvl||1]}</span><span class="pk-n">${p.shots.length} shots · ${p.mode}v${p.mode}</span></span><b>${esc(p.name)}</b><small>${esc(p.desc||'')}</small>${a!=null?`<span class="pk-acc"><i style="width:${a}%"></i></span><span class="pk-n">Last run: ${a}%</span>`:''}</button>`};
+  const {el,close}=modal(`<div class="banner"><span>CUSTOM</span>TRAINING</div>
+   <div class="trtop">${gauge(shots?Math.round(tot/shots*100):0,shots?Math.round(tot/shots*100)+'%':'-','accuracy')}<p>Watch each shot on the board. Then do it in Rocket League (free play or your own custom training) and tap <b>Hit</b> or <b>Miss</b>. Your accuracy is tracked.</p></div>
+   ${TEAMD.packs&&TEAMD.packs.length?`<h3>From your coach</h3><div class="packs">${ps.filter(p=>p.team).map(card).join('')}</div>`:''}
+   <h3>Training packs</h3><div class="packs">${PACKS.map(card).join('')}</div>
+   <h3>My packs</h3><div class="packs">${tr.packs.length?tr.packs.map(card).join(''):'<div class="empty">Make your own pack: set up a play on the board (step 1 = setup, step 2 = where the ball goes), then add it as a shot.</div>'}</div>
+   <div class="row" style="margin-top:12px"><button class="btn pri" id="trNew">+ New pack</button><button class="btn" id="trImp">Import pack code</button></div>`,false,'tall');
+  el.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{close();openPack(b.dataset.p)});
+  el.querySelector('#trNew').onclick=()=>{const id='m'+Date.now().toString(36);tr.packs.push({id,name:'My pack '+(tr.packs.length+1),mode:S.mode,lvl:1,desc:'',shots:[]});saveTr();close();openPack(id,true)};
+  el.querySelector('#trImp').onclick=()=>{close();importPack()};
+}
+function openPack(id,fresh){
+  const p=packById(id);if(!p)return;const mine=!!p.mine, r=tr.res[id]||{};
+  const {el,close}=modal(`<div class="lhead"><span class="pk-tag">${p.team?'TEAMD PACK':mine?'MY PACK':'TRAINING PACK'}</span><span class="lbl">${p.shots.length} shots · ${p.mode}v${p.mode}</span></div>
+   ${mine?`<input type="text" id="pkName" maxlength="40" value="${esc(p.name)}" class="uin"><textarea id="pkDesc" class="note" maxlength="200" placeholder="What is this pack for?" style="min-height:60px;margin-top:8px">${esc(p.desc||'')}</textarea>`:`<h2>${esc(p.name)}</h2><p>${esc(p.desc||'')}</p>`}
+   ${r.runs?`<div class="row" style="gap:14px;margin:10px 0">${gauge(r.last,r.last+'%','last run')}${gauge(r.best,r.best+'%','best','#3ddc84')}<div class="meta"><b>${r.runs} run${r.runs>1?'s':''}</b><small>${r.hits||0} hits of ${r.shots||0} shots</small></div></div>`:''}
+   <h3>Shots</h3><div class="list" id="pkList">${p.shots.map((s,i)=>`<div class="item"><span class="tag">${i+1}</span><div class="meta"><b>${esc(s.title||'Shot '+(i+1))}</b><small>${esc(((s.steps&&s.steps[0].say)||(s.frames&&s.frames[0].say)||'').slice(0,90))}</small></div><button class="btn" data-v="${i}">View</button>${mine?`<button class="btn" data-up="${i}" aria-label="Move up"${i?'':' disabled'}>↑</button><button class="btn bad" data-x="${i}" aria-label="Delete shot">✕</button>`:''}</div>`).join('')||'<div class="empty">No shots yet.</div>'}</div>
+   ${mine?`<div class="row" style="margin-top:10px"><button class="btn" id="pkAdd">+ Add the board as a shot</button></div><p class="hint">Make the shot on the board first: step 1 = setup, step 2 (and more) = where the ball and the cars go. Step notes become the instructions.</p>`:''}
+   <div class="row" style="margin-top:14px">${p.shots.length?`<button class="btn pri" id="pkGo">${svg('play')}Start training</button>`:''}<button class="btn" id="pkCode">Copy pack code</button>${mine&&isCoach()?`<button class="btn" id="pkPub">${(TEAMD.packs||[]).some(x=>x.id===p.id)?'Update team pack':'Send to team'}</button>`:''}${p.team&&isCoach()?'<button class="btn bad" id="pkUnpub">Remove from team</button>':''}<button class="btn" id="pkBack">All packs</button>${mine?'<button class="btn bad" id="pkDel">Delete pack</button>':''}</div>`,false,'tall');
+  const q=s=>el.querySelector(s);
+  if(mine){q('#pkName').oninput=e=>{p.ref.name=e.target.value.trim()||'My pack';saveTr()};q('#pkDesc').oninput=e=>{p.ref.desc=e.target.value;saveTr()};if(fresh)setTimeout(()=>{q('#pkName').focus();q('#pkName').select()},60)}
+  el.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{close();stopPlay();pushHistory();S=shotToS(p,p.shots[+b.dataset.v]);cur=0;coachHidden=false;afterLoad();toast('Tap play to watch the shot')});
+  el.querySelectorAll('[data-up]').forEach(b=>b.onclick=()=>{const i=+b.dataset.up,a=p.ref.shots;[a[i-1],a[i]]=[a[i],a[i-1]];saveTr();close();openPack(id)});
+  el.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{p.ref.shots.splice(+b.dataset.x,1);saveTr();close();openPack(id)});
+  const add=q('#pkAdd');if(add)add.onclick=()=>{
+    if(S.frames.length<2){toast('Make at least 2 steps: the setup, then where the ball goes');return}
+    p.ref.shots.push({title:S.name||('Shot '+(p.ref.shots.length+1)),map:S.map,mode:S.mode,frames:clone(S.frames)});p.ref.mode=S.mode;saveTr();close();openPack(id);toast('Shot added')};
+  const go=q('#pkGo');if(go)go.onclick=()=>{close();startTraining(p)};
+  q('#pkCode').onclick=()=>{const code='BBT1:'+b64e(JSON.stringify({name:p.name,desc:p.desc,mode:p.mode,lvl:p.lvl,shots:p.shots}));
+    const {el:e2}=modal(`<h2>Pack code</h2><p>Send this code to a teammate. They open Training, Import pack code, and paste it.</p><textarea readonly id="pcOut">${esc(code)}</textarea><div class="row" style="margin-top:12px"><button class="btn pri" id="pcCp">Copy code</button></div>`);
+    e2.querySelector('#pcCp').onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(code).then(()=>toast('Copied'),()=>{e2.querySelector('#pcOut').select()})}};
+  const pub=q('#pkPub');if(pub)pub.onclick=()=>{const t=clone(TEAMD);t.packs=(t.packs||[]).filter(x=>x.id!==p.id);t.packs.push({id:p.id,name:p.name,desc:p.desc,mode:p.mode,lvl:p.lvl||1,shots:p.ref.shots});saveTeam(t,'Sent to the team')};
+  const up=q('#pkUnpub');if(up)up.onclick=()=>{const t=clone(TEAMD);t.packs=(t.packs||[]).filter(x=>x.id!==p.id);saveTeam(t,'Removed');close();openTraining()};
+  q('#pkBack').onclick=()=>{close();openTraining()};
+  const del=q('#pkDel');if(del)del.onclick=()=>{if(!confirm('Delete this pack?'))return;tr.packs=tr.packs.filter(x=>x.id!==id);delete tr.res[id];saveTr();close();openTraining()};
+}
+function importPack(){
+  const {el,close}=modal(`<h2>Import pack</h2><p>Paste a code that starts with BBT1:</p><textarea id="ipIn" placeholder="BBT1:..."></textarea><div class="row" style="margin-top:12px"><button class="btn pri" id="ipGo">Add pack</button></div>`);
+  el.querySelector('#ipGo').onclick=()=>{try{const v=el.querySelector('#ipIn').value.trim();if(!v.startsWith('BBT1:'))throw 0;const d=JSON.parse(b64d(v.slice(5)));if(!Array.isArray(d.shots))throw 0;
+    const id='m'+Date.now().toString(36);tr.packs.push({id,name:String(d.name||'Imported pack').slice(0,40),desc:String(d.desc||'').slice(0,200),mode:d.mode||3,lvl:d.lvl||1,shots:d.shots});saveTr();close();openPack(id);toast('Pack added')}catch(e){toast('That code does not look right')}};
+}
+function startTraining(p){TR={pack:p,i:0,hits:0,miss:0};loadShot();}
+function loadShot(){
+  const p=TR.pack, s=p.shots[TR.i];stopPlay();pushHistory();S=shotToS(p,s);S.name=p.name;cur=0;coachHidden=true;afterLoad();syncTrBar();
+}
+function syncTrBar(){
+  let b=$('#trBar');
+  if(!TR){if(b)b.remove();return}
+  if(!b){b=document.createElement('div');b.id='trBar';$('#stage').appendChild(b)}
+  const p=TR.pack, s=p.shots[TR.i], say=(S.frames[cur]&&S.frames[cur].say)||'';
+  // Keep the bar away from the action: in portrait the blue goal is at the bottom, so move the bar up for plays in your half.
+  {const st=$('#stage'),bl=(S.frames[0].objs||[]).find(o=>o.kind==='ball');b.classList.toggle('top',!!bl&&bl.y<0&&st.clientHeight>st.clientWidth)}
+  b.innerHTML=`<div class="tb-h"><span class="pk-tag">TRAINING</span><b>${esc(p.name)}</b><span class="tb-n">SHOT ${TR.i+1}/${p.shots.length}</span><span class="tb-sc"><i class="h">✓ ${TR.hits}</i><i class="m">✕ ${TR.miss}</i></span><button class="ib sm" id="tbX" aria-label="Stop training">${svg('x')}</button></div>
+   <div class="tb-t">${esc(s.title||'')}</div><div class="tb-say">${esc(say)}</div>
+   <div class="tb-b"><button class="btn" id="tbW">${svg('play')}Watch</button><button class="btn hit" id="tbH">✓ Hit</button><button class="btn miss" id="tbM">✕ Miss</button></div>`;
+  b.querySelector('#tbX').onclick=()=>{TR=null;syncTrBar();coachHidden=false;syncCoach();toast('Training stopped')};
+  b.querySelector('#tbW').onclick=()=>countdown(()=>{cur=0;afterFrame();play()});
+  b.querySelector('#tbH').onclick=()=>shotDone(true);
+  b.querySelector('#tbM').onclick=()=>shotDone(false);
+}
+function countdown(fn){let n=3;const tick=()=>{if(n>0){splash(String(n),'cd');n--;setTimeout(tick,600)}else{splash('GO!','go');fn()}};tick()}
+function shotDone(hit){
+  if(hit){TR.hits++;splash(['NICE SHOT!','WHAT A SAVE!','GREAT PLAY!','SAVAGE!'][Math.floor(Math.random()*4)],'hit')}else{TR.miss++;splash('WHIFF!','miss')}
+  if(TR.i<TR.pack.shots.length-1){TR.i++;setTimeout(loadShot,500);return}
+  const p=TR.pack, n=TR.hits+TR.miss, acc=Math.round(TR.hits/n*100), r=tr.res[p.id]||{runs:0,best:0,hits:0,shots:0};
+  r.runs++;r.last=acc;r.best=Math.max(r.best||0,acc);r.hits+=TR.hits;r.shots+=n;r.at=Date.now();tr.res[p.id]=r;saveTr();pushStats();
+  const res={...TR};TR=null;syncTrBar();coachHidden=false;
+  setTimeout(()=>{const {el,close}=modal(`<div class="banner"><span>PACK</span>COMPLETE</div><div class="row" style="gap:14px;justify-content:center;margin:12px 0">${gauge(acc,acc+'%','this run')}${gauge(r.best,r.best+'%','best','#3ddc84')}</div>
+    <p style="text-align:center"><b>${res.hits}</b> hits, <b>${res.miss}</b> misses. ${acc>=80?'Great work. Try a harder pack!':acc>=50?'Good. Run it again tomorrow to lock it in.':'Keep going: repeat this pack every day this week.'}</p>
+    <div class="row" style="margin-top:12px;justify-content:center"><button class="btn pri" id="rsA">Run it again</button><button class="btn" id="rsB">All packs</button></div>`,true);
+    el.querySelector('#rsA').onclick=()=>{close();startTraining(res.pack)};el.querySelector('#rsB').onclick=()=>{close();openTraining()}},700);
+}
+// When steps change during training, keep the bar text in sync.
+setInterval(()=>{if(TR){const s=$('#trBar .tb-say');if(s){const say=(S.frames[cur]&&S.frames[cur].say)||'';if(s.textContent!==say)s.textContent=say}}},300);
+
+// ---------- team data from the coach (message, homework, roster, team packs) ----------
+function teamListen(){
+  if(!NET.fb||NET.teamOff)return;const {D,db}=NET.fb;
+  NET.teamOff=D.onValue(D.ref(db,'teamdoc'),s=>{const v=s.val()||{};TEAMD={msg:v.msg||null,hw:v.hw||[],roster:v.roster||{},packs:v.packs||[]};
+    if(TEAMD.msg&&TEAMD.msg.id&&LS.get('bb.seenMsg','')!==TEAMD.msg.id&&!isCoach()){LS.set('bb.seenMsg',TEAMD.msg.id);setTimeout(showMsg,800)}
+    syncPl()},()=>{});
+}
+function showMsg(){
+  const m=TEAMD.msg;if(!m)return;
+  const {el,close}=modal(`<div class="banner coachb"><span>MESSAGE FROM</span>COACH</div><p class="msg">${esc(m.text||'')}</p>${m.practice?`<div class="nextup"><span class="lbl">Next team practice</span><b>${esc(fmtWhen(m.practice))}</b></div>`:''}
+   ${myHw().length?`<p>You have <b>${myHw().filter(h=>!h.done).length}</b> homework task(s) from your coach.</p>`:''}
+   <div class="row" style="margin-top:12px"><button class="btn pri" id="msOk">Got it</button>${myHw().length?'<button class="btn" id="msHw">See homework</button>':''}</div>`,true);
+  el.querySelector('#msOk').onclick=close;const hb=el.querySelector('#msHw');if(hb)hb.onclick=()=>{close();openHomework()};
+}
+function fmtWhen(v){try{const d=new Date(v);return d.toLocaleString([], {weekday:'long',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}catch(e){return v}}
+let HWDONE={};
+function myHw(){const me=NET.name?NET.name.toLowerCase():'';return (TEAMD.hw||[]).filter(h=>h.to==='all'||h.to===me).map(h=>({...h,done:!!(HWDONE[h.id])}))}
+function hwLabel(h){if(h.type==='lesson'){const L=lessonById(h.ref);return L?'Lesson: '+L.title:'Lesson'}if(h.type==='pack'){const p=packById(h.ref);return p?'Training: '+p.name:'Training pack'}if(h.type==='sprint')return '30-day sprint: do today\'s tasks';if(h.type==='quiz')return 'Situation quiz: 10 questions';if(h.type==='kick')return 'Kickoff trainer: reach a 10 streak';return h.text||'Task'}
+function openHomework(){
+  if(!NET.name){openPlayers();return}
+  const {D,db}=NET.fb, me=NET.name.toLowerCase();
+  D.get(D.ref(db,'hw/'+me)).then(s=>{HWDONE=s.val()||{};draw()}).catch(()=>draw());
+  const {el,close}=modal(`<div class="banner coachb"><span>COACH</span>HOMEWORK</div><div id="hwB"><div class="empty">Loading...</div></div><div class="row" style="margin-top:14px"><button class="btn" id="hwBack">Close</button></div>`,false,'tall');
+  el.querySelector('#hwBack').onclick=close;
+  function draw(){const hs=myHw();
+    el.querySelector('#hwB').innerHTML=(TEAMD.msg&&TEAMD.msg.text?`<div class="nextup"><span class="lbl">Coach says</span><b>${esc(TEAMD.msg.text)}</b>${TEAMD.msg.practice?`<small>Next practice: ${esc(fmtWhen(TEAMD.msg.practice))}</small>`:''}</div>`:'')+
+     (hs.length?`<div class="checks">${hs.map(h=>`<div class="hwi"><label class="chk"><input type="checkbox" data-h="${h.id}"${h.done?' checked':''}><span><b>${esc(hwLabel(h))}</b>${h.type!=='text'&&h.text?`<small>${esc(h.text)}</small>`:''}${h.due?`<small class="due">Due ${esc(h.due)}</small>`:''}</span></label>${h.type!=='text'?`<button class="btn" data-o="${h.id}">Open</button>`:''}</div>`).join('')}</div>`:'<div class="empty">No homework right now. GG!</div>');
+    el.querySelectorAll('[data-h]').forEach(c=>c.onchange=()=>{HWDONE[c.dataset.h]=c.checked;D.set(D.ref(db,'hw/'+me+'/'+c.dataset.h),c.checked?true:null).catch(()=>{});if(c.checked)splash('NICE!','hit')});
+    el.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{const h=hs.find(x=>x.id===b.dataset.o);close();
+      if(h.type==='lesson')openLesson(h.ref);else if(h.type==='pack'){const p=packById(h.ref);p?openPack(p.id):openTraining()}else if(h.type==='sprint')openSprint();else if(h.type==='quiz')openQuiz(3);else if(h.type==='kick')openTrainer(3)})}
+}
+function pushStats(){
+  if(!NET.name||!NET.fb)return;const {D,db}=NET.fb;
+  const shots=Object.values(tr.res).reduce((a,r)=>a+(r.shots||0),0),hits=Object.values(tr.res).reduce((a,r)=>a+(r.hits||0),0);
+  const xp=xpNow();D.set(D.ref(db,'stats/'+NET.name.toLowerCase()),{xp,lv:lvlOf(xp).l,games:imp.games.length,streak:streak(),acc:shots?Math.round(hits/shots*100):-1,shots,lessons:Object.keys(prog.done||{}).length,sprint:sprintDone()[0],at:D.serverTimestamp()}).catch(()=>{});
+}
+
+// ---------- Coach Hub (owner only): team roster + roles, message, homework, team packs, player stats ----------
+// Writes go to teamdoc together with teamck {k: coach login key, t: server time}. The database rules only accept it
+// when k matches the coach's key (stored where nobody can read it), so only the coach can change team data.
+function saveTeam(t,msg){
+  const {D,db}=NET.fb;
+  return D.update(D.ref(db),{teamdoc:t,teamck:{k:NET.key,t:D.serverTimestamp()}}).then(()=>{if(msg)toast(msg)}).catch(e=>{toast('Could not save: '+((e&&e.message)||'error').slice(0,60))});
+}
+const ROLES=['','Striker','Playmaker','Anchor','Sub'];
+function openHub(tab){
+  if(!isCoach()){toast('Coach only');return}
+  const {D,db}=NET.fb;tab=tab||'team';
+  const {el,close}=modal(`<div class="banner coachb"><span>COACH</span>HUB</div>
+   <div class="seg tabs" id="hbT">${[['team','Team'],['hw','Tasks'],['msg','Message'],['packs','Packs']].map(([k,n])=>`<button data-t="${k}">${n}</button>`).join('')}</div><div id="hbB"></div>`,false,'tall');
+  const B=el.querySelector('#hbB');let data={names:{},pres:{},last:{},rank:{},hw:{},stats:{}};
+  const offs=Object.keys(data).map(k=>D.onValue(D.ref(db,k),s=>{data[k]=s.val()||{};if(tab==='team'||tab==='hw')draw()},()=>{}));
+  const obs=new MutationObserver(()=>{if(!el.isConnected){offs.forEach(f=>f());obs.disconnect()}});obs.observe(document.body,{childList:true});
+  const players=()=>Object.entries(data.names).map(([id,v])=>({id,name:v.name,on:!!(data.pres[id]&&Object.keys(data.pres[id]).length),rk:data.rank[id],st:data.stats[id]||{},last:data.last[id]||v.joined})).filter(p=>p.id!==COACH_ID).sort((a,b)=>(b.on-a.on)||a.name.localeCompare(b.name));
+  function draw(){
+    // Live updates: keep forms the coach is filling in; only refresh lists.
+    if(B.contains(document.activeElement)&&/SELECT|INPUT|TEXTAREA/.test(document.activeElement.tagName)&&B.dataset.t===tab&&tab==='team')return;
+    if(tab==='hw'&&B.dataset.t==='hw'&&B.querySelector('#hwGiven')){B.querySelector('#hwGiven').innerHTML=givenHtml();wireGiven();return}
+    B.dataset.t=tab;
+    el.querySelectorAll('#hbT button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===tab));
+    if(tab==='team'){const ps=players();
+      B.innerHTML=`<p>Your players. Set a role and a team for each one. Players see their role in the Players list.</p>`+(ps.length?ps.map(p=>{const r=TEAMD.roster[p.id]||{},hs=(TEAMD.hw||[]).filter(h=>h.to==='all'||h.to===p.id),hd=hs.filter(h=>(data.hw[p.id]||{})[h.id]).length;
+        return `<div class="pcard"><div class="pc-h"><span class="pdot${p.on?' on':''}"></span>${rankEmb(p.rk,26)}<b>${esc(p.name)}</b><small>${p.on?'Online':'Seen '+(p.last?ago(p.last):'-')}${p.st.streak?' · 🔥'+p.st.streak:''}${p.st.games?' · '+p.st.games+' games logged':''}</small></div>
+        <div class="pc-s"><span><b>${hs.length?hd+'/'+hs.length:'-'}</b>homework</span><span><b>${p.st.acc>=0?p.st.acc+'%':'-'}</b>training</span><span><b>${p.st.lessons||0}</b>lessons</span><span><b>${p.st.lv||1}</b>level</span></div>
+        <div class="pc-c"><select data-role="${p.id}" aria-label="Role">${ROLES.map(x=>`<option value="${x}"${(r.role||'')===x?' selected':''}>${x||'Role...'}</option>`).join('')}</select>
+        <select data-grp="${p.id}" aria-label="Team">${['','Team A','Team B','Team C'].map(x=>`<option value="${x}"${(r.grp||'')===x?' selected':''}>${x||'Team...'}</option>`).join('')}</select>
+        <button class="btn" data-as="${p.id}">Give homework</button><button class="btn" data-bc="${p.id}" data-bn="${esc(p.name)}">Replay stats</button></div></div>`}).join(''):'<div class="empty">No players yet. Send them the app link so they sign up.</div>');
+      B.querySelectorAll('[data-role],[data-grp]').forEach(s=>s.onchange=()=>{const t=clone(TEAMD),id=s.dataset.role||s.dataset.grp;t.roster=t.roster||{};t.roster[id]=Object.assign({},t.roster[id],s.dataset.role?{role:s.value}:{grp:s.value});saveTeam(t,'Saved')});
+      B.querySelectorAll('[data-bc]').forEach(b=>b.onclick=()=>openReplayStats(b.dataset.bc,b.dataset.bn));
+      B.querySelectorAll('[data-as]').forEach(b=>b.onclick=()=>{tab='hw';draw();const s=B.querySelector('#hwTo');if(s)s.value=b.dataset.as})}
+    if(tab==='hw'){const ps=players(), hs=TEAMD.hw||[];
+      B.innerHTML=`<h3>New homework</h3><div class="form2">
+        <select id="hwType"><option value="lesson">Lesson</option><option value="pack">Training pack</option><option value="quiz">Situation quiz</option><option value="kick">Kickoff trainer</option><option value="sprint">30-day sprint</option><option value="text">Your own task</option></select>
+        <select id="hwRef"></select>
+        <input type="text" id="hwText" maxlength="140" placeholder="Note (optional): e.g. 'Do it 3 times'">
+        <select id="hwTo"><option value="all">Whole team</option>${ps.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select>
+        <input type="date" id="hwDue" aria-label="Due date">
+        <button class="btn pri" id="hwAdd">Give homework</button></div>
+        <div id="hwGiven">${givenHtml()}</div>`;
+      const ty=B.querySelector('#hwType'),rf=B.querySelector('#hwRef');
+      const fill=()=>{const t=ty.value;rf.hidden=!(t==='lesson'||t==='pack');B.querySelector('#hwText').placeholder=t==='text'?'The task, e.g. "20 min shadow defense pack in RL"':'Note (optional)';
+        rf.innerHTML=t==='lesson'?LESSONS.map(L=>`<option value="${L.id}">${esc(lessonTag(L)+'s · '+L.title)}</option>`).join(''):t==='pack'?allPacks().filter(p=>!p.mine||(TEAMD.packs||[]).some(x=>x.id===p.id)).map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join(''):''};
+      ty.onchange=fill;fill();
+      B.querySelector('#hwAdd').onclick=()=>{const h={id:'h'+Date.now().toString(36),type:ty.value,to:B.querySelector('#hwTo').value,at:Date.now()};
+        if(!rf.hidden)h.ref=rf.value;const tx=B.querySelector('#hwText').value.trim();if(tx)h.text=tx;const du=B.querySelector('#hwDue').value;if(du)h.due=du;
+        if(h.type==='text'&&!tx){toast('Write the task first');return}
+        const t=clone(TEAMD);t.hw=(t.hw||[]).concat([h]);saveTeam(t,'Homework sent').then(()=>{TEAMD=t;B.querySelector('#hwGiven').innerHTML=givenHtml();wireGiven();B.querySelector('#hwText').value=''})};
+      wireGiven()}
+    if(tab==='msg'){const m=TEAMD.msg||{};
+      B.innerHTML=`<p>Players see this message once when they open the app, and in their homework.</p><textarea id="msT" class="note" maxlength="500" placeholder="e.g. Great games yesterday! This week: back post rotation. Practice Friday 8pm.">${esc(m.text||'')}</textarea>
+       <h3>Next team practice (optional)</h3><input type="datetime-local" id="msP" value="${esc(m.practice||'')}">
+       <div class="row" style="margin-top:12px"><button class="btn pri" id="msSend">Send to team</button>${m.text?'<button class="btn bad" id="msClr">Clear message</button>':''}</div>`;
+      B.querySelector('#msSend').onclick=()=>{const tx=B.querySelector('#msT').value.trim();if(!tx){toast('Write a message first');return}const t=clone(TEAMD);t.msg={id:'m'+Date.now().toString(36),text:tx,practice:B.querySelector('#msP').value||'',at:Date.now()};saveTeam(t,'Message sent').then(()=>{TEAMD=t;draw()})};
+      const c=B.querySelector('#msClr');if(c)c.onclick=()=>{const t=clone(TEAMD);t.msg=null;saveTeam(t,'Cleared').then(()=>{TEAMD=t;draw()})}}
+    if(tab==='packs'){const tp=TEAMD.packs||[];
+      B.innerHTML=`<p>Make a pack in Training (My packs), then open it and tap "Send to team". Team packs show up for every player.</p>
+       <div class="list">${tp.map(p=>`<div class="item"><span class="tag">${p.shots.length}</span><div class="meta"><b>${esc(p.name)}</b><small>${esc(p.desc||'')}</small></div><button class="btn bad" data-rp="${p.id}">Remove</button></div>`).join('')||'<div class="empty">No team packs yet.</div>'}</div>
+       <div class="row" style="margin-top:12px"><button class="btn pri" id="pkT">Open Training</button></div>`;
+      B.querySelectorAll('[data-rp]').forEach(b=>b.onclick=()=>{const t=clone(TEAMD);t.packs=(t.packs||[]).filter(x=>x.id!==b.dataset.rp);saveTeam(t,'Removed').then(()=>{TEAMD=t;draw()})});
+      B.querySelector('#pkT').onclick=()=>{close();openTraining()}}
+  }
+  function givenHtml(){const ps=players(),hs=TEAMD.hw||[];
+    return `<h3>Given (${hs.length})</h3><div class="list">${hs.slice().reverse().map(h=>{const who=h.to==='all'?ps:ps.filter(p=>p.id===h.to),dn=who.filter(p=>(data.hw[p.id]||{})[h.id]);
+      return `<div class="item"><div class="meta"><b>${esc(hwLabel(h))}</b><small>${h.to==='all'?'Whole team':esc((data.names[h.to]||{}).name||h.to)}${h.due?' · due '+esc(h.due):''}${h.type!=='text'&&h.text?' · '+esc(h.text):''}</small><small class="okc">Done: ${dn.length}/${who.length}${dn.length?' ('+dn.map(p=>esc(p.name)).join(', ')+')':''}</small></div><button class="btn bad" data-rm="${h.id}" aria-label="Remove">✕</button></div>`}).join('')||'<div class="empty">No homework given yet.</div>'}</div>`}
+  function wireGiven(){B.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const t=clone(TEAMD);t.hw=(t.hw||[]).filter(h=>h.id!==b.dataset.rm);saveTeam(t,'Removed').then(()=>{TEAMD=t;B.querySelector('#hwGiven').innerHTML=givenHtml();wireGiven()})})}
+  el.querySelectorAll('#hbT button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;B.dataset.t='';draw()});draw();
+}
+function rankEmb(code,sz){const x=rankFromCode(code);return x?rankEmblem(x.r,x.t,sz):''}
+
+// ---------- Improve tools: daily challenge + XP, game log + weakness finder, mistake doctor, mechanics tracker, mental reset, session timer, glossary ----------
+const TODAY=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+let imp=Object.assign({games:[],daily:{},mech:{},reps:{},doctor:0,breath:0,sess:0},LS.get('bb.imp',{}));
+const saveImp=()=>{LS.set('bb.imp',imp);clearTimeout(window._ps2);window._ps2=setTimeout(()=>{try{pushStats()}catch(e){}},1200)};
+// XP is worked out from what you have done, so it can never get out of sync.
+function xpNow(){
+  const r=tr.res||{};let x=0;
+  x+=Object.keys(prog.done||{}).length*50;
+  x+=Object.values(r).reduce((a,v)=>a+(v.runs||0)*30+(v.hits||0)*5,0);
+  x+=sprintDone()[0]*10;
+  x+=imp.games.length*15;
+  x+=Object.keys(imp.daily).length*100;
+  x+=Object.values(imp.reps).reduce((a,v)=>a+v,0)*5;
+  x+=Object.values(imp.mech).reduce((a,v)=>a+(v===2?150:v===1?40:0),0);
+  x+=imp.doctor*20+imp.breath*10+imp.sess*40;
+  const _p=imp.pt||{};x+=Object.values(imp.skl||{}).reduce((a,v)=>a+v.log.length*10+v.lv*50,0)+((imp.sim||{}).runs||0)*40+(_p.rounds||0)*30+(_p.perfect||0)*5+(imp.plansDone||0)*80;
+  return x;
+}
+const lvlOf=x=>{let l=1,need=200,acc=0;while(x>=acc+need){acc+=need;l++;need=Math.round(need*1.18)}return {l,into:x-acc,need}};
+function streak(){let n=0;const d=new Date();if(!imp.daily[TODAY()])d.setDate(d.getDate()-1);
+  for(;;){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');if(imp.daily[k]){n++;d.setDate(d.getDate()-1)}else break}return n}
+function xpBar(){const x=xpNow(),L=lvlOf(x);return `<div class="xpbar"><span class="lvl">LV <b>${L.l}</b></span><div class="xpt"><i style="width:${Math.round(L.into/L.need*100)}%"></i></div><span class="xpn">${L.into}/${L.need} XP</span><span class="fire" title="Daily streak">🔥 ${streak()}</span></div>`}
+
+// --- Daily challenge (same for everyone on a given day) ---
+const TIPS=["Before you touch the ball, know where your teammates are.","Small pads give you 12 boost each. Take them on your path instead of going for 100 boost corners.","If you are last back, do not challenge unless you are sure to win it.","Shoot low to the far post: it is the hardest shot to save.","After a shot, rotate out wide, not back through the middle.","Do not jump at a dribbler. Shadow and wait for the bad touch.","A good pass to the middle is worth more than a weak shot.","Look at the minimap: it tells you who is back.","Fake challenges make opponents flick early.","Land on your wheels after every touch. Recovery wins games.","Stop playing ranked after 2 losses in a row. Come back fresh.","Watch one pro player, not the ball. Copy where they go.","Clear to the corners, never across your own net.","On defense, go back post: you see the whole play.","When you are 2nd man, be ready for the ball that comes out of the challenge.","Use quick chat for info ('I got it', 'Take the shot'), not for 'What a save!' spam.","Your first touch decides the play. Slow down to make it a good one.","When ahead late in the game, play safe and keep the ball in their half.","Boost starve: take their corner boost when it is safe.","A 10-minute warm-up before ranked is worth 50 MMR."];
+function seedRand(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return ()=>{h=(h*1103515245+12345)>>>0;return h/4294967296}}
+function dailyFor(day){
+  const rnd=seedRand(day), R=rk.r>=0?RANKS[rk.r]:RANKS[2];
+  const mk=R.mech[Math.floor(rnd()*R.mech.length)], ql=LESSONS.filter(l=>l.quiz), L=ql[Math.floor(rnd()*ql.length)];
+  const drills=[`${MECHS[mk].n}: 10 minutes in free play.`,`Free play: 50 touches without letting the ball stop.`,`Training pack: 3 hits in a row on every shot.`,`One ranked game where you say your job (1st, 2nd, 3rd) in your head every time it changes.`,`5 minutes of half-flips: drive backwards, half-flip, repeat.`,`Kickoff practice: 10 kickoffs in free play with the fastest flip you can do.`];
+  return {mk,drill:drills[Math.floor(rnd()*drills.length)].replace('${mk}',''),L,tip:TIPS[Math.floor(rnd()*TIPS.length)]};
+}
+function openDaily(){
+  const day=TODAY(),D=dailyFor(day),done=!!imp.daily[day],st=imp.dstate&&imp.dstate.day===day?imp.dstate:{day,drill:false,quiz:false};
+  const q=shuffleQ(D.L.quiz);
+  const {el,close}=modal(`<div class="banner"><span>${esc(new Date().toLocaleDateString([], {weekday:'long',month:'short',day:'numeric'}))}</span>DAILY CHALLENGE</div>${xpBar()}
+   ${done?'<div class="nextup"><span class="lbl">Done today</span><b>Challenge complete! +100 XP</b><small>Come back tomorrow to keep your streak.</small></div>':''}
+   <h3>1. Tip of the day</h3><div class="tipday">${esc(D.tip)}</div>
+   <h3>2. Drill</h3><label class="chk"><input type="checkbox" id="dyDrill"${st.drill?' checked':''}><span>${esc(D.drill)}</span></label>
+   <h3>3. Quick question</h3><div id="dyQ">${st.quiz?'<div class="why good"><b>Answered.</b> Nice.</div>':quizHtml(q)}</div>
+   <div class="row" style="margin-top:14px"><button class="btn" id="dyL">Open the lesson</button><button class="btn" id="dyBack">Close</button></div>`,false,'tall');
+  const check=()=>{imp.dstate=st;if(st.drill&&st.quiz&&!imp.daily[day]){imp.daily[day]=1;splash('+100 XP','hit');setTimeout(()=>{close();openDaily()},1100)}saveImp()};
+  el.querySelector('#dyDrill').onchange=e=>{st.drill=e.target.checked;check()};
+  const qb=el.querySelector('#dyQ .quiz');if(qb)wireQuiz(qb,q,ok=>{if(ok){st.quiz=true;check()}},true);
+  el.querySelector('#dyL').onclick=()=>{close();openLesson(D.L.id)};el.querySelector('#dyBack').onclick=close;
+}
+
+// --- Game log + weakness finder ---
+const TAGS=[
+ ['over','Overcommitted','Everybody went forward, nobody back'],['dbl','Double commit','Two of us went for the same ball'],['whiff','Whiffed','Missed the ball completely'],
+ ['boost','Out of boost','Empty when it mattered'],['slow','Slow rotation','Came back too slow or through the middle'],['chase','Ball chased','Went for every ball'],
+ ['kick','Lost kickoffs','Kickoffs went badly'],['dribble','Beaten by dribbles','Dove in and got flicked'],['fifty','Lost 50/50s','Lost the challenges'],
+ ['finish','Missed chances','Missed open nets or easy shots'],['tilt','Tilted','Got angry or gave up'],['pass','No passing','Nobody passed, all solo plays'],
+ ['air','Aerials','Lost the ball in the air'],['wall','Walls / backboard','Beaten off the wall or backboard']];
+const TAGN=Object.fromEntries(TAGS.map(t=>[t[0],t[1]]));
+const FIX={
+ over:{les:['r9','r3','d7'],pack:'p_rot',meth:'Stop rules (tilt control)',txt:'Before you go forward, check that someone is behind you. If not, you are last man: stay back.'},
+ dbl:{les:['r3','r1','g1'],pack:'p_rot',txt:'Use quick chat "I got it!" and trust the closest player. If a teammate is going, you go to 2nd or back.'},
+ whiff:{les:['o7'],pack:'p_shoot',mech:'jump',txt:'Slow down before the touch. A good first touch beats a fast whiff. Practice in free play: 50 clean touches a day.'},
+ boost:{les:['b1','r5','b2'],txt:'Take small pads on your path. Keep 30 to 60 boost. Never cross the field for a corner boost.'},
+ slow:{les:['r2','r5','r8'],pack:'p_rot',mech:'halfflip',txt:'Rotate back post (the far side), use the half-flip and pick up pads on the way.'},
+ chase:{les:['r1','r9','r11'],pack:'p_rot',txt:'Know your job: 1st, 2nd or 3rd. Only the 1st man goes for the ball.'},
+ kick:{les:['k1','k4','k5','k6'],mech:'speedflip',txt:'Play the kickoff trainer until a 10 streak and learn the speed flip.'},
+ dribble:{les:['d1','m3'],pack:'p_shadow',mech:'shadow',txt:'Shadow defense: drive back with them, stay goal-side and wait for the bad touch.'},
+ fifty:{les:['k4','o8'],mech:'fifty',txt:'Challenge low with a front flip, at the same time as them. Do not jump early.'},
+ finish:{les:['o7','o1'],pack:'p_shoot',mech:'powershot',txt:'Aim for the far post, low. Do a shooting pack every day this week.'},
+ tilt:{meth:'Stop rules (tilt control)',txt:'Use the Mental reset after losses. Stop ranked after 2 losses in a row.',mental:true},
+ pass:{les:['o2','o3','o6'],txt:'Look for the centre pass from the corner. A good pass is worth more than a weak shot.'},
+ air:{les:['d8'],pack:'p_aerial',mech:'fastaerial',txt:'Learn the fast aerial and take off earlier. Only go up when you will get there first.'},
+ wall:{les:['d8','o3'],mech:'readbb',txt:'Read the backboard: go where the ball will come down, not where it is.'}};
+function gameStats(mode){
+  const g=imp.games.filter(x=>!mode||x.m===mode), last=g.slice(-20), w=last.filter(x=>x.r==='W').length;
+  const cnt={};last.forEach(x=>(x.t||[]).forEach(t=>cnt[t]=(cnt[t]||0)+1));
+  const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+  let st=0,sr='';for(let i=g.length-1;i>=0;i--){if(!sr)sr=g[i].r;if(g[i].r===sr)st++;else break}
+  return {n:g.length,last:last.length,w,wr:last.length?Math.round(w/last.length*100):0,top,streak:st,sr,mmr:g.filter(x=>x.mmr).map(x=>x.mmr)};
+}
+function spark(vals){if(vals.length<2)return '<div class="empty">Add your MMR to a few games to see your chart.</div>';
+  const v=vals.slice(-30),mn=Math.min(...v),mx=Math.max(...v),W=320,H=90,sx=W/(v.length-1),sy=v=>H-8-((v-mn)/((mx-mn)||1))*(H-16);
+  const pts=v.map((y,i)=>`${(i*sx).toFixed(1)},${sy(y).toFixed(1)}`).join(' ');
+  return `<div class="spark"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="spg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffc93c" stop-opacity=".35"/><stop offset="1" stop-color="#ffc93c" stop-opacity="0"/></linearGradient></defs><polygon points="0,${H} ${pts} ${W},${H}" fill="url(#spg)"/><polyline points="${pts}" fill="none" stroke="#ffc93c" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg><span class="sp-a">${mx}</span><span class="sp-b">${mn}</span><span class="sp-c">Now: <b>${v[v.length-1]}</b> (${v[v.length-1]-v[0]>=0?'+':''}${v[v.length-1]-v[0]})</span></div>`}
+function openGameLog(mode){
+  mode=mode||imp.lm||'3';
+  const {el,close}=modal(`<div class="banner"><span>MATCH</span>GAME LOG</div>
+   <button class="btn pri wide" id="glAdd">+ Log a game</button>
+   <div class="seg tabs" id="glM" style="margin-top:12px">${['1','2','3'].map(m=>`<button data-m="${m}">${m}v${m}</button>`).join('')}</div><div id="glB"></div>
+   <div class="row" style="margin-top:14px"><button class="btn" id="glBack">Back</button></div>`,false,'tall');
+  const B=el.querySelector('#glB');
+  const draw=()=>{imp.lm=mode;saveImp();el.querySelectorAll('#glM button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===mode));
+    const s=gameStats(mode), g=imp.games.map((x,i)=>({...x,i})).filter(x=>x.m===mode).reverse();
+    B.innerHTML=s.n?`<div class="row" style="gap:12px;margin:10px 0;justify-content:space-around">${gauge(s.wr,s.wr+'%','win rate',s.wr>=50?'#3ddc84':'#ff4d5e')}<div class="meta"><b>${s.w}W - ${s.last-s.w}L</b><small>last ${s.last} games</small><small class="${s.sr==='W'?'okc':'badc'}">${s.streak} ${s.sr==='W'?'win':'loss'} streak</small></div></div>
+     ${s.sr==='L'&&s.streak>=2?`<button class="nextup warn" id="glTilt"><span class="lbl">Tilt warning</span><b>${s.streak} losses in a row. Take a break.</b><small>Do the 1-minute Mental reset, then play casual or training.</small></button>`:''}
+     <h3>MMR</h3>${spark(s.mmr)}
+     <h3>What's holding you back</h3>${s.top.length?s.top.slice(0,3).map(([t,n],i)=>{const F=FIX[t];return `<div class="weak"><div class="wk-h"><span class="wk-n">${i+1}</span><b>${esc(TAGN[t])}</b><small>${n} of ${s.last} games</small></div><p>${esc(F.txt)}</p><div class="row">${(F.les||[]).slice(0,2).map(id=>{const L=lessonById(id);return L?`<button class="btn" data-l="${id}">${esc(L.title)}</button>`:''}).join('')}${F.pack?`<button class="btn" data-pk="${F.pack}">${svg('kick')}Training</button>`:''}${F.mech?`<button class="btn" data-mc="${F.mech}">Learn: ${esc(MECHS[F.mech].n)}</button>`:''}${F.mental?'<button class="btn" data-mt>Mental reset</button>':''}</div></div>`}).join(''):'<div class="empty">Tag what went wrong when you log games. Your top problems show up here with the fix.</div>'}
+     <h3>Games</h3><div class="list">${g.slice(0,30).map(x=>`<div class="item"><span class="res ${x.r}">${x.r}</span><div class="meta"><b>${x.sc?esc(x.sc):(x.r==='W'?'Win':'Loss')}${x.mmr?` · ${x.mmr} MMR`:''}</b><small>${esc(fmtDate(x.d))}${(x.t||[]).length?' · '+x.t.map(t=>esc(TAGN[t])).join(', '):''}${x.n?' · '+esc(x.n):''}</small></div><button class="btn bad" data-del="${x.i}" aria-label="Delete">✕</button></div>`).join('')}</div>`
+     :'<div class="empty" style="margin-top:12px">No games logged for this mode yet. After each ranked game, tap "Log a game". It takes 5 seconds and shows you what to train.</div>';
+    B.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{close();openLesson(b.dataset.l)});
+    B.querySelectorAll('[data-pk]').forEach(b=>b.onclick=()=>{close();openPack(b.dataset.pk)});
+    B.querySelectorAll('[data-mc]').forEach(b=>b.onclick=()=>openMech(b.dataset.mc));
+    B.querySelectorAll('[data-mt],#glTilt').forEach(b=>b.onclick=()=>{close();openMental()});
+    B.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{imp.games.splice(+b.dataset.del,1);saveImp();draw()})};
+  el.querySelectorAll('#glM button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;draw()});draw();
+  el.querySelector('#glAdd').onclick=()=>{close();logGame(mode)};el.querySelector('#glBack').onclick=()=>{close();openLearn('tools')};
+}
+function logGame(mode){
+  const last=imp.games.filter(x=>x.m===mode).slice(-1)[0];
+  const g={m:mode,r:'',t:[]};
+  const {el,close}=modal(`<h2>Log a game</h2>
+   <div class="seg tabs" id="lgM">${['1','2','3'].map(m=>`<button data-m="${m}" aria-pressed="${m===mode}">${m}v${m}</button>`).join('')}</div>
+   <div class="wl"><button data-r="W">WIN</button><button data-r="L">LOSS</button></div>
+   <div class="row" style="gap:8px"><input type="text" id="lgS" maxlength="8" placeholder="Score 3-1" style="flex:1"><input type="text" inputmode="numeric" id="lgR" maxlength="5" placeholder="MMR${last&&last.mmr?' ('+last.mmr+')':''}" style="flex:1"></div>
+   <h3>What went wrong? (tap all that fit)</h3><div class="tags">${TAGS.map(([k,n,d])=>`<button data-t="${k}" title="${esc(d)}">${esc(n)}</button>`).join('')}</div>
+   <input type="text" id="lgN" maxlength="80" placeholder="Note (optional)" style="margin-top:10px">
+   <div class="row" style="margin-top:12px"><button class="btn pri" id="lgOk">Save game</button><button class="btn" id="lgX">Cancel</button></div>`,true);
+  el.querySelectorAll('#lgM button').forEach(b=>b.onclick=()=>{g.m=b.dataset.m;el.querySelectorAll('#lgM button').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  el.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{g.r=b.dataset.r;el.querySelectorAll('[data-r]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  el.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{const k=b.dataset.t,i=g.t.indexOf(k);if(i<0)g.t.push(k);else g.t.splice(i,1);b.setAttribute('aria-pressed',i<0)});
+  el.querySelector('#lgX').onclick=close;
+  el.querySelector('#lgOk').onclick=()=>{if(!g.r){toast('Tap WIN or LOSS');return}
+    const sc=el.querySelector('#lgS').value.trim(),mm=parseInt(el.querySelector('#lgR').value,10),n=el.querySelector('#lgN').value.trim();
+    if(sc)g.sc=sc;if(mm>0&&mm<5000)g.mmr=mm;if(n)g.n=n;g.d=Date.now();imp.games.push(g);if(imp.games.length>500)imp.games.shift();saveImp();
+    close();splash(g.r==='W'?'VICTORY!':'NEXT ONE!',g.r==='W'?'hit':'miss');setTimeout(()=>openGameLog(g.m),900)};
+}
+
+// --- Mistake doctor: "why did I get scored on?" ---
+const DOC={
+ start:{q:'Where were you when they scored?',o:[['I was going for the ball','go'],['I was in net','net'],['I was driving back to defend','back'],['I was up the field','up']]},
+ go:{q:'Did a teammate go for the same ball?',o:[['Yes, we both went','D:dbl'],['No, just me','go2']]},
+ go2:{q:'What happened with your touch?',o:[['I missed it (whiff)','D:whiff'],['I hit it, but to the middle / to them','D:clear'],['We hit it at the same time and I lost','D:fifty'],['They flicked or dribbled past me','D:dribble']]},
+ net:{q:'What kind of shot was it?',o:[['Low shot to the far post','D:farpost'],['High / lob over me','D:lob'],['Off the backboard','D:backboard'],['A rebound after my save','D:rebound']]},
+ back:{q:'How did you come back?',o:[['Through the middle, near the ball','D:ballside'],['The right way, but too slow','D:slow'],['I went for boost first','D:boostfirst']]},
+ up:{q:'Why were you up there?',o:[['I wanted to score too','D:last'],['I was getting boost','D:boostfirst'],['I thought a teammate was back','D:last']]}};
+const DIAG={
+ dbl:{t:'Double commit',why:'Two players went for the same ball. When one gets beaten, both are out of the play.',fix:['The closest player goes. Everyone else backs off.','Use quick chat "I got it!" before you go.','If a teammate is already going, become 2nd man: wait behind for what comes out.'],les:['r3','g1'],tag:'dbl'},
+ whiff:{t:'Whiff',why:'You missed the ball, usually because you came in too fast or jumped at the wrong time.',fix:['Slow down before the touch.','Practice 50 clean touches in free play every day.','Only go if you can reach the ball comfortably.'],les:['o7'],pack:'p_shoot',mech:'jump',tag:'whiff'},
+ clear:{t:'Bad clear',why:'Your clear went to the middle, straight to an opponent.',fix:['Clear to the corners or up the side wall.','Hit the side of the ball, not the middle.','If you cannot clear well, just block and stay in front of the net.'],les:['d3','d9'],pack:'p_saves',tag:'over'},
+ fifty:{t:'Lost the 50/50',why:'You challenged at the same time and lost the hit.',fix:['Flip into the ball at the same time as them, low on the ball.','Do not jump too early.','If you have no boost or bad angle, do not challenge: shadow instead.'],les:['k4'],mech:'fifty',tag:'fifty'},
+ dribble:{t:'Beaten by a dribble',why:'You dove in and they flicked or dribbled around you.',fix:['Shadow defense: drive back with them, between ball and goal.','Wait for their bad touch, then challenge.','Stay on the ground until they commit.'],les:['d1','m3'],pack:'p_shadow',mech:'shadow',tag:'dribble'},
+ farpost:{t:'Far post shot',why:'You were on the near post or in the middle, so the far post was open.',fix:['Defend from the back post: you see the whole play.','Come back on the far side, then slide across.'],les:['r2','d2'],pack:'p_saves',tag:'slow'},
+ lob:{t:'Chipped / lobbed',why:'You came out too far or jumped too early.',fix:['Stay deeper in your net when they are shooting from far.','Wait for the ball to drop if you are not sure.','Learn the fast aerial for high saves.'],les:['d1'],pack:'p_aerial',mech:'fastaerial',tag:'air'},
+ backboard:{t:'Off the backboard',why:'The ball came off your backboard and you chased it into the wall.',fix:['Read where it will come down in front of the net.','Go there early instead of following the ball.'],les:['d8'],mech:'readbb',tag:'wall'},
+ rebound:{t:'Rebound',why:'Your save went back into the middle and they shot again.',fix:['Save to the side, towards the corner.','After a save, recover fast: land on your wheels.'],les:['d3','r8'],pack:'p_saves',mech:'recover',tag:'over'},
+ ballside:{t:'Ball-side rotation',why:'You drove back through the middle near the ball and got in the way or were too late.',fix:['Rotate on the far side: back post.','This keeps you out of the play and lets you see everything.'],les:['r2'],pack:'p_rot',tag:'slow'},
+ slow:{t:'Too slow back',why:'You went the right way but did not get there in time.',fix:['Use the half-flip to turn around fast.','Take small pads on the way, keep moving at full speed.'],les:['r5'],mech:'halfflip',tag:'slow'},
+ boostfirst:{t:'Boost before defense',why:'You went for boost when the team needed you back.',fix:['Defense first, boost second.','Take small pads on your way back instead of corner boost.'],les:['b1','r5'],tag:'boost'},
+ last:{t:'Last man went forward',why:'You were the last player back and you went up, so nobody was in net.',fix:['Check before you go: is anyone behind me?','If not, you are last man: stay back and only go when it is safe.'],les:['r9','d7'],pack:'p_rot',tag:'over'}};
+function openDoctor(node){
+  node=node||'start';
+  if(node.startsWith('D:')){const k=node.slice(2),G=DIAG[k];imp.doctor++;saveImp();
+    const {el,close}=modal(`<div class="banner coachb"><span>DIAGNOSIS</span>${esc(G.t)}</div><p>${esc(G.why)}</p><h3>How to fix it</h3><ul class="tipl ok">${G.fix.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+     <h3>Train it</h3><div class="list">${(G.les||[]).map(lessonById).filter(Boolean).map(lessonItem).join('')}</div>
+     <div class="row" style="margin-top:8px">${G.pack?`<button class="btn" id="dgP">${svg('kick')}Training pack</button>`:''}${G.mech?`<button class="btn" id="dgM">Learn: ${esc(MECHS[G.mech].n)}</button>`:''}</div>
+     <div class="row" style="margin-top:14px"><button class="btn pri" id="dgLog">Add to my last game</button><button class="btn" id="dgA">Another goal</button><button class="btn" id="dgX">Close</button></div>`,false,'tall');
+    el.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{close();openLesson(b.dataset.l)});
+    const p=el.querySelector('#dgP');if(p)p.onclick=()=>{close();openPack(G.pack)};const m=el.querySelector('#dgM');if(m)m.onclick=()=>openMech(G.mech);
+    el.querySelector('#dgLog').onclick=()=>{const g=imp.games[imp.games.length-1];if(!g){toast('Log a game first');return}g.t=g.t||[];if(!g.t.includes(G.tag))g.t.push(G.tag);saveImp();toast('Added "'+TAGN[G.tag]+'" to your last game')};
+    el.querySelector('#dgA').onclick=()=>{close();openDoctor()};el.querySelector('#dgX').onclick=close;return}
+  const N=DOC[node];
+  const {el,close}=modal(`<div class="banner"><span>MISTAKE</span>DOCTOR</div><p class="hint" style="margin-top:0">Think of one goal you let in. Answer honestly.</p><h3>${esc(N.q)}</h3><div class="list">${N.o.map(([t,n])=>`<button class="les" data-n="${n}"><span class="lm"><b>${esc(t)}</b></span><span>›</span></button>`).join('')}</div>
+   <div class="row" style="margin-top:14px">${node!=='start'?'<button class="btn" id="dcR">Start over</button>':''}<button class="btn" id="dcX">Close</button></div>`,true);
+  el.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{close();openDoctor(b.dataset.n)});
+  const r=el.querySelector('#dcR');if(r)r.onclick=()=>{close();openDoctor()};el.querySelector('#dcX').onclick=close;
+}
+
+// --- Mechanics tracker ---
+const MST=['Not started','Learning','Consistent'];
+function openMechTracker(){
+  const {el,close}=modal(`<div class="banner"><span>MECHANICS</span>TRACKER</div><p>Tap a mechanic for its <b>skill test</b>: 3 levels, scored out of 10 in Rocket League. Tap <b>+ rep</b> each time you practice it.</p>
+   <div id="mtB"></div><div class="row" style="margin-top:14px"><button class="btn" id="mtX">Back</button></div>`,false,'tall');
+  const B=el.querySelector('#mtB');
+  const draw=()=>{const all=Object.entries(MECHS),c=all.filter(([k])=>imp.mech[k]===2).length,l=all.filter(([k])=>imp.mech[k]===1).length;
+    B.innerHTML=`<div class="row" style="gap:12px;justify-content:space-around;margin:6px 0 10px">${gauge(Math.round(c/all.length*100),c+'/'+all.length,'consistent','#3ddc84')}${gauge(Math.round(l/all.length*100),String(l),'learning')}</div>`+
+     RANKS.slice(0,7).map((R,i)=>{const ms=all.filter(([,m])=>m.r===i);return `<h3>${rankEmblem(i,0,18)} ${esc(R.n)}</h3>`+ms.map(([k,m])=>{const s=imp.mech[k]||0;return `<div class="mrow"><button class="mst s${s}" data-s="${k}">${MST[s]}</button><button class="mn" data-sk="${k}"><b>${esc(m.n)}</b><small>Skill test: ${sklState(k).lv>=3?'mastered ✓':'level '+(sklState(k).lv+1)+'/3'}${imp.reps[k]?' · '+imp.reps[k]+' reps':''}</small></button><button class="btn" data-rep="${k}">+ rep</button></div>`}).join('')}).join('');
+    B.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const k=b.dataset.s;imp.mech[k]=((imp.mech[k]||0)+1)%3;if(imp.mech[k]===2)splash('MASTERED!','hit');saveImp();draw()});
+    B.querySelectorAll('[data-rep]').forEach(b=>b.onclick=()=>{const k=b.dataset.rep;imp.reps[k]=(imp.reps[k]||0)+1;if(!imp.mech[k])imp.mech[k]=1;saveImp();toast('+5 XP · '+MECHS[k].n);draw()});
+    B.querySelectorAll('[data-sk]').forEach(b=>b.onclick=()=>{close();openSkill(b.dataset.sk)})};
+  draw();el.querySelector('#mtX').onclick=()=>{close();openLearn('tools')};
+}
+
+// --- Mental reset: tilt check + box breathing ---
+function openMental(){
+  const {el,close}=modal(`<div class="banner coachb"><span>MENTAL</span>RESET</div>
+   <p>Tilt costs more MMR than bad mechanics. Do this after 2 losses in a row, or whenever you feel angry.</p>
+   <div class="breath"><div class="bcirc" id="bcC"><span id="bcT">Tap start</span></div><button class="btn pri" id="bcGo">Start 1-minute breathing</button></div>
+   <h3>Reset checklist</h3><ul class="tipl ok"><li>Stand up, drink water, stretch your hands.</li><li>Mute chat for the next games.</li><li>Pick ONE thing to focus on (example: "back post").</li><li>Play one casual game or a training pack before ranked.</li><li>Lost 3 in a row? Done with ranked for today. That is a win.</li></ul>
+   <h3>Remember</h3><ul class="tipl drill"><li>Every player loses. SSLs lose too.</li><li>Your teammate is not trying to lose. A "Nice shot!" helps you win more than "What a save!" spam.</li><li>Focus on what YOU can fix, not on them.</li></ul>
+   <div class="row" style="margin-top:14px"><button class="btn" id="mnX">Close</button></div>`,false,'tall');
+  let t=null;const C=el.querySelector('#bcC'),T=el.querySelector('#bcT');
+  el.querySelector('#bcGo').onclick=()=>{clearInterval(t);let s=0;const ph=[['Breathe in',1.35],['Hold',1.35],['Breathe out',1],['Hold',1]];
+    const step=()=>{if(s>=60||!el.isConnected){clearInterval(t);if(el.isConnected){T.textContent='Done. Nice.';C.style.transform='scale(1)';imp.breath++;saveImp();splash('RESET!','hit')}return}
+      const p=ph[Math.floor(s/4)%4];if(s%4===0){T.textContent=p[0];C.style.transform=`scale(${p[1]})`}T.dataset.n=4-s%4;s++};step();t=setInterval(step,1000)};
+  el.querySelector('#mnX').onclick=()=>{clearInterval(t);close()};
+}
+
+// --- Session timer: walks you through your routine block by block ---
+function openSession(){
+  const mins=ROUTINES[rk.mins]?rk.mins:60, blocks=ROUTINES[mins];let i=0,left=blocks[0][1]*60,run=false,t=null;
+  const {el,close}=modal(`<div class="banner"><span>${mins} MINUTE</span>SESSION</div><div class="sess"><div class="ss-b" id="ssB"></div><div class="ss-t" id="ssT"></div><div class="ss-n" id="ssN"></div></div>
+   <div class="row" style="justify-content:center"><button class="btn pri" id="ssGo">Start</button><button class="btn" id="ssSk">Next block ›</button><button class="btn" id="ssX">Stop</button></div>
+   <div class="list" id="ssL" style="margin-top:12px"></div><p class="hint">Keep this open next to the game, or just use it as a checklist.</p>`,true);
+  const draw=()=>{el.querySelector('#ssB').textContent=blocks[i][0];el.querySelector('#ssT').textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');
+    el.querySelector('#ssN').textContent=`Block ${i+1} of ${blocks.length}`;el.querySelector('#ssGo').textContent=run?'Pause':'Start';
+    el.querySelector('#ssL').innerHTML=blocks.map(([n,m],j)=>`<div class="item${j===i?' me':''}"><span class="tag">${m} MIN</span><div class="meta"><b>${j<i?'✓ ':''}${esc(n)}</b></div></div>`).join('')};
+  const next=()=>{if(i<blocks.length-1){i++;left=blocks[i][1]*60;splash(blocks[i][0].split(' ')[0].toUpperCase()+'!','go');draw()}else{clearInterval(t);run=false;imp.sess++;saveImp();splash('SESSION DONE!','hit');close()}};
+  el.querySelector('#ssGo').onclick=()=>{run=!run;clearInterval(t);if(run)t=setInterval(()=>{if(!el.isConnected){clearInterval(t);return}left--;if(left<=0)next();else draw()},1000);draw()};
+  el.querySelector('#ssSk').onclick=next;el.querySelector('#ssX').onclick=()=>{clearInterval(t);close()};draw();
+}
+
+// --- Glossary ---
+const GLOSS=[['1st / 2nd / 3rd man','The three jobs in 3s: pressure the ball, support, and stay back as safety.'],['Back post','The far post of your goal, away from the ball. Rotate to it on defense to see the whole play.'],['Ball cam','Camera that always looks at the ball. Most players use it most of the time.'],['Boost starve','Taking the other team\'s boost so they run out.'],['Cheat / cheating up','Moving up a bit as 2nd man to be ready for the next touch.'],['Ceiling shot','Driving onto the ceiling, dropping off with your flip saved, then using it on the ball.'],['Chain dash','Wavedashing again and again to keep speed.'],['Demo','Destroying an opponent by hitting them at supersonic speed.'],['Double commit','Two teammates going for the same ball. Usually a goal against.'],['Double tap','Hitting the ball off the backboard, then hitting it again into the net.'],['Dribble','Carrying the ball on top of your car.'],['Fast aerial','Jump + boost, then a quick second jump to get up fast.'],['50/50','Both players hit the ball at the same time.'],['Flick','Using a flip to launch the ball off your roof.'],['Flip reset','Touching the ball with all four wheels in the air to get your flip back.'],['Half-flip','A backflip you cancel and roll out of to turn around quickly.'],['Half-volley','Hitting the ball right after it bounces.'],['Kickoff','The start of each round. Closest player goes.'],['Last man','The player furthest back. If they go up, the net is open.'],['Musty flick','A flick where you tip the nose up and backflip into the ball.'],['Overcommit','Too many players going forward, leaving the net open.'],['Pinch','Hitting the ball into a wall or another car to send it very fast.'],['Powerslide','The handbrake. Used to turn sharply.'],['Pre-jump','Jumping early to meet a ball before the opponent can.'],['Recovery','Landing on your wheels and getting back to speed after a play.'],['Redirect','Changing the direction of a pass in the air towards the net.'],['Rotation','The cycle of moving between 1st, 2nd and 3rd so someone is always back.'],['Shadow defense','Driving back with the attacker, between ball and goal, without diving in.'],['Small pads','The boost pads that give 12 boost. Take them on your path.'],['Speed flip','The fastest kickoff flip: diagonal flip with a cancel.'],['Supersonic','Top speed. Your car leaves a trail.'],['Touch','Any hit on the ball. A good first touch sets up the play.'],['Wavedash','Flipping right as your wheels touch the ground for free speed.'],['Whiff','Missing the ball completely.'],['Zap dash','An advanced dash technique for very fast speed.'],['Air roll','Rolling the car in the air to control your angle.'],['Backboard read','Predicting where the ball comes down after hitting the back wall.'],['Clear','Hitting the ball away from your goal, best to the corners.'],['Infield pass','Passing the ball into the middle for a teammate.']];
+function openGlossary(){
+  const {el,close}=modal(`<div class="banner"><span>RL</span>GLOSSARY</div><input type="text" id="gsQ" placeholder="Search a word..."><div class="list" id="gsL" style="margin-top:10px"></div><div class="row" style="margin-top:14px"><button class="btn" id="gsX">Back</button></div>`,false,'tall');
+  const L=el.querySelector('#gsL');const draw=q=>{q=(q||'').toLowerCase();L.innerHTML=GLOSS.slice().sort((a,b)=>a[0].localeCompare(b[0])).filter(([t,d])=>!q||t.toLowerCase().includes(q)||d.toLowerCase().includes(q)).map(([t,d])=>`<div class="item"><div class="meta"><b>${esc(t)}</b><small>${esc(d)}</small></div></div>`).join('')||'<div class="empty">No match.</div>'};
+  el.querySelector('#gsQ').oninput=e=>draw(e.target.value);draw();el.querySelector('#gsX').onclick=()=>{close();openLearn('tools')};
+}
+
+// --- The Tools tab ---
+function renderTools(body,close){
+  const day=TODAY(),dd=!!imp.daily[day],s=gameStats(),top=s.top[0];
+  const _pi=planItems(),_pd=imp.plan&&imp.plan.day===day?_pi.filter(x=>imp.plan.done[x.id]).length:0;
+  body.innerHTML=`${xpBar()}
+   <button class="nextup plan" id="tlPlan"><span class="lbl">Today's plan</span><b>${_pd}/${_pi.length} done</b><small>Exactly what to do today to get better. Built for you.</small></button>
+   <button class="nextup${dd?'':' glow'}" id="tlDaily"><span class="lbl">${dd?'Daily challenge done ✓':'Daily challenge · +100 XP'}</span><b>${dd?'Come back tomorrow!':'Tip + drill + quick question'}</b><small>Streak: 🔥 ${streak()} day${streak()===1?'':'s'}</small></button>
+   ${top?`<button class="nextup" id="tlWeak"><span class="lbl">Your #1 problem right now</span><b>${esc(TAGN[top[0]])}</b><small>${esc(FIX[top[0]].txt)}</small></button>`:''}
+   <div class="hero" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    <button class="hc hc-wide hc-sim" id="tlSim">${svg('people')}<b>Rotation simulator</b><small>NEW · Play live 3v3 vs AI. A coach shows your spot and calls your mistakes. Best: ${(imp.sim||{}).best||0}%</small></button>
+    <button class="hc hc-wide hc-pt" id="tlPT">${svg('arrow')}<b>Read the play</b><small>A real situation, 7 seconds: tap where you should go. Best: ${(imp.pt||{}).best||0} pts</small></button>
+    <button class="hc hc-wide" id="tlBC">${svg('star')}<b>Replay stats (real games)</b><small>From ballchasing.com: you vs the players in your matches</small></button>
+    <button class="hc" id="tlLog">${svg('note')}<b>Game log</b><small>${s.n?s.n+' games · '+s.wr+'% wins':'Log games, find your weak spots'}</small></button>
+    <button class="hc" id="tlDoc">${svg('quiz')}<b>Mistake doctor</b><small>Why did I get scored on?</small></button>
+    <button class="hc" id="tlMech">${svg('star')}<b>Mechanics tracker</b><small>${Object.values(imp.mech).filter(v=>v===2).length} mastered</small></button>
+    <button class="hc" id="tlSess">${svg('play')}<b>Session timer</b><small>Your ${ROUTINES[rk.mins]?rk.mins:60}-min routine, step by step</small></button>
+    <button class="hc" id="tlMental">${svg('cap')}<b>Mental reset</b><small>Tilted? 1 minute to reset</small></button>
+    <button class="hc" id="tlGloss">${svg('text')}<b>Glossary</b><small>${GLOSS.length} RL words explained</small></button>
+    <button class="hc" id="tlTrain">${svg('kick')}<b>Custom training</b><small>Packs of shots, hit / miss</small></button>
+    <button class="hc" id="tlBoard">${svg('people')}<b>Team XP board</b><small>Who is training the most?</small></button>
+   </div>
+   <h3>How you earn XP</h3><div class="xpways">${[['Skill test level',50],['Skill test logged',10],['Simulator game',40],['Plan complete',80],['Read the play round',30],['Daily challenge',100],['Mechanic mastered',150],['Lesson done',50],['Session done',40],['Training run',30],['Logged game',15],['Sprint task',10],['Practice rep',5]].map(([n,x])=>`<span><b>+${x}</b>${n}</span>`).join('')}</div>`;
+  const on=(id,f)=>{const b=body.querySelector(id);if(b)b.onclick=()=>{close();f()}};
+  on('#tlDaily',openDaily);on('#tlPlan',openPlan);on('#tlSim',openSim);on('#tlPT',openPT);on('#tlBC',()=>openReplayStats());on('#tlWeak',()=>openGameLog());on('#tlLog',()=>openGameLog());on('#tlDoc',()=>openDoctor());on('#tlMech',openMechTracker);
+  on('#tlSess',openSession);on('#tlMental',openMental);on('#tlGloss',openGlossary);on('#tlTrain',openTraining);on('#tlBoard',openXPBoard);
+}
+function openXPBoard(){
+  if(!NET.name){openPlayers();return}
+  const {D,db}=NET.fb;
+  const {el,close}=modal(`<div class="banner"><span>TEAM</span>XP LEADERBOARD</div><div class="list" id="xbL"><div class="empty">Loading...</div></div><div class="row" style="margin-top:14px"><button class="btn" id="xbX">Close</button></div>`,false,'tall');
+  pushStats();
+  Promise.all([D.get(D.ref(db,'stats')),D.get(D.ref(db,'names')),D.get(D.ref(db,'rank'))]).then(([s,n,r])=>{const st=s.val()||{},nm=n.val()||{},rr=r.val()||{},me=NET.name.toLowerCase();
+    const rows=Object.keys(nm).map(id=>({id,name:nm[id].name,xp:(st[id]||{}).xp||0,lv:(st[id]||{}).lv||1,rk:rr[id]})).sort((a,b)=>b.xp-a.xp);
+    el.querySelector('#xbL').innerHTML=rows.map((p,i)=>`<div class="item${p.id===me?' me':''}"><span class="place p${i+1}">${i+1}</span><div class="meta"><b>${esc(p.name)} ${rankEmb(p.rk,18)}</b><small>Level ${p.lv} · ${p.xp} XP</small></div></div>`).join('')}).catch(()=>{el.querySelector('#xbL').innerHTML='<div class="empty">Could not load.</div>'});
+  el.querySelector('#xbX').onclick=close;
+}
+
+// ---------- Replay stats from ballchasing.com (real match data) ----------
+// A GitHub Action reads each linked player's latest ranked replays every hour and saves bc/<player>.json on the site.
+// We compare the player with the OTHER players in the same matches (same skill level), so no made-up rank averages.
+const BC_URL='https://developerwither.github.io/boost-board/bc/';
+// What each number means, which way is better, how big a gap matters, and how to fix it.
+const BCM=[
+ {f:'percent_behind_ball',n:'Time behind the ball',u:'%',good:1,gap:4,bad:'You are in front of the ball more than the players in your games. That usually means overcommitting: going forward when you should be behind the play.',fix:'Before you go up, check that someone is behind you. Rotate back post.',les:['r9','r2','d7'],pack:'p_rot',tag:'over'},
+ {f:'percent_closest_to_ball',n:'Time closest to the ball',u:'%',good:-1,gap:5,mode:'23',bad:'You are the closest player to the ball much more than others. In 2s and 3s that is ball chasing: you take your teammates\' touches.',fix:'Only the 1st man goes. If a teammate is closer, become 2nd or 3rd.',les:['r1','r3','r11'],pack:'p_rot',tag:'chase'},
+ {f:'percent_zero_boost',n:'Time with 0 boost',u:'%',good:-1,gap:3,bad:'You run out of boost more often than the others. You are slow and late when it matters.',fix:'Take the small pads on your path and keep 30 to 60 boost.',les:['b1','r5'],tag:'boost'},
+ {f:'_small',n:'Small pads taken (share of all pads)',u:'%',good:1,gap:6,bad:'You take fewer small pads than others and rely on big corner boosts, which pulls you out of the play.',fix:'Drive over small pads on the way back instead of going to the corners.',les:['b1','r5'],tag:'boost'},
+ {f:'percent_slow_speed',n:'Time at slow speed',u:'%',good:-1,gap:4,bad:'You spend more time driving slowly than the others. Slow players get beaten to every ball.',fix:'Keep moving: wavedash, flip and use small pads to stay fast.',les:['o8'],mech:'wavedash',tag:'slow'},
+ {f:'percent_supersonic_speed',n:'Time at supersonic',u:'%',good:1,gap:3,bad:'You reach top speed less than the others.',fix:'Boost in short taps to stay supersonic, and use flips for speed.',mech:'wavedash',tag:'slow'},
+ {f:'goals_against_while_last_defender',n:'Goals let in as last man (per game)',u:'',good:-1,gap:.3,bad:'More goals go in while you are the last defender than for others.',fix:'As last man, do not challenge unless you are sure. Shadow and stay in front of the net.',les:['d1','d7','r9'],pack:'p_saves',mech:'shadow',tag:'over'},
+ {f:'shooting_percentage',n:'Shots that go in',u:'%',good:1,gap:7,bad:'Fewer of your shots go in than for the others.',fix:'Aim low to the far post, and pass when the angle is bad.',les:['o7','o2'],pack:'p_shoot',mech:'powershot',tag:'finish'},
+ {f:'saves',n:'Saves per game',u:'',good:1,gap:.4,bad:'You make fewer saves than the others.',fix:'Defend from the back post so you are in position for the shot.',les:['r2','d2'],pack:'p_saves'},
+ {f:'taken',n:'Times demoed per game',u:'',good:-1,gap:.6,bad:'You get demoed more than others: you drive into danger without looking.',fix:'Watch for cars coming at you and do not sit still near the ball.',les:['g4'],tag:'boost'},
+ {f:'avg_speed',n:'Average speed',u:'',good:1,gap:60,bad:'Your average speed is lower than others.',fix:'Play faster: less stopping, more flips and small pads.',mech:'wavedash',tag:'slow'},
+];
+function bcVal(o,f){if(!o)return null;if(f==='_small'){const s=o.count_collected_small,b=o.count_collected_big;return s!=null&&b!=null&&(s+b)>0?Math.round(s/(s+b)*1000)/10:null}return o[f]==null?null:o[f]}
+function bcInsights(d){
+  const out=[];const modes=new Set((d.recent||[]).map(r=>r.mode));
+  for(const M of BCM){const a=bcVal(d.me,M.f),b=bcVal(d.lobby,M.f);if(a==null||b==null)continue;
+    if(M.mode&&![...modes].some(m=>M.mode.includes(m)))continue;
+    const diff=(a-b)*M.good;out.push({M,a,b,diff,bad:diff<=-M.gap,goodp:diff>=M.gap,score:diff/M.gap})}
+  return out;
+}
+const fmtN=(v,u)=>v==null?'-':(Math.abs(v)>=100?Math.round(v):Math.round(v*10)/10)+u;
+function bcCompare(x){const mx=Math.max(x.a,x.b)*1.15||1;
+  return `<div class="cmp"><div class="cmp-h"><b>${esc(x.M.n)}</b>${x.bad?'<span class="bdg bad">WORK ON THIS</span>':x.goodp?'<span class="bdg good">STRENGTH</span>':''}</div>
+   <div class="cmp-r"><span>You</span><div class="cmp-b"><i class="me${x.bad?' bad':x.goodp?' good':''}" style="width:${Math.max(2,x.a/mx*100)}%"></i></div><b>${fmtN(x.a,x.M.u)}</b></div>
+   <div class="cmp-r"><span>Lobby</span><div class="cmp-b"><i style="width:${Math.max(2,x.b/mx*100)}%"></i></div><b>${fmtN(x.b,x.M.u)}</b></div></div>`}
+async function bcLoad(id){const r=await fetch(BC_URL+encodeURIComponent(id)+'.json?t='+Date.now(),{cache:'no-store'});if(r.status===404)return null;if(!r.ok)throw new Error('http '+r.status);return r.json()}
+function parseBcLink(v){v=(v||'').trim();
+  const m=/ballchasing\.com\/player\/([a-z]+)\/([^/?#\s]+)/i.exec(v);if(m)return {p:m[1].toLowerCase(),i:decodeURIComponent(m[2])};
+  const m2=/^(steam|epic|ps4|xbox|switch):(\S+)$/i.exec(v);if(m2)return {p:m2[1].toLowerCase(),i:m2[2]};
+  if(v.length>=2&&v.length<=32)return {n:v};return null}
+function openReplayStats(forId,forName){
+  if(!NET.name){openPlayers();return}
+  const {D,db}=NET.fb, me=NET.name.toLowerCase(), id=forId||me, mine=id===me;
+  const {el,close}=modal(`<div class="banner"><span>BALLCHASING</span>REPLAY STATS</div><div id="bcB"><div class="empty">Loading...</div></div><div class="row" style="margin-top:14px"><button class="btn" id="bcX">Close</button></div>`,false,'tall');
+  el.querySelector('#bcX').onclick=close;const B=el.querySelector('#bcB');
+  const linkForm=(cur)=>{B.innerHTML=`<p>Link your ballchasing.com profile. Every hour, Boost Board reads your latest <b>ranked</b> replays and compares you with the other players in the same games.</p>
+     <h3>Your ballchasing profile</h3><input type="text" id="bcIn" placeholder="Paste your profile link, e.g. ballchasing.com/player/steam/7656..." value="${esc(cur||'')}">
+     <p class="hint">Find it: open ballchasing.com, search your name, open your player page and copy the link. Your in-game name also works but is less exact.</p>
+     <div class="row" style="margin-top:10px"><button class="btn pri" id="bcSave">Link</button>${cur?'<button class="btn bad" id="bcDel">Unlink</button>':''}</div>
+     <h3>How do my replays get on ballchasing?</h3><ul class="tipl drill"><li><b>PC:</b> install BakkesMod and turn on its ballchasing.com upload plugin. Every game uploads by itself.</li><li><b>Or by hand:</b> upload .replay files at ballchasing.com/upload (PC replays are in Documents/My Games/Rocket League/TAGame/Demos).</li><li><b>Console:</b> consoles cannot save replay files, so this does not work there. Use the Game Log instead.</li><li>Replays must be public or unlisted, and only ranked 1s, 2s and 3s are used.</li></ul>`;
+    B.querySelector('#bcSave').onclick=()=>{const L=parseBcLink(B.querySelector('#bcIn').value);if(!L){toast('Paste your ballchasing player link');return}
+      D.set(D.ref(db,'bclink/'+me),L).then(()=>{LS.set('bb.bclink',B.querySelector('#bcIn').value.trim());toast('Linked! Stats show up within an hour');draw()}).catch(()=>toast('Could not save'))};
+    const del=B.querySelector('#bcDel');if(del)del.onclick=()=>D.set(D.ref(db,'bclink/'+me),null).then(()=>{LS.set('bb.bclink','');toast('Unlinked');linkForm('')})};
+  async function draw(){
+    B.innerHTML='<div class="empty">Loading...</div>';
+    const lk=(await D.get(D.ref(db,'bclink/'+id)).catch(()=>null));const link=lk&&lk.val();
+    if(!link){if(mine)linkForm(LS.get('bb.bclink',''));else B.innerHTML='<div class="empty">This player has not linked ballchasing yet.</div>';return}
+    let d=null;try{d=await bcLoad(id)}catch(e){B.innerHTML='<div class="empty">Could not load stats. Check your internet.</div>';return}
+    if(!d||!d.games){B.innerHTML=`<div class="nextup"><span class="lbl">Linked ✓</span><b>Waiting for replays</b><small>${d?'No ranked replays found yet for this profile.':'Stats update every hour. Check back soon.'} Make sure your replays upload to ballchasing.com.</small></div>${mine?'<div class="row" style="margin-top:10px"><button class="btn" id="bcEdit">Change link</button></div>':''}`;
+      const e=B.querySelector('#bcEdit');if(e)e.onclick=()=>linkForm(LS.get('bb.bclink',''));return}
+    const ins=bcInsights(d), bad=ins.filter(x=>x.bad).sort((a,b)=>a.score-b.score), good=ins.filter(x=>x.goodp).sort((a,b)=>b.score-a.score);
+    const wr=Math.round(d.wins/d.games*100);
+    B.innerHTML=`${!mine?`<p>Stats for <b>${esc(forName||id)}</b></p>`:''}
+     <div class="row" style="gap:12px;justify-content:space-around;margin:6px 0 10px">${gauge(wr,wr+'%','win rate',wr>=50?'#3ddc84':'#ff4d5e')}<div class="meta"><b>${d.games} ranked games</b><small>${d.wins}W - ${d.games-d.wins}L</small><small>Updated ${ago(d.updated)}</small></div></div>
+     <p class="hint" style="margin-top:0">"Lobby" = the average of the other players in the same matches: your teammates and opponents, at your level.</p>
+     <h3>Fix these first</h3>${bad.length?bad.slice(0,3).map((x,i)=>`<div class="weak"><div class="wk-h"><span class="wk-n">${i+1}</span><b>${esc(x.M.n)}</b><small>${fmtN(x.a,x.M.u)} vs ${fmtN(x.b,x.M.u)}</small></div><p>${esc(x.M.bad)}</p><p class="okc" style="color:var(--fg)!important"><b>Fix:</b> ${esc(x.M.fix)}</p><div class="row">${(x.M.les||[]).slice(0,2).map(id=>{const L=lessonById(id);return L?`<button class="btn" data-l="${id}">${esc(L.title)}</button>`:''}).join('')}${x.M.pack?`<button class="btn" data-pk="${x.M.pack}">${svg('kick')}Training</button>`:''}${x.M.mech?`<button class="btn" data-mc="${x.M.mech}">Learn: ${esc(MECHS[x.M.mech].n)}</button>`:''}</div></div>`).join(''):'<div class="nextup"><span class="lbl">Nice</span><b>No big weak spots vs your lobby</b><small>Keep playing and check again after more games.</small></div>'}
+     ${good.length?`<h3>Your strengths</h3><div class="xpways">${good.slice(0,4).map(x=>`<span><b>✓</b>${esc(x.M.n)}</span>`).join('')}</div>`:''}
+     <h3>You vs your lobby</h3>${ins.map(bcCompare).join('')}
+     <h3>Recent games</h3><div class="list">${(d.recent||[]).slice(0,15).map(r=>`<div class="item"><span class="res ${r.win?'W':'L'}">${r.win?'W':'L'}</span><div class="meta"><b>${esc(r.score)} · ${r.mode}v${r.mode}</b><small>${r.date?esc(fmtDate(Date.parse(r.date))):''} · ${r.goals}G ${r.saves}S ${r.assists}A${r.behind!=null?' · behind ball '+Math.round(r.behind)+'%':''}</small></div></div>`).join('')}</div>
+     ${mine?'<div class="row" style="margin-top:10px"><button class="btn" id="bcEdit">Change link</button>'+(bad.length?'<button class="btn pri" id="bcLog">Add top problems to my Game Log focus</button>':'')+'</div>':''}`;
+    B.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{close();openLesson(b.dataset.l)});
+    B.querySelectorAll('[data-pk]').forEach(b=>b.onclick=()=>{close();openPack(b.dataset.pk)});
+    B.querySelectorAll('[data-mc]').forEach(b=>b.onclick=()=>openMech(b.dataset.mc));
+    const e=B.querySelector('#bcEdit');if(e)e.onclick=()=>linkForm(LS.get('bb.bclink',''));
+    const lg=B.querySelector('#bcLog');if(lg)lg.onclick=()=>{const g=imp.games[imp.games.length-1];if(!g){toast('Log a game first');return}g.t=g.t||[];bad.slice(0,3).forEach(x=>{if(x.M.tag&&!g.t.includes(x.M.tag))g.t.push(x.M.tag)});saveImp();toast('Added to your last logged game')};
+  }
+  draw();
+}
+
+// ---------- Positioning trainer: see a real situation, tap where you should drive, beat the clock ----------
+// Situations come from every lesson and training shot: for each step where a blue car makes a big move,
+// the question is "where does this car go next?" and the answer is where it goes in the next step.
+let PT_POOL=null;
+function ptPool(){
+  if(PT_POOL)return PT_POOL;const out=[];
+  const add=(P,isPack)=>{let S2;try{S2=buildLesson(P)}catch(e){return}
+    for(let k=0;k<S2.frames.length-1;k++){const a=S2.frames[k],b=S2.frames[k+1];
+      let best=null,bd=0;
+      for(const o of a.objs){if(o.kind!=='car'||o.team!=='b')continue;const n=b.objs.find(q=>q.id===o.id);if(!n)continue;const d=Math.hypot(n.x-o.x,n.y-o.y);if(d>bd){bd=d;best=[o,n]}}
+      if(!best||bd<900)continue;
+      out.push({src:P.title,lid:isPack?null:P.id,map:S2.map,mode:S2.mode,kick:S2.kick,objs:clone(a.objs),car:best[0].id,lab:best[0].label||'',tx:best[1].x,ty:best[1].y,q:a.say||'',why:b.say||'',lvl:P.lvl||1})}};
+  LESSONS.forEach(L=>{if(!L.gen&&L.steps&&L.steps.length>1)add(L)});
+  PACKS.forEach(p=>p.shots.forEach(s=>{if(s.steps)add({id:'',title:p.name+': '+s.title,mode:p.mode,steps:s.steps,lvl:p.lvl},true)}));
+  PT_POOL=out;return out;
+}
+let PT=null;
+function startPT(mode){
+  const pool=ptPool().filter(s=>!mode||String(s.mode)===String(mode));
+  const pick=[];const used=new Set();while(pick.length<10&&used.size<pool.length){const i=Math.floor(Math.random()*pool.length);if(used.has(i))continue;used.add(i);pick.push(pool[i])}
+  if(!pick.length){toast('No situations for this mode yet');return}
+  TR=null;syncTrBar();PT={list:pick,i:0,score:0,perf:0,mode,ans:false};ptLoad();
+}
+function ptLoad(){
+  const s=PT.list[PT.i];stopPlay();pushHistory();
+  const objs=clone(s.objs).map(o=>{if(o.id===s.car){o.label='YOU'}return o});
+  S={name:'Positioning trainer',map:s.map,mode:s.mode,kick:s.kick,frames:[{objs,marks:[ZN(Y,objs.find(o=>o.id===s.car).x-450,objs.find(o=>o.id===s.car).y-450,objs.find(o=>o.id===s.car).x+450,objs.find(o=>o.id===s.car).y+450)]}]};
+  cur=0;zoom=1;panX=panY=0;coachHidden=true;afterLoad();PT.ans=false;PT.t0=performance.now();ptBar();
+}
+function ptBar(){
+  let b=$('#ptBar'),h=$('#ptHit');
+  if(!PT){if(b)b.remove();if(h)h.remove();clearInterval(window._ptT);return}
+  if(!h){h=document.createElement('div');h.id='ptHit';$('#stage').appendChild(h);h.addEventListener('pointerdown',ptTap)}
+  if(!b){b=document.createElement('div');b.id='ptBar';b.className='ptbar';$('#stage').appendChild(b)}
+  const s=PT.list[PT.i];
+  {const st=$('#stage'),c=s.objs.find(o=>o.id===s.car);b.classList.toggle('top',!!c&&c.y<0&&st.clientHeight>st.clientWidth)}
+  b.innerHTML=`<div class="tb-h"><span class="pk-tag">READ THE PLAY</span><b>${PT.ans?'':'Tap where YOU should go'}</b><span class="tb-n">${PT.i+1}/${PT.list.length}</span><span class="tb-sc"><i class="h">${PT.score} pts</i></span><button class="ib sm" id="ptX" aria-label="Stop">${svg('x')}</button></div>
+   ${PT.ans?`<div class="tb-say">${esc(s.why)}</div><div class="tb-b"><button class="btn pri" id="ptN">${PT.i<PT.list.length-1?'Next situation ›':'See score'}</button>${s.lid?'<button class="btn" id="ptL">Lesson</button>':''}</div>`
+   :`<div class="tb-say">${esc(s.q)}</div><div class="ptclock"><i id="ptC"></i></div>`}`;
+  b.querySelector('#ptX').onclick=()=>{PT=null;ptBar();coachHidden=false;syncCoach();toast('Trainer stopped')};
+  const n=b.querySelector('#ptN');if(n)n.onclick=()=>{if(PT.i<PT.list.length-1){PT.i++;ptLoad()}else ptDone()};
+  const l=b.querySelector('#ptL');if(l)l.onclick=()=>{const id=s.lid;PT=null;ptBar();openLesson(id)};
+  h.style.display=PT.ans?'none':'block';
+  clearInterval(window._ptT);
+  if(!PT.ans){const LIM=7000;window._ptT=setInterval(()=>{if(!PT||PT.ans){clearInterval(window._ptT);return}const left=1-(performance.now()-PT.t0)/LIM;const c=$('#ptC');if(c)c.style.width=Math.max(0,left*100)+'%';if(left<=0)ptAnswer(null)},60)}
+}
+function ptTap(e){if(!PT||PT.ans)return;e.preventDefault();e.stopPropagation();const r=cv.getBoundingClientRect();view();ptAnswer(s2w(e.clientX-r.left,e.clientY-r.top))}
+function ptAnswer(w){
+  const s=PT.list[PT.i];PT.ans=true;clearInterval(window._ptT);
+  const car=S.frames[0].objs.find(o=>o.id===s.car), marks=[R(G,[car.x,car.y],[s.tx,s.ty]),ZN(G,s.tx-500,s.ty-500,s.tx+500,s.ty+500),TX(G,s.tx+560,s.ty,'Best spot')];
+  let pts=0,word='TOO SLOW!',kind='miss';
+  if(w){const d=Math.hypot(w[0]-s.tx,w[1]-s.ty),secs=(performance.now()-PT.t0)/1000,fast=secs<3?10:0;
+    if(d<=700){pts=100+fast;word='PERFECT!';kind='hit';PT.perf++}else if(d<=1300){pts=70+fast;word='GOOD READ!';kind='hit'}else if(d<=2100){pts=40;word='CLOSE!';kind='go'}else{pts=0;word='WRONG SPOT';kind='miss'}
+    marks.push(TX(kind==='miss'?Rd:Y,w[0],w[1],'✕ You'))}
+  PT.score+=pts;S.frames[0].marks=marks;dirty=true;changed();splash(pts?word+' +'+pts:word,kind);ptBar();
+}
+function ptDone(){
+  const max=PT.list.length*110, sc=PT.score, perf=PT.perf, mode=PT.mode;PT=null;ptBar();coachHidden=false;
+  imp.pt=imp.pt||{rounds:0,best:0,perfect:0};imp.pt.rounds++;imp.pt.perfect+=perf;const nb=sc>imp.pt.best;if(nb)imp.pt.best=sc;saveImp();
+  const pct=Math.round(sc/max*100);
+  const {el,close}=modal(`<div class="banner"><span>READ THE PLAY</span>${nb?'NEW BEST!':'ROUND OVER'}</div>
+   <div class="row" style="gap:14px;justify-content:center;margin:10px 0">${gauge(pct,String(sc),'points')}${gauge(Math.round(imp.pt.best/max*100),String(imp.pt.best),'best','#3ddc84')}</div>
+   <p style="text-align:center"><b>${perf}</b> perfect reads. ${pct>=75?'You read the game like a high-rank player.':pct>=45?'Good. The more you play, the faster you see the right spot in real games.':'Keep going: watch the green arrow each time and read why.'}</p>
+   <div class="row" style="justify-content:center;margin-top:12px"><button class="btn pri" id="pA">Play again</button><button class="btn" id="pB">Close</button></div>`,true);
+  el.querySelector('#pA').onclick=()=>{close();startPT(mode)};el.querySelector('#pB').onclick=close;
+}
+function openPT(){
+  const pool=ptPool(), by=m=>pool.filter(s=>String(s.mode)===m).length, b=imp.pt||{};
+  const {el,close}=modal(`<div class="banner"><span>GAME SENSE</span>READ THE PLAY</div>
+   <p>A real situation appears on the board. Your car is marked <b>YOU</b>. You have <b>7 seconds</b> to tap where you should drive next. Then you see the best spot and why.</p>
+   <p class="hint">This trains the decision you make 100 times a game: where do I go now? Faster reads = faster rank-ups.</p>
+   ${b.rounds?`<div class="row" style="gap:12px;margin:8px 0"><div class="meta"><b>Best: ${b.best} pts</b><small>${b.rounds} rounds · ${b.perfect} perfect reads</small></div></div>`:''}
+   <div class="list">${[['3','3s situations'],['2','2s situations'],['1','1s situations'],['','Mixed']].map(([m,n])=>`<button class="les" data-m="${m}"><span class="lm"><b>${n}</b><small>${m?by(m):pool.length} situations · 10 per round</small></span><span>›</span></button>`).join('')}</div>`,true);
+  el.querySelectorAll('[data-m]').forEach(x=>x.onclick=()=>{close();startPT(x.dataset.m||null)});
+}
+
+// ---------- Today's plan: one list of what to do today, built from everything the app knows about you ----------
+function planItems(){
+  const day=TODAY(), it=[], R=rk.r>=0?RANKS[rk.r]:null, s=gameStats(), top=s.top[0];
+  if(!imp.daily[day])it.push({id:'daily',t:'Daily challenge',sub:'Tip, drill and one question. +100 XP',go:openDaily,auto:()=>!!imp.daily[day]});
+  try{myHw().filter(h=>!h.done).slice(0,2).forEach(h=>it.push({id:'hw'+h.id,t:'Coach: '+hwLabel(h),sub:h.text||'Homework from your coach',go:openHomework}))}catch(e){}
+  if(top){const F=FIX[top[0]];it.push({id:'fix',t:'Fix #1: '+TAGN[top[0]],sub:F.txt,go:()=>{const L=F.les&&lessonById(F.les[0]);L?openLesson(L.id):openGameLog()}})}
+  else if(R){const L=lessonById(R.les[0]);if(L)it.push({id:'fix',t:'Lesson: '+L.title,sub:'Picked for '+R.n,go:()=>openLesson(L.id)})}
+  it.push({id:'sim',t:'Rotation simulator: 1 game',sub:'90 seconds live 3v3. Stay in your spot',go:()=>openSim()});
+  it.push({id:'pt',t:'Read the play: 1 round',sub:'10 situations, tap where to go. Trains game sense',go:()=>openPT()});
+  const mk=sklNext()||'recover',sl=Math.min(2,sklState(mk).lv);
+  it.push({id:'mech',t:'Skill test: '+MECHS[mk].n+' (level '+(sl+1)+')',sub:SKL[sl].n+'. Pass with '+SKL[sl].goal+'/10',go:()=>openSkill(mk)});
+  const pk=top&&FIX[top[0]].pack||'p_shoot';const P=packById(pk);if(P)it.push({id:'pack',t:'Training: '+P.name,sub:'Do it in Rocket League, log hit or miss',go:()=>openPack(pk)});
+  it.push({id:'warm',t:'Warm up 10 min before ranked',sub:'Free play: 50 touches, mix ground and air',go:()=>openSession()});
+  it.push({id:'log',t:'Log your ranked games',sub:'5 seconds each. Finds your weak spots',go:()=>logGame(imp.lm||'3')});
+  return it;
+}
+function openPlan(){
+  const day=TODAY();imp.plan=imp.plan&&imp.plan.day===day?imp.plan:{day,done:{}};
+  const {el,close}=modal(`<div class="banner"><span>${esc(new Date().toLocaleDateString([], {weekday:'long'}))}</span>TODAY'S PLAN</div>${xpBar()}<div id="plB"></div>
+   <p class="hint">Built from your rank, your game log, your coach and your mechanics. Do it every day: small steps, every day, is how players climb.</p>
+   <div class="row" style="margin-top:12px"><button class="btn" id="plX">Close</button></div>`,false,'tall');
+  const B=el.querySelector('#plB');
+  const draw=()=>{const items=planItems();items.forEach(x=>{if(x.auto&&x.auto())imp.plan.done[x.id]=1});
+    const n=items.filter(x=>imp.plan.done[x.id]).length;
+    B.innerHTML=`<div class="progrow"><div class="prog"><i style="width:${Math.round(n/items.length*100)}%"></i></div><span>${n}/${items.length} done</span></div>`+
+     items.map(x=>`<div class="hwi"><label class="chk"><input type="checkbox" data-p="${x.id}"${imp.plan.done[x.id]?' checked':''}><span><b>${esc(x.t)}</b><small>${esc(x.sub)}</small></span></label><button class="btn" data-g="${x.id}">Go</button></div>`).join('');
+    B.querySelectorAll('[data-p]').forEach(c=>c.onchange=()=>{if(c.checked)imp.plan.done[c.dataset.p]=1;else delete imp.plan.done[c.dataset.p];
+      const all=planItems().every(x=>imp.plan.done[x.id]);if(all&&!imp.plan.full){imp.plan.full=1;imp.plansDone=(imp.plansDone||0)+1;splash('PLAN COMPLETE! +80 XP','hit')}saveImp();draw()});
+    B.querySelectorAll('[data-g]').forEach(g=>g.onclick=()=>{const x=items.find(i=>i.id===g.dataset.g);close();x.go()})};
+  draw();el.querySelector('#plX').onclick=close;
+}
+
+// ---------- Rotation simulator: play live 3v3 / 2v2 rotation against AI, with a coach judging your position ----------
+// Simple top-down game: the ball rolls and bounces, AI cars take jobs (1st goes to ball, 2nd supports, 3rd stays back)
+// and rotate out after they hit it. You drag your car. Every moment the coach works out YOUR job and where you should be.
+const SIMF={hx:4096,hy:5120,goal:893,br:93};
+let SIM=null;
+function simStart(mode,hints){
+  mode=mode||3;if(PT){PT=null;ptBar()}if(TR){TR=null;syncTrBar()}
+  stopPlay();const prev=JSON.stringify({S,cur});
+  const map='dfh';
+  S={name:'Rotation simulator',map,mode,frames:[{objs:kickoffObjs(mode,map),marks:[]}]};cur=0;zoom=1;panX=panY=0;coachHidden=true;afterLoad();
+  SIM={mode,hints:hints!==false,prev,t:90,score:{b:0,o:0},good:0,total:0,dbl:0,last:0,bp:0,calls:[],cool:{},
+    ball:{x:0,y:0,vx:0,vy:0},cars:{},target:null,pause:1.6,lastTs:performance.now(),role:'',msg:'Kickoff! Drag your car.',msgT:0};
+  simReset();simUI();requestAnimationFrame(simStep);
+}
+function simReset(){
+  const objs=S.frames[0].objs, ko=kickoffObjs(SIM.mode,S.map);
+  for(const o of objs){const k=ko.find(q=>q.id===o.id);o.x=k.x;o.y=k.y;o.a=k.a;if(o.id==='b1')o.label='YOU';else delete o.label;
+    if(o.kind==='car')SIM.cars[o.id]={vx:0,vy:0,rot:0,team:o.team}}
+  SIM.ball={x:0,y:0,vx:0,vy:0};SIM.target=null;SIM.pause=1.6;
+}
+const simObj=id=>S.frames[0].objs.find(o=>o.id===id);
+function simRoles(team){
+  // Jobs by distance to the ball, but players rotating out (just hit it) go to the back of the queue.
+  const B=SIM.ball, cs=S.frames[0].objs.filter(o=>o.kind==='car'&&o.team===team);
+  return cs.map(o=>({o,d:Math.hypot(o.x-B.x,o.y-B.y)+(SIM.cars[o.id].rot>0?4000:0)})).sort((a,b)=>a.d-b.d).map(x=>x.o);
+}
+function simSpot(team,role,mode){
+  const B=SIM.ball, dir=team==='b'?1:-1, own=-SIMF.hy*dir, cl=(v,a,b)=>Math.max(Math.min(a,b),Math.min(Math.max(a,b),v));
+  if(role===0)return [B.x,B.y-260*dir];
+  const last=role===mode-1;
+  if(!last)return [cl(B.x*0.45,-3200,3200),cl(B.y-1900*dir,own+1400*dir,own+8600*dir)];
+  // Last man: between ball and goal, deep. Back post side when the ball is wide.
+  const bx=Math.abs(B.x)>1400?-Math.sign(B.x)*500:B.x*0.2;
+  return [bx,cl(B.y-3600*dir,own+700*dir,own+5200*dir)];
+}
+function simHit(o,power,aim){
+  const B=SIM.ball, dir=o.team==='b'?1:-1;let tx,ty;
+  if(aim){tx=(Math.random()-.5)*1400;ty=SIMF.hy*dir}else{tx=B.x+(B.x-o.x)*3;ty=B.y+(B.y-o.y)*3}
+  if(Math.random()<.22){tx=(Math.random()-.5)*8000;ty=B.y+(Math.random()-.3)*6000*dir}
+  const dx=tx-B.x,dy=ty-B.y,L=Math.hypot(dx,dy)||1;B.vx=dx/L*power;B.vy=dy/L*power;
+}
+function simStep(ts){
+  if(!SIM)return;
+  const dt=Math.min(.05,(ts-SIM.lastTs)/1000);SIM.lastTs=ts;
+  if(SIM.pause>0){SIM.pause-=dt}else{
+  SIM.t-=dt;
+  const B=SIM.ball, objs=S.frames[0].objs, mode=SIM.mode;
+  // Ball
+  B.x+=B.vx*dt;B.y+=B.vy*dt;const f=Math.pow(.72,dt);B.vx*=f;B.vy*=f;
+  if(Math.abs(B.x)>SIMF.hx-SIMF.br){B.x=Math.sign(B.x)*(SIMF.hx-SIMF.br);B.vx*=-.65}
+  if(Math.abs(B.y)>SIMF.hy-SIMF.br){
+    if(Math.abs(B.x)<SIMF.goal){const blueScored=B.y>0;SIM.score[blueScored?'b':'o']++;splash(blueScored?'GOAL!':'GOAL AGAINST',blueScored?'hit':'miss');
+      if(!blueScored){const deep=simRoles('b').slice(-1)[0];if(deep&&deep.id==='b1'&&simObj('b1').y>-2000)simCall('last','You were last man and too far up!',true)}
+      simReset();simDraw();requestAnimationFrame(simStep);return}
+    B.y=Math.sign(B.y)*(SIMF.hy-SIMF.br);B.vy*=-.65}
+  // Cars
+  for(const team of ['b','o']){const order=simRoles(team);
+    order.forEach((o,role)=>{const st=SIM.cars[o.id];st.rot=Math.max(0,st.rot-dt);
+      let tx,ty,max=team==='b'&&o.id==='b1'?2300:1850;
+      if(o.id==='b1'){if(!SIM.target)return;[tx,ty]=SIM.target}
+      else if(st.rot>0){const dir=team==='b'?1:-1;tx=-Math.sign(B.x||1)*2600;ty=-SIMF.hy*dir+2600*dir}
+      else [tx,ty]=simSpot(team,role,mode);
+      const dx=tx-o.x,dy=ty-o.y,L=Math.hypot(dx,dy);
+      const sp=L<60?0:Math.min(max,L*3);const vx=L?dx/L*sp:0,vy=L?dy/L*sp:0;
+      st.vx+=(vx-st.vx)*Math.min(1,dt*4);st.vy+=(vy-st.vy)*Math.min(1,dt*4);
+      o.x=Math.max(-SIMF.hx+80,Math.min(SIMF.hx-80,o.x+st.vx*dt));o.y=Math.max(-SIMF.hy-300,Math.min(SIMF.hy+300,o.y+st.vy*dt));
+      if(Math.hypot(st.vx,st.vy)>120)o.a=Math.atan2(st.vy,st.vx);
+      // Touch the ball
+      const d=Math.hypot(B.x-o.x,B.y-o.y);
+      if(d<240&&(st.hitCd||0)<=0){
+        if(o.id==='b1'){const sp2=Math.hypot(st.vx,st.vy);simHit(o,Math.max(1600,sp2*1.25),false);st.rot=2.2}
+        else if(role===0){simHit(o,2000+Math.random()*1100,true);st.rot=2.4}
+        else{simHit(o,900,false)}
+        st.hitCd=.35}
+      st.hitCd=Math.max(0,(st.hitCd||0)-dt);
+    })}
+  simJudge(dt);
+  if(SIM.t<=0){simEnd();return}
+  }
+  simDraw();requestAnimationFrame(simStep);
+}
+function simCall(k,text,bad){
+  const now=performance.now();if(SIM.cool[k]&&now-SIM.cool[k]<3500)return;SIM.cool[k]=now;
+  if(k==='dbl')SIM.dbl++;if(k==='last')SIM.last++;if(k==='bp')SIM.bp++;
+  SIM.msg=text;SIM.msgBad=!!bad;SIM.msgT=2.2;if(bad||k==='bp')splash(bad?(k==='dbl'?'DOUBLE COMMIT!':'LAST MAN!'):'BACK POST!',bad?'miss':'hit');
+}
+function simJudge(dt){
+  const me=simObj('b1'), B=SIM.ball, order=simRoles('b'), role=order.indexOf(me), mode=SIM.mode;
+  const [ix,iy]=simSpot('b',role,mode);SIM.ideal=[ix,iy];SIM.role=role;
+  const dist=Math.hypot(me.x-ix,me.y-iy), ok=dist<(role===0?1000:1300);
+  SIM.total+=dt;if(ok)SIM.good+=dt;SIM.ok=ok;
+  const dBall=Math.hypot(me.x-B.x,me.y-B.y);
+  // Double commit: a teammate is already on the ball and you go too.
+  const mate=order.find(o=>o!==me&&Math.hypot(o.x-B.x,o.y-B.y)<900&&SIM.cars[o.id].rot<=0);
+  if(mate&&dBall<900&&role!==0)simCall('dbl','Double commit! Your teammate had it. Back off to 2nd.',true);
+  // Last man in front of the ball with the ball in your half.
+  const deepest=order.slice().sort((a,b)=>a.y-b.y)[0];
+  if(deepest===me&&me.y>B.y+400&&B.y<1500&&mode>1)simCall('last','Last man in front of the ball! Get back!',true);
+  // Back post: ball wide in your third, you are last back on the far side of your goal.
+  if(role===mode-1&&B.y<-2600&&Math.abs(B.x)>1500&&Math.sign(me.x)!==Math.sign(B.x)&&me.y<-3600)simCall('bp','Good back post rotation!',false);
+  SIM.msgT=Math.max(0,SIM.msgT-dt);
+}
+function simDraw(){
+  const marks=[];
+  if(SIM.hints&&SIM.ideal){const [x,y]=SIM.ideal;marks.push(ZN(SIM.ok?G:Y,x-650,y-650,x+650,y+650),TX(SIM.ok?G:Y,x,y+820,SIM.ok?'In spot ✓':'Your spot'))}
+  const bo=simObj('ball');bo.x=SIM.ball.x;bo.y=SIM.ball.y;
+  S.frames[0].marks=marks;dirty=true;
+  const bar=$('#simBar');if(!bar)return;
+  const names=['1st man: go to the ball','2nd man: support','3rd man: stay back'],nm=SIM.mode===2?['1st: go to the ball','2nd: stay back']:names;
+  bar.querySelector('#smT').textContent=Math.max(0,Math.ceil(SIM.t))+'s';
+  bar.querySelector('#smS').textContent=SIM.score.b+' - '+SIM.score.o;
+  bar.querySelector('#smR').textContent=SIM.pause>0?'Get ready...':'You: '+(nm[SIM.role]||'');
+  bar.querySelector('#smR').className='sm-r'+(SIM.ok?' ok':'');
+  bar.querySelector('#smA').textContent=SIM.total?Math.round(SIM.good/SIM.total*100)+'%':'-';
+  const m=bar.querySelector('#smM');m.textContent=SIM.msgT>0?SIM.msg:(SIM.ok?'In position. Keep it up.':'Move to your spot.');m.className='sm-m'+(SIM.msgT>0?(SIM.msgBad?' bad':' good'):'');
+}
+function simUI(){
+  let h=$('#simHit'),b=$('#simBar');
+  if(!SIM){if(h)h.remove();if(b)b.remove();return}
+  if(!h){h=document.createElement('div');h.id='simHit';$('#stage').appendChild(h);
+    const set=e=>{if(!SIM)return;e.preventDefault();const r=cv.getBoundingClientRect();view();SIM.target=s2w(e.clientX-r.left,e.clientY-r.top)};
+    h.addEventListener('pointerdown',e=>{try{h.setPointerCapture(e.pointerId)}catch(_){}set(e)});h.addEventListener('pointermove',e=>{if(e.buttons||e.pointerType==='touch')set(e)})}
+  if(!b){b=document.createElement('div');b.id='simBar';$('#stage').appendChild(b)}
+  b.innerHTML=`<div class="sm-h"><span class="pk-tag">LIVE ${SIM.mode}V${SIM.mode}</span><span class="sm-sc" id="smS">0 - 0</span><span class="sm-t" id="smT">90s</span><span class="sm-a">IN SPOT <b id="smA">-</b></span><button class="ib sm" id="smH" aria-label="Hints">${SIM.hints?'◎':'○'}</button><button class="ib sm" id="smX" aria-label="Stop">${svg('x')}</button></div>
+   <div class="sm-r" id="smR"></div><div class="sm-m" id="smM"></div>`;
+  b.querySelector('#smX').onclick=()=>simStop(true);
+  b.querySelector('#smH').onclick=()=>{SIM.hints=!SIM.hints;b.querySelector('#smH').textContent=SIM.hints?'◎':'○';toast(SIM.hints?'Spot hints on':'Hard mode: no hints')};
+}
+function simStop(restore){
+  const prev=SIM&&SIM.prev;SIM=null;simUI();
+  if(restore&&prev){const r=JSON.parse(prev);S=r.S;cur=r.cur}coachHidden=false;afterLoad();
+}
+function simEnd(){
+  const R={...SIM},acc=R.total?Math.round(R.good/R.total*100):0;
+  imp.sim=imp.sim||{runs:0,best:0};imp.sim.runs++;const nb=acc>imp.sim.best;if(nb)imp.sim.best=acc;saveImp();
+  simStop(true);
+  const grade=acc>=80?['S','Elite rotation. This is how high ranks play.']:acc>=65?['A','Great. You are in the right place most of the time.']:acc>=50?['B','Good. Watch the ring and move earlier.']:acc>=35?['C','You chase the ball too much. Follow the ring.']:['D','Keep practicing: your spot moves with the ball. Read it before you drive.'];
+  const {el,close}=modal(`<div class="banner"><span>ROTATION SIMULATOR</span>${nb?'NEW BEST!':'FULL TIME'}</div>
+   <div class="simres"><div class="grade g${grade[0]}">${grade[0]}</div>${gauge(acc,acc+'%','in your spot',acc>=50?'#3ddc84':'#ffc93c')}<div class="meta"><b>Score ${R.score.b} - ${R.score.o}</b><small>Best: ${imp.sim.best}%</small></div></div>
+   <p style="text-align:center">${grade[1]}</p>
+   <div class="pc-s"><span><b>${R.dbl}</b>double commits</span><span><b>${R.last}</b>last man errors</span><span><b>${R.bp}</b>back posts</span><span><b>${R.mode}v${R.mode}</b>mode</span></div>
+   ${R.dbl?'<p class="hint">Double commits: when a teammate is on the ball, you become 2nd man. Wait behind the play.</p>':''}${R.last?'<p class="hint">Last man errors: if nobody is behind you, do not go past the ball.</p>':''}
+   <div class="row" style="justify-content:center;margin-top:12px"><button class="btn pri" id="srA">Play again</button><button class="btn" id="srL">Rotation lessons</button><button class="btn" id="srX">Close</button></div>`,true);
+  el.querySelector('#srA').onclick=()=>{close();simStart(R.mode,R.hints)};el.querySelector('#srL').onclick=()=>{close();openLesson('r1')};el.querySelector('#srX').onclick=close;
+}
+function openSim(){
+  const b=imp.sim||{};
+  const {el,close}=modal(`<div class="banner"><span>PLAY IT LIVE</span>ROTATION SIM</div>
+   <p>A live game on the board: the ball moves, your AI teammates and opponents rotate. <b>Drag your car</b> (marked YOU). The glowing ring shows <b>where you should be right now</b>: as 1st, 2nd or 3rd man. Your coach calls out double commits and last-man mistakes.</p>
+   <p class="hint">90 seconds. Your score is how much of the time you were in the right spot. Turn hints off for hard mode.</p>
+   ${b.runs?`<div class="meta" style="margin:8px 0"><b>Best: ${b.best}% in spot</b><small>${b.runs} games played</small></div>`:''}
+   <div class="list"><button class="les" data-m="3"><span class="lm"><b>3v3 rotation</b><small>1st, 2nd and 3rd man</small></span><span>›</span></button><button class="les" data-m="2"><span class="lm"><b>2v2 rotation</b><small>1st and 2nd man</small></span><span>›</span></button><button class="les" data-m="3" data-h="0"><span class="lm"><b>3v3 hard mode</b><small>No spot ring: read it yourself</small></span><span>›</span></button></div>`,true);
+  el.querySelectorAll('[data-m]').forEach(x=>x.onclick=()=>{close();simStart(+x.dataset.m,x.dataset.h!=='0')});
+}
+
+// ---------- Skill tests: measurable mechanic practice (3 levels, score out of 10) ----------
+const SKL=[
+ {n:'Slow, in free play',d:'Take your time. Do the mechanic 10 times at a slow, controlled speed. Count how many work.',goal:7},
+ {n:'Full speed',d:'Same mechanic, 10 tries at full game speed in free play or a training pack. Count the clean ones.',goal:7},
+ {n:'In real games',d:'Over your next games (casual or ranked), try it 10 times when the chance is there. Count how many work.',goal:5}];
+function sklState(k){imp.skl=imp.skl||{};return imp.skl[k]||(imp.skl[k]={lv:0,log:[]})}
+function sklNext(){
+  // The next mechanic to test: one you are learning, else the first not-started one for your rank.
+  const R=rk.r>=0?RANKS[rk.r]:null, keys=Object.keys(MECHS);
+  const learning=keys.filter(k=>imp.mech[k]===1&&sklState(k).lv<3);
+  if(learning.length)return learning[0];
+  return (R?R.mech:keys).find(k=>imp.mech[k]!==2&&sklState(k).lv<3)||keys.find(k=>sklState(k).lv<3);
+}
+function openSkill(k){
+  const M=MECHS[k],st=sklState(k);let pick=null;
+  const {el,close}=modal(`<div class="banner"><span>SKILL TEST</span>${esc(M.n)}</div>
+   <div class="sklv">${SKL.map((L,i)=>`<div class="skl${i<st.lv?' pass':i===st.lv?' now':''}"><b>${i<st.lv?'✓':i+1}</b><span>${esc(L.n)}</span></div>`).join('')}</div>
+   ${st.lv>=3?`<div class="nextup"><span class="lbl">Mastered</span><b>You passed all 3 levels!</b><small>Keep using it in games. Test again any time to stay sharp.</small></div>`:''}
+   <h3>How to do it</h3><p>${esc(M.how)}</p>
+   <h3>${st.lv>=3?'Test again':'Level '+(st.lv+1)+': '+esc(SKL[Math.min(2,st.lv)].n)}</h3><p>${esc(SKL[Math.min(2,st.lv)].d)} <b>Pass: ${SKL[Math.min(2,st.lv)].goal}/10.</b></p>
+   <div class="sk10">${Array.from({length:11},(_,i)=>`<button data-v="${i}">${i}</button>`).join('')}</div>
+   <div class="row" style="margin-top:10px"><button class="btn pri" id="skSave" disabled>Save result</button><button class="btn" id="skX">Close</button></div>
+   ${st.log.length?`<h3>Your results</h3><div class="skhist">${st.log.slice(-12).map(r=>`<span class="${r.p?'p':''}" title="Level ${r.l+1}"><i style="height:${r.v*10}%"></i><b>${r.v}</b></span>`).join('')}</div>`:''}`,false,'tall');
+  el.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{pick=+b.dataset.v;el.querySelectorAll('[data-v]').forEach(x=>x.setAttribute('aria-pressed',x===b));el.querySelector('#skSave').disabled=false});
+  el.querySelector('#skX').onclick=close;
+  el.querySelector('#skSave').onclick=()=>{const L=Math.min(2,st.lv),pass=pick>=SKL[L].goal;
+    st.log.push({l:L,v:pick,p:pass,d:Date.now()});imp.reps[k]=(imp.reps[k]||0)+1;
+    if(pass&&st.lv<3){st.lv++;if(st.lv>=1&&!imp.mech[k])imp.mech[k]=1;if(st.lv>=3)imp.mech[k]=2;splash(st.lv>=3?'MASTERED!':'LEVEL UP!','hit')}
+    else if(!pass)splash(pick+'/10 · AGAIN!','go');
+    if(!imp.mech[k])imp.mech[k]=1;saveImp();close();openSkill(k)};
+}
+
 // ---------- boot ----------
 buildStatic();initCoach();setTool('run');buildTop();buildFrames();syncUndo();syncPlay();
 window.addEventListener('hashchange',()=>{const c=location.hash.match(/^#c=([\w-]+)/);if(c){document.querySelectorAll('.modal').forEach(x=>x.remove());importCoach(c[1]);return}const m=location.hash.match(/^#l=([\w:,]+)/);if(m&&lessonById(decodeURIComponent(m[1]))){document.querySelectorAll('.modal').forEach(x=>x.remove());openLesson(decodeURIComponent(m[1]))}});
 const hm=location.hash.match(/^#l=([\w:,]+)/), hc=location.hash.match(/^#c=([\w-]+)/);
 if(hc){LS.set('bb.seenAcademy',true);LS.set('bb.seenAcademy2',true);LS.set('bb.seen2',true);setTimeout(()=>importCoach(hc[1]),300)}
 else if(hm&&lessonById(decodeURIComponent(hm[1])))setTimeout(()=>openLesson(decodeURIComponent(hm[1])),300);
+else if(!LS.get('bb.name','')&&!LS.get('bb.askedSignup',false)){LS.set('bb.askedSignup',true);setTimeout(()=>openAccount('up'),300)}
 else if(!LS.get('bb.seenAcademy',false)){LS.set('bb.seenAcademy',true);LS.set('bb.seenAcademy2',true);LS.set('bb.seen2',true);setTimeout(openWelcome,500)}
 else if(!LS.get('bb.seenAcademy2',false)){LS.set('bb.seenAcademy2',true);setTimeout(openNews,500)}
+else if(LS.get('bb.planDay','')!==new Date().toDateString()){LS.set('bb.planDay',new Date().toDateString());setTimeout(openPlan,700)}
 else if(!LS.get('bb.seen2',false)){LS.set('bb.seen2',true);setTimeout(()=>toast('Drag a car or ball to move it. Drag the field to draw'),600)}
 })();
 </script>
